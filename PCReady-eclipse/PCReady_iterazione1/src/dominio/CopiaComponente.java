@@ -10,5 +10,13 @@ package dominio;
 public class CopiaComponente {
 
 	private int codice;
+
+	public int getCodice() {
+		return codice;
+	}
+
+	public void setCodice(int codice) {
+		this.codice = codice;
+	}
 	
 }

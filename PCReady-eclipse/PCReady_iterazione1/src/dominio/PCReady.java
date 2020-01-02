@@ -22,13 +22,20 @@ public class PCReady {
 	private List<Configurazione> listaConfigurazioni;
 	
 	protected PCReady() {
-		this.mCat = new Map<Integer, Categoria>();
-		
+		this.mCat = new HashMap<Integer, Categoria>();
+		this.listaComponentiSistema = new LinkedList<Componente>();
+		this.listaConfigurazioni = new LinkedList<Configurazione>();
+		this.caricaSistema();
 	}
 	
 	public static synchronized PCReady getIstance() {
 		if(singleton == null) singleton = new PCReady();
 		return singleton;
+	}
+	
+	protected void caricaSistema() {
+		// riempie il sistema con i dati conosciuti tramite la lettura di un
+		// file JSON
 	}
 	
 }
