@@ -1,5 +1,7 @@
 package dominio;
 
+import java.util.*;
+
 /**
  * @author Bartolomeo Caruso
  * @author Gabriele Costanzo
@@ -9,4 +11,10 @@ package dominio;
  */
 public class Componente {
 
+	private int id;
+	private double prezzo;
+	private int consumo_energetico;
+	private String descrizione;
+	
+	private List<CopiaComponente> listaCopie;
 }
