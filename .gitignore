@@ -1,0 +1,8 @@
+/bin/
+.project
+.DS_Store
+.classpath
+_old/*
+*.lock
+PCReady-eclipse/.gitignore
+PCReady-eclipse/.settings/org.eclipse.jdt.ui.prefs

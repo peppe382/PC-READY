@@ -7,8 +7,9 @@ package dominio;
  *
  * @version 0.1
  */
-public class CopiaComponente {
+public class Amministratore {
 
-	private int codice;
+	private int id;
+	private String nome, cognome, email, password;
 	
 }

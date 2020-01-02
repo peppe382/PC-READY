@@ -10,6 +10,8 @@ import java.util.*;
  * @version 0.1
  */
 public class PCReady {
+	
+	private static PCReady singleton;
 
 	private Componente c; // Componente corrente
 	private Componente componenteSelezionato;
@@ -19,7 +21,14 @@ public class PCReady {
 	private List<Componente> listaComponentiSistema;
 	private List<Configurazione> listaConfigurazioni;
 	
-	public PCReady() {
+	protected PCReady() {
+		this.mCat = new Map<Integer, Categoria>();
 		
 	}
+	
+	public static synchronized PCReady getIstance() {
+		if(singleton == null) singleton = new PCReady();
+		return singleton;
+	}
+	
 }
