@@ -9,4 +9,7 @@ package dominio;
  */
 public class Bundle {
 
+	public Bundle(String nome, String descrizione, double prezzo) {
+	}
+
 }
