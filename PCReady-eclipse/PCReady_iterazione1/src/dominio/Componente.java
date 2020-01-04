@@ -2,6 +2,8 @@ package dominio;
 
 import java.util.*;
 
+import Utility.Counter;
+
 /**
  * @author Bartolomeo Caruso
  * @author Gabriele Costanzo
@@ -12,11 +14,23 @@ import java.util.*;
 public class Componente {
 
 	private int id;
+	private String nome;
 	private double prezzo;
 	private int consumo_energetico;
 	private String descrizione;
+	private String nome;
 	
 	private List<CopiaComponente> listaCopie;
+	
+	public Componente(int id, String nome, double prezzo, int consumo_energetico, String descrizione) {
+		this.setId(id);
+		this.setNome(nome);
+		this.setPrezzo(prezzo);
+		this.setConsumo_energetico(consumo_energetico);
+		this.setDescrizione(descrizione);
+		
+		this.setListaCopie(new LinkedList<CopiaComponente>());
+	}
 
 	public int getId() {
 		return id;
@@ -57,4 +71,35 @@ public class Componente {
 	public void setListaCopie(List<CopiaComponente> listaCopie) {
 		this.listaCopie = listaCopie;
 	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	/*
+	//
+	//Funzioni previste dal diagramma delle classi di progetto//
+	//
+
+	public Componente(String nome, int consumo_energetico, double prezzo, String descrizione){
+		//Questo costruttore risulta essere la funzione aggiungiComponente
+		this.nome = nome;
+		this.consumo_energetico = consumo_energetico;
+		this.prezzo = prezzo;
+		this.descrizione = descrizione;
+		this.id = (int) Counter.getNextNumber(); //Id univoco
+		this.listaCopie = new LinkedList<CopiaComponente>(); //Corrisponde alla funzione "inizializzaListaCopie()"
+	}
+	
+	public void aggiungiCopie(int numero) {
+		for (int i = 0; i<numero; i++) {
+			CopiaComponente newCopia;
+			this.listaCopie.add(newCopia = new CopiaComponente()); //Corrisponde alla funzione aggiungiInListaCopie 
+		}
+	}
+	*/
 }
