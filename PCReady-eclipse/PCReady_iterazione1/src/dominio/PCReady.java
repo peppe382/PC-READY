@@ -18,12 +18,12 @@ public class PCReady {
 	private Configurazione conf; // Configurazione corrente
 	
 	private Map<Integer, Categoria> mCat;
-	private List<Componente> listaComponentiSistema;
+	private Map<Integer, Componente> mappaComponentiSistema;
 	private List<Configurazione> listaConfigurazioni;
 	
 	protected PCReady() {
 		this.mCat = new HashMap<Integer, Categoria>();
-		this.listaComponentiSistema = new LinkedList<Componente>();
+		this.mappaComponentiSistema = new HashMap<Integer, Componente>();
 		this.listaConfigurazioni = new LinkedList<Configurazione>();
 		this.caricaSistema();
 	}
