@@ -14,12 +14,12 @@ public class Categoria {
 	private int id;
 	private String nome;
 	
-	private List<Componente> lComp;
+	private Map<Integer, Componente> mComp;
 	
 	public Categoria(int id, String nome) {
 		this.id = id;
 		this.nome = nome;
-		this.lComp = new LinkedList<Componente>();
+		this.mComp = new HashMap<Integer, Componente>();
 	}
 	
 	public int getId() {
@@ -38,12 +38,12 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-	public List<Componente> getCompList() {
-		return lComp;
+	public Map<Integer, Componente> getCompList() {
+		return mComp;
 	}
 
-	public void setCompList(List<Componente> lComp) {
-		this.lComp = lComp;
+	public void setCompList(Map<Integer, Componente> mComp) {
+		this.mComp = mComp;
 	}
 	
 }

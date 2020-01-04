@@ -1,3 +1,5 @@
+import data.*;
+
 
 /**
  * @author Bartolomeo Caruso
@@ -12,8 +14,8 @@ public class PCReadyMainAppText {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		Parser par = new Parser("data/main_data.json");
+		System.out.println(par.getJsonText());
 	}
 
 }

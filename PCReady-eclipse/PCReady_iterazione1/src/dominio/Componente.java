@@ -12,11 +12,22 @@ import java.util.*;
 public class Componente {
 
 	private int id;
+	private String nome;
 	private double prezzo;
 	private int consumo_energetico;
 	private String descrizione;
 	
 	private List<CopiaComponente> listaCopie;
+	
+	public Componente(int id, String nome, double prezzo, int consumo_energetico, String descrizione) {
+		this.setId(id);
+		this.setNome(nome);
+		this.setPrezzo(prezzo);
+		this.setConsumo_energetico(consumo_energetico);
+		this.setDescrizione(descrizione);
+		
+		this.setListaCopie(new LinkedList<CopiaComponente>());
+	}
 
 	public int getId() {
 		return id;
@@ -56,5 +67,13 @@ public class Componente {
 
 	public void setListaCopie(List<CopiaComponente> listaCopie) {
 		this.listaCopie = listaCopie;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 }
