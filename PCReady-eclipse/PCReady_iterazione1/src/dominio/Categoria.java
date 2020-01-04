@@ -16,13 +16,15 @@ public class Categoria {
 
 	private int id;
 	private String nome;
-	
-	private HashMap<Integer,Componente> mComp;
+
+	private Map<Integer, Componente> mComp;
 	
 	public Categoria(String nome) {
 		this.id = (int) Counter.getNextNumber(); //Id univoco
 		this.nome = nome;
-		this.mComp = new HashMap<Integer,Componente>();
+
+		this.mComp = new HashMap<Integer, Componente>();
+
 	}
 	
 	public int getId() {
@@ -41,7 +43,7 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-	public HashMap<Integer,Componente> ottieniMappaComponenti() { //Il nome é stato adeguato al diagramma delle classi di progetto
+	public HashMap<Integer,Componente> ottieniMappaComponenti() { //Il nome ï¿½ stato adeguato al diagramma delle classi di progetto
 		return this.mComp;
 	}
 

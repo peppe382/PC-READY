@@ -12,6 +12,10 @@ import Utility.Counter;
 public class CopiaComponente {
 
 	private int codice;
+	
+	public CopiaComponente(int codice) {
+		this.setCodice(codice);
+	}
 
 	public int getCodice() {
 		return codice;

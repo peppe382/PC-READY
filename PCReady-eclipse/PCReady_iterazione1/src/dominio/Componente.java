@@ -14,12 +14,23 @@ import Utility.Counter;
 public class Componente {
 
 	private int id;
+	private String nome;
 	private double prezzo;
 	private int consumo_energetico;
 	private String descrizione;
 	private String nome;
 	
 	private List<CopiaComponente> listaCopie;
+	
+	public Componente(int id, String nome, double prezzo, int consumo_energetico, String descrizione) {
+		this.setId(id);
+		this.setNome(nome);
+		this.setPrezzo(prezzo);
+		this.setConsumo_energetico(consumo_energetico);
+		this.setDescrizione(descrizione);
+		
+		this.setListaCopie(new LinkedList<CopiaComponente>());
+	}
 
 	public int getId() {
 		return id;
@@ -60,7 +71,7 @@ public class Componente {
 	public void setListaCopie(List<CopiaComponente> listaCopie) {
 		this.listaCopie = listaCopie;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -68,7 +79,8 @@ public class Componente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
+	/*
 	//
 	//Funzioni previste dal diagramma delle classi di progetto//
 	//
@@ -89,7 +101,5 @@ public class Componente {
 			this.listaCopie.add(newCopia = new CopiaComponente()); //Corrisponde alla funzione aggiungiInListaCopie 
 		}
 	}
-	
-	
-	
+	*/
 }
