@@ -94,11 +94,23 @@ public class Componente {
 		this.listaCopie = new LinkedList<CopiaComponente>(); //Corrisponde alla funzione "inizializzaListaCopie()"
 	}
 	
+	public void aggiungiCopia(CopiaComponente copia) {
+		this.listaCopie.add(copia);
+	}
+	
 	public void aggiungiCopie(int numero) {
 		for (int i = 0; i<numero; i++) {
-			CopiaComponente newCopia;
-			this.listaCopie.add(newCopia = new CopiaComponente()); //Corrisponde alla funzione aggiungiInListaCopie 
+			this.listaCopie.add(new CopiaComponente()); //Corrisponde alla funzione aggiungiInListaCopie 
 		}
+	}
+	
+	public String toString() {
+		String str = "";
+		str += "#"+this.getId()+" : "+this.getNome()+"\n";
+		str += "€"+this.getPrezzo()+", consumo: "+this.getConsumo_energetico()+"W\n";
+		str += "DESC: "+this.getDescrizione()+"\n\n";
+		str += "Copie disponibili: "+this.getListaCopie().size();
+		return str;
 	}
 	
 }
