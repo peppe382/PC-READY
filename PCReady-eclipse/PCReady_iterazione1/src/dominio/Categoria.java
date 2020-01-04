@@ -1,6 +1,9 @@
 package dominio;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
+import Utility.Counter;
 
 /**
  * @author Bartolomeo Caruso
@@ -14,12 +17,12 @@ public class Categoria {
 	private int id;
 	private String nome;
 	
-	private List<Componente> lComp;
+	private HashMap<Integer,Componente> mComp;
 	
 	public Categoria(int id, String nome) {
-		this.id = id;
+		this.id = (int) Counter.getNextNumber(); //Id univoco
 		this.nome = nome;
-		this.lComp = new LinkedList<Componente>();
+		this.mComp = new HashMap<Integer,Componente>();
 	}
 	
 	public int getId() {
@@ -38,12 +41,34 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-	public List<Componente> getCompList() {
-		return lComp;
+	public HashMap<Integer,Componente> ottieniMappaComponenti() { //Il nome é stato adeguato al diagramma delle classi di progetto
+		return this.mComp;
 	}
 
-	public void setCompList(List<Componente> lComp) {
-		this.lComp = lComp;
+	public void setCompList(HashMap<Integer,Componente> mComp) {
+		this.mComp = mComp;
 	}
+	
+	//
+	//Funzioni previste dal diagramma delle classi di progetto//
+	//
+	
+	public Map<Integer,Categoria> getMappaCategorie() {
+		Map<Integer,Categoria> mappa = new HashMap<Integer,Categoria>();
+		//Logica di inserimento: da un file JSON si prelevano tutte le categorie con i relativi ID
+		return mappa;
+	}
+	
+	public Componente getComponente (int idComponente) {
+		Componente componente_richiesto = null;
+		componente_richiesto = this.mComp.get(idComponente);
+		return componente_richiesto;
+	}
+	
+	public void aggiungiComponente(Componente c) {
+		this.mComp.put(c.getId(), c);
+	}
+	
+	
 	
 }
