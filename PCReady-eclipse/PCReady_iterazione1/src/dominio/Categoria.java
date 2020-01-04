@@ -63,22 +63,25 @@ public class Categoria {
 	//Funzioni previste dal diagramma delle classi di progetto//
 	//
 	
-	public Map<Integer,Categoria> getMappaCategorie() {
-		Map<Integer,Categoria> mappa = new HashMap<Integer,Categoria>();
-		//Logica di inserimento: da un file JSON si prelevano tutte le categorie con i relativi ID
-		return mappa;
-	}
-	
 	public Componente getComponente (int idComponente) {
 		Componente componente_richiesto = null;
 		componente_richiesto = this.mComp.get(idComponente);
 		return componente_richiesto;
 	}
 	
-	public void aggiungiComponente(Componente c) {
-		this.mComp.put(c.getId(), c);
+	public void aggiungiComponente(Componente comp) {
+		this.mComp.put(comp.getId(), comp);
 	}
 	
 	
-	
+	public String toString() {
+		String str = "";
+		str += "#"+this.getId()+" : "+this.getNome()+"\n";
+		str += "Componenti presenti: --------------\n";
+		for(Map.Entry<Integer, Componente> entry: mComp.entrySet()) {
+			str += entry.getValue().toString();
+			str += "\n\n";
+		}
+		return str;
+	}
 }
