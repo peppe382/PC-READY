@@ -18,7 +18,6 @@ public class Componente {
 	private double prezzo;
 	private int consumo_energetico;
 	private String descrizione;
-	private String nome;
 	
 	private List<CopiaComponente> listaCopie;
 	
@@ -80,7 +79,7 @@ public class Componente {
 		this.nome = nome;
 	}
 
-	/*
+	
 	//
 	//Funzioni previste dal diagramma delle classi di progetto//
 	//
@@ -101,5 +100,5 @@ public class Componente {
 			this.listaCopie.add(newCopia = new CopiaComponente()); //Corrisponde alla funzione aggiungiInListaCopie 
 		}
 	}
-	*/
+	
 }

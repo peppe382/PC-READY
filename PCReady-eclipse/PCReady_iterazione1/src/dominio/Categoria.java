@@ -27,6 +27,14 @@ public class Categoria {
 
 	}
 	
+	public Categoria(int id, String nome) {
+		this.setId(id);
+		this.setNome(nome);
+
+		this.mComp = new HashMap<Integer, Componente>();
+
+	}
+	
 	public int getId() {
 		return this.id;
 	}
@@ -43,7 +51,7 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-	public HashMap<Integer,Componente> ottieniMappaComponenti() { //Il nome � stato adeguato al diagramma delle classi di progetto
+	public Map<Integer,Componente> ottieniMappaComponenti() { //Il nome è stato adeguato al diagramma delle classi di progetto
 		return this.mComp;
 	}
 
