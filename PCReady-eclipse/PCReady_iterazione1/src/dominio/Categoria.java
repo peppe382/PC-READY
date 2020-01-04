@@ -19,7 +19,7 @@ public class Categoria {
 	
 	private HashMap<Integer,Componente> mComp;
 	
-	public Categoria(int id, String nome) {
+	public Categoria(String nome) {
 		this.id = (int) Counter.getNextNumber(); //Id univoco
 		this.nome = nome;
 		this.mComp = new HashMap<Integer,Componente>();
