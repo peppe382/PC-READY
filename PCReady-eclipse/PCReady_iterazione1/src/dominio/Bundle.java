@@ -57,9 +57,4 @@ public class Bundle {
 		this.id = (int) Counter.getNextNumber();
 	}
 	
-	
-	
-	
-	
-	
 }
