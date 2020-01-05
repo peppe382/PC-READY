@@ -27,5 +27,4 @@ class ComponenteTest {
 			System.out.println(elemento.getCodice());
 		}
 	}
-
 }

@@ -2,6 +2,8 @@ package dominio;
 
 import java.util.*;
 
+import Utility.Counter;
+
 /**
  * @author Bartolomeo Caruso
  * @author Gabriele Costanzo
@@ -89,17 +91,52 @@ public class Configurazione {
 
 	public void setConsumo(int consumo_energetico) {
 		this.consumo_energetico = consumo_energetico;
+	}	
+	public Configurazione(int id, double prezzo_tot, int consumo_energetico, List<Componente> listaComponenti) {
+		
+		this.id = id;
+		this.prezzo_tot = prezzo_tot;
+		this.consumo_energetico = consumo_energetico;
+		this.listaComponenti = listaComponenti;
+		
+	}
+
+	public Configurazione(){
+		
+		this.id = (int) Counter.getNextNumber();
+		listaComponenti = new LinkedList<>();
+
 	}
 	
-	public String toString() {
-		String str = "";
-		str += "Conf. #"+this.getId()+"\n";
-		str += "€"+this.getPrezzo()+", consumo: "+this.getConsumo()+"W\n\n";
-		str += "Composto da: ----------------------\n";
-		for(int i = 0; i < listaComponenti.size(); i++) {
-			str += listaComponenti.get(i).toString();
-			str += "\n\n";
-		}
-		return str;
+	public void addComponente(Componente componente){
+		
+		listaComponenti.add(componente);
+		
+	}
+	
+	public void aggiornaAttributi(Componente componente){
+		
+		this.consumo_energetico += componente.getConsumo_energetico();
+		this.prezzo_tot += componente.getPrezzo();
+		
+	}
+	
+	public boolean controllaConfigurazione(){
+		
+		return true;
+		
+	}
+	
+	public List<Componente> getComponenti(){
+		
+		return this.listaComponenti;
+		
+	}
+	
+	public Bundle generaBundle(String nome, String descrizione, double sconto){
+		
+		Bundle bundle = new Bundle(nome,descrizione,sconto);
+		
+		return bundle;
 	}
 }
