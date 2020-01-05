@@ -1,5 +1,4 @@
-import data.*;
-
+import dominio.*;
 
 /**
  * @author Bartolomeo Caruso
@@ -14,8 +13,8 @@ public class PCReadyMainAppText {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Parser par = new Parser("data/main_data.json");
-		System.out.println(par.getJsonText());
+		PCReady sistema = PCReady.getIstance();
+		System.out.println("Completato!");
 	}
 
 }

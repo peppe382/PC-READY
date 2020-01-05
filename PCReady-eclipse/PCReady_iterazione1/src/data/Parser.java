@@ -52,8 +52,25 @@ public class Parser {
 				for(int k = 0; k < compCopie.length(); k++) {
 					JSONObject currCopia = compCopie.getJSONObject(k);
 					CopiaComponente copia = this.processCopia(currCopia);
+					comp.aggiungiCopia(copia);
 				}
+				sistema.aggiungiComponente(comp);
+				cat.aggiungiComponente(comp);
 			}
+			sistema.aggiungiCategoria(cat);
+		}
+		
+		JSONArray configurazioni = this.getObject().getJSONArray("configurazioni");
+		for(int l = 0; l < configurazioni.length(); l++) {
+			JSONObject currConf = configurazioni.getJSONObject(l);
+			Configurazione conf = this.processConfigurazione(currConf);
+			JSONArray compIds = currConf.getJSONArray("componenti");
+			for(int m = 0; m < compIds.length(); m++) {
+				int id = compIds.getInt(m);
+				Componente comp = sistema.selezionaComponente(id);
+				conf.addComponente(comp);
+			}
+			sistema.aggiungiConfigurazione(conf);
 		}
 	}
 	
@@ -77,6 +94,11 @@ public class Parser {
 	public CopiaComponente processCopia(JSONObject copia) {
 		int codice = copia.getInt("codice");
 		return new CopiaComponente(codice);
+	}
+	
+	public Configurazione processConfigurazione(JSONObject conf) {
+		int id = conf.getInt("id");
+		return new Configurazione(id);
 	}
 
 // -------------------------------------------------------------------
