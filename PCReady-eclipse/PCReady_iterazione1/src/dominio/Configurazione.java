@@ -2,6 +2,8 @@ package dominio;
 
 import java.util.*;
 
+import Utility.Counter;
+
 /**
  * @author Bartolomeo Caruso
  * @author Gabriele Costanzo
@@ -42,8 +44,20 @@ public class Configurazione {
 		this.consumo_energetico = consumo_energetico;
 	}
 	
+	
+	
+	public Configurazione(int id, double prezzo_tot, int consumo_energetico, List<Componente> listaComponenti) {
+		
+		this.id = id;
+		this.prezzo_tot = prezzo_tot;
+		this.consumo_energetico = consumo_energetico;
+		this.listaComponenti = listaComponenti;
+		
+	}
+
 	public Configurazione(){
 		
+		this.id = (int) Counter.getNextNumber();
 		listaComponenti = new LinkedList<>();
 
 	}
@@ -73,10 +87,11 @@ public class Configurazione {
 		
 	}
 	
-	public void generaBundle(String nome, String descrizione, double prezzo){
+	public Bundle generaBundle(String nome, String descrizione, double sconto){
 		
-		Bundle bundle = new Bundle(nome,descrizione,prezzo);
+		Bundle bundle = new Bundle(nome,descrizione,sconto);
 		
+		return bundle;
 	}
 	
 }
