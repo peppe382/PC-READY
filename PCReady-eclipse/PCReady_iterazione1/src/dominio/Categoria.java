@@ -69,10 +69,19 @@ public class Categoria {
 		return componente_richiesto;
 	}
 	
-	public void aggiungiComponente(Componente c) {
-		this.mComp.put(c.getId(), c);
+	public void aggiungiComponente(Componente comp) {
+		this.mComp.put(comp.getId(), comp);
 	}
 	
 	
-	
+	public String toString() {
+		String str = "";
+		str += "#"+this.getId()+" : "+this.getNome()+"\n";
+		str += "Componenti presenti: --------------\n";
+		for(Map.Entry<Integer, Componente> entry: mComp.entrySet()) {
+			str += entry.getValue().toString();
+			str += "\n\n";
+		}
+		return str;
+	}
 }
