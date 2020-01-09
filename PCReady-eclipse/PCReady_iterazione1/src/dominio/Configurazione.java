@@ -14,7 +14,6 @@ public class Configurazione {
 	private int id;
 	private double prezzo_tot;
 	private int consumo_energetico;
-	
 	private List<Componente> listaComponenti;
 	
 	public Configurazione(int id) {
@@ -49,6 +48,7 @@ public class Configurazione {
 		return true;
 	}
 
+
 	public int getId() {
 		return id;
 	}
@@ -73,6 +73,7 @@ public class Configurazione {
 		this.consumo_energetico = consumo_energetico;
 	}
 	
+
 	public String toString() {
 		String str = "";
 		str += "Conf. #"+this.getId()+"\n";
@@ -84,4 +85,32 @@ public class Configurazione {
 		}
 		return str;
 	}
+
+	public Configurazione(){
+		
+		listaComponenti = new LinkedList<>();
+
+	}
+	
+	public void aggiornaAttributi(Componente componente){
+		
+		this.consumo_energetico += componente.getConsumo_energetico();
+		this.prezzo_tot += componente.getPrezzo();
+		
+	}
+	
+
+	
+	public List<Componente> getComponenti(){
+		
+		return this.listaComponenti;
+		
+	}
+	
+	public void generaBundle(String nome, String descrizione, double prezzo){
+		
+		Bundle bundle = new Bundle(nome,descrizione,prezzo);
+		
+	}
+
 }
