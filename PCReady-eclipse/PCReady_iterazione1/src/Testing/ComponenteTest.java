@@ -12,7 +12,6 @@ import dominio.CopiaComponente;
 class ComponenteTest {
 	
 	private static Componente componente;
-	
 
 	@BeforeAll
 	static void setupAll() {

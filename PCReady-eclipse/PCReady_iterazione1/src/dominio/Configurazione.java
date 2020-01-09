@@ -2,6 +2,8 @@ package dominio;
 
 import java.util.*;
 
+import Utility.Counter;
+
 /**
  * @author Bartolomeo Caruso
  * @author Gabriele Costanzo
@@ -44,10 +46,11 @@ public class Configurazione {
 	
 	public Configurazione(){
 		
+		this.id = (int) Counter.getNextNumber();
 		listaComponenti = new LinkedList<>();
 
 	}
-	
+
 	public void addComponente(Componente componente){
 		
 		listaComponenti.add(componente);
