@@ -11,10 +11,14 @@ import java.util.*;
  */
 public class Configurazione {
 
-	private int id;
-	private double prezzo_tot;
-	private int consumo_energetico;
-	private List<Componente> listaComponenti;
+	private int id; // id univoco della Configurazione
+	private double prezzo_tot; // prezzo finale della Configurazione all'acquisto, in Euro
+	private int consumo_energetico; // consumo totale, in Watt
+	
+	private List<Componente> listaComponenti; // lista di tutte le Componente presenti
+	
+	
+	/********** COSTRUTTORI *********/
 	
 	public Configurazione(int id) {
 		this.setId(id);
@@ -22,12 +26,28 @@ public class Configurazione {
 		this.setConsumo(0);
 		this.inizializzaListaComponenti();
 	}
-
-	private void inizializzaListaComponenti() {
+	
+	public Configurazione(){
+		listaComponenti = new LinkedList<>();
+	}
+	
+	
+	/********** FUNZIONI di PROGETTO **********/
+	
+	public static Configurazione generaConfigurazione() {
+		return new Configurazione();
+	}
+	
+	public void inizializzaListaComponenti() {
 		this.listaComponenti = new LinkedList<Componente>();
 	}
 	
-	private void aggiornaAttributi() {
+	public void addComponente(Componente c) {
+		this.listaComponenti.add(c);
+		this.aggiornaAttributi();
+	}
+	
+	public void aggiornaAttributi() {
 		double prezzo = 0;
 		int consumo = 0;
 		for(int i = 0; i < this.listaComponenti.size(); i++) {
@@ -38,17 +58,27 @@ public class Configurazione {
 		this.setPrezzo(prezzo);
 		this.setConsumo(consumo);
 	}
-	
-	public void addComponente(Componente c) {
-		this.listaComponenti.add(c);
-		this.aggiornaAttributi();
+
+	public void aggiornaAttributi(Componente componente){
+		this.consumo_energetico += componente.getConsumo_energetico();
+		this.prezzo_tot += componente.getPrezzo();
 	}
 	
 	public boolean controllaConfigurazione() {
 		return true;
 	}
-
-
+	
+	public List<Componente> getComponenti(){
+		return this.listaComponenti;
+	}
+	
+	public void generaBundle(String nome, String descrizione, double prezzo){
+		Bundle bundle = new Bundle(nome,descrizione,prezzo);	
+	}
+	
+	
+	/********** GETTERS & SETTERS + TO-STRING **********/
+	
 	public int getId() {
 		return id;
 	}
@@ -77,40 +107,13 @@ public class Configurazione {
 	public String toString() {
 		String str = "";
 		str += "Conf. #"+this.getId()+"\n";
-		str += "€"+this.getPrezzo()+", consumo: "+this.getConsumo()+"W\n\n";
+		str += "EUR "+this.getPrezzo()+", consumo: "+this.getConsumo()+"W\n\n";
 		str += "Composto da: ----------------------\n";
 		for(int i = 0; i < listaComponenti.size(); i++) {
 			str += listaComponenti.get(i).toString();
 			str += "\n\n";
 		}
 		return str;
-	}
-
-	public Configurazione(){
-		
-		listaComponenti = new LinkedList<>();
-
-	}
-	
-	public void aggiornaAttributi(Componente componente){
-		
-		this.consumo_energetico += componente.getConsumo_energetico();
-		this.prezzo_tot += componente.getPrezzo();
-		
-	}
-	
-
-	
-	public List<Componente> getComponenti(){
-		
-		return this.listaComponenti;
-		
-	}
-	
-	public void generaBundle(String nome, String descrizione, double prezzo){
-		
-		Bundle bundle = new Bundle(nome,descrizione,prezzo);
-		
 	}
 
 }
