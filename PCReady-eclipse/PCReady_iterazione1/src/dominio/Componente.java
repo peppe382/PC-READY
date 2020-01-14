@@ -57,28 +57,12 @@ public class Componente {
 		this.prezzo = prezzo;
 		this.descrizione = descrizione;
 		this.id = (int) Counter.getNextNumber(); //Id univoco
-		this.inizializzaListaCopie();
+		
+		this.setListaCopie(new LinkedList<CopiaComponente>());
 	}
 	
 	
 	/********** FUNZIONI di PROGETTO **********/
-	
-	/**
-	 * Crea un nuovo Componente sulla base del prossimo codice disponibile.
-	 * (Ridondanza col costruttore senza parametro id)
-	 * 
-	 * @return il nuovo Componente generato
-	 */
-	public static Componente aggiungiComponente(String nome, int consumo_energetico, double prezzo, String descrizione) {
-		return new Componente(nome, consumo_energetico, prezzo, descrizione);
-	}
-	
-	/**
-	 * Inizializza la lista vuota che conterrà le CopieComponente
-	 */
-	public void inizializzaListaCopie() {
-		this.listaCopie = new LinkedList<CopiaComponente>();
-	}
 	
 	/**
 	 * Aggiunge una CopiaComponente appena generata alla lista di copie disponibili
@@ -94,7 +78,7 @@ public class Componente {
 	 */
 	public void aggiungiCopie(int numero) {
 		for (int i = 0; i<numero; i++) {
-			this.aggiungiInListaCopie(CopiaComponente.creaCopia());
+			this.aggiungiInListaCopie(new CopiaComponente());
 		}
 	}
 	

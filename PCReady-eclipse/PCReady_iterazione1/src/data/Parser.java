@@ -138,7 +138,7 @@ public class Parser {
 		core.put("id", cat.getId());
 		core.put("nome", cat.getNome());
 		JSONArray componenti = new JSONArray();
-		Map<Integer, Componente> mComp = cat.ottieniMappaComponenti();
+		Map<Integer, Componente> mComp = cat.getMappaComponenti();
 		for(Map.Entry<Integer, Componente> entry : mComp.entrySet()) componenti.put(jsonComponente(entry.getValue()));
 		core.put("mComp", componenti);
 		return core;

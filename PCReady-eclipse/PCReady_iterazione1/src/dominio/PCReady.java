@@ -73,34 +73,9 @@ public class PCReady {
 	
 	/********** FUNZIONI di PROGETTO **********/
 	
-	/**
-	 * Inizia una nuova Configurazione, utente o Bundle
-	 */
-	public void creaConfigurazione() {
-		this.conf = Configurazione.generaConfigurazione();
-	}
+	/* POSSIBILI GETTER e SETTER, MA IN REALTA' SONO FUNZIONI DI PROGETTO */
 	
-	/**
-	 * Seleziona una Categoria
-	 * @param id: id della Categoria
-	 * @return la Categoria cercata se esistente, null altrimenti
-	 */
-	public Categoria getCategoriaById(int id) {
-		Categoria cat = null;
-		try {
-			cat = this.mCat.get(id);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return cat;
-	}
-	
-	/**
-	 * Seleziona un Componente
-	 * @param id: id del Componente
-	 * @return il Componente cercato se esistente, null altrimenti
-	 */
-	public Componente getComponente(int id) {
+	public Componente selezionaComponente(int id) {
 		Componente comp = null;
 		try {
 			comp = this.mappaComponentiSistema.get(id);
@@ -110,49 +85,64 @@ public class PCReady {
 		return comp;
 	}
 	
-	
-	public String confermaComponente() {
-		
-	}
-	
-	public boolean terminaAssemblaggio() {
-		
+	public Categoria selezionaCategoria(int id) {
+		Categoria cat = null;
+		try {
+			cat = this.mCat.get(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return cat;
 	}
 	
 	public void aggiungiConfigurazione(Configurazione conf) {
 		this.listaConfigurazioni.add(conf);
 	}
 	
-	public void aggiungiComponenteInConfigurazione() {
-		this.conf.addComponente(this.componenteSelezionato);
+	/**
+	 * Inizia una nuova Configurazione, utente o Bundle
+	 */
+	public void creaConfigurazione() {
+		this.conf = new Configurazione();
+	}
+	
+	public void confermaComponente() {
+		this.aggiungiComponenteInConfigurazione(this.componenteSelezionato);
+	}
+	
+	public void terminaAssemblaggio() {
+		if(this.conf.controllaConfigurazione()) this.confermaConfigurazione();
 	}
 	
 	public void confermaConfigurazione() {
-		
+		this.listaConfigurazioni.add(this.conf);
 	}
 	
-	public void riepilogaComponenti() {
-		
+	public void riepilogaConfigurazione() {
+		String str = this.conf.toString();
 	}
 	
-	public String infoConfigurazione(double sconto, String nome, String descrizione) {
-		
+	public void infoConfigurazione(String nome, String descrizione, double sconto) {
+		this.conf.generaBundle(nome, descrizione, sconto);
 	}
 	
-	public Componente creaComponente(String nome, int codiceCategoria, double consumo, String descrizione) {
-		
+	public Componente creaComponente(String nome, int codiceCategoria, int consumo, double prezzo, String descrizione) {
+		this.c = new Componente(nome, consumo, prezzo, descrizione);
+		this.aggiungiInMappa(this.c);
+		this.aggiungiInCategoria(codiceCategoria, this.c);
+		return this.c;
 	}
 	
-	public String creaCopie(int numero) {
-		
+	public void creaCopie(int numero) {
+		this.c.aggiungiCopie(numero);
 	}
 	
-	public void aggiungiInLista(Componente c) {
-		
+	public void aggiungiInMappa(Componente c) {
+		this.mappaComponentiSistema.put(c.getId(), c);
 	}
 	
-	public void aggiungiInCategoria(Componente c) {
-		
+	public void aggiungiInCategoria(int id, Componente c) {
+		this.mCat.get(id).aggiungiComponente(c);
 	}
 	
 	
@@ -160,6 +150,10 @@ public class PCReady {
 	
 	public void aggiungiComponente(Componente comp) {
 		this.mappaComponentiSistema.put(comp.getId(), comp);
+	}
+	
+	public void aggiungiComponenteInConfigurazione(Componente c) {
+		this.conf.addComponente(c);
 	}
 	
 	public void aggiungiCategoria(Categoria cat) {

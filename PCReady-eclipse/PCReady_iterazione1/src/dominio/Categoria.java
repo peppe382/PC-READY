@@ -51,16 +51,6 @@ public class Categoria {
 	/********** FUNZIONI di PROGETTO **********/
 
 	/**
-	 * Ottiene la mappa contenente tutti i Componente.
-	 * (Ridondanza col getter di default)
-	 *
-	 * @return la mappa delle Componente mComp
-	 */
-	public Map<Integer,Componente> ottieniMappaComponenti() { 
-		return this.getMappaComponenti();
-	}
-
-	/**
 	 * Ottiene il Componente corrispondente in mComp all'id fornito
 	 * @param idComponente
 	 * @return il Componente corrispondente, oppure null se non è presente
@@ -106,7 +96,7 @@ public class Categoria {
 	public Map<Integer,Componente> getMappaComponenti(){
 		return this.mComp;
 	}
-	
+
 	public void setMappaComponenti(HashMap<Integer,Componente> mComp) {
 		this.mComp = mComp;
 	}

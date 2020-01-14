@@ -34,19 +34,6 @@ public class CopiaComponente {
 	}
 	
 	
-	/********** FUNZIONI di PROGETTO **********/
-	
-	/**
-	 * Crea una nuova CopiaComponente sulla base del prossimo codice disponibile.
-	 * (Ridondanza col costruttore senza parametri)
-	 * 
-	 * @return la nuova CopiaComponente generata
-	 */
-	public static CopiaComponente creaCopia() {
-		return new CopiaComponente();
-	}
-	
-	
 	/********** GETTERS & SETTERS **********/
 	public int getCodice() {
 		return codice;
