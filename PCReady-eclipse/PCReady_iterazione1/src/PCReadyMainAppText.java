@@ -14,7 +14,9 @@ public class PCReadyMainAppText {
 	 */
 	public static void main(String[] args) {
 		PCReady sistema = PCReady.getIstance();
-		System.out.println("Completato!");
+		System.out.println("Salvo...");
+		sistema.salvaSistema();
+		System.out.println("Sistema salvato correttamente!");
 	}
 
 }
