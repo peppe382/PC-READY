@@ -14,11 +14,31 @@ import Utility.Counter;
  */
 public class Categoria {
 
-	private int id;
-	private String nome;
+	private int id; // id univoco della Categoria
+	private String nome; // nome da mostrare all'utente
 
-	private Map<Integer, Componente> mComp;
+	private Map<Integer, Componente> mComp; // mappa <idComponente, Componente> di tutti i Componente appartenenti alla Categoria
 	
+	
+	/********** COSTRUTTORI *********/
+	
+	/**
+	 * Costruttore di default per Categorie pre-esistenti
+	 * @param id
+	 * @param nome
+	 */
+	public Categoria(int id, String nome) {
+		this.setId(id);
+		this.setNome(nome);
+
+		this.mComp = new HashMap<Integer, Componente>();
+
+	}
+	
+	/**
+	 * Costruttore per Categorie con id auto-generato
+	 * @param nome
+	 */
 	public Categoria(String nome) {
 		this.id = (int) Counter.getNextNumber(); //Id univoco
 		this.nome = nome;
@@ -27,13 +47,35 @@ public class Categoria {
 
 	}
 	
-	public Categoria(int id, String nome) {
-		this.setId(id);
-		this.setNome(nome);
+	
+	/********** FUNZIONI di PROGETTO **********/
 
-		this.mComp = new HashMap<Integer, Componente>();
-
+	/**
+	 * Ottiene il Componente corrispondente in mComp all'id fornito
+	 * @param idComponente
+	 * @return il Componente corrispondente, oppure null se non è presente
+	 */
+	public Componente getComponente (int idComponente) {
+		Componente componente_richiesto = null;
+		try{
+			componente_richiesto = this.mComp.get(idComponente);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return componente_richiesto;
 	}
+	
+	/**
+	 * Aggiunge un Componente alla mappa Componente della Categoria
+	 * @param comp: il Componente generato da aggiungere
+	 */
+	public void aggiungiComponente(Componente comp) {
+		this.mComp.put(comp.getId(), comp);
+	}
+	
+	
+	/********** GETTERS & SETTERS + TO-STRING **********/
 	
 	public int getId() {
 		return this.id;
@@ -50,29 +92,14 @@ public class Categoria {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public Map<Integer,Componente> ottieniMappaComponenti() { //Il nome è stato adeguato al diagramma delle classi di progetto
+	
+	public Map<Integer,Componente> getMappaComponenti(){
 		return this.mComp;
 	}
 
-	public void setCompList(HashMap<Integer,Componente> mComp) {
+	public void setMappaComponenti(HashMap<Integer,Componente> mComp) {
 		this.mComp = mComp;
 	}
-	
-	//
-	//Funzioni previste dal diagramma delle classi di progetto//
-	//
-	
-	public Componente getComponente (int idComponente) {
-		Componente componente_richiesto = null;
-		componente_richiesto = this.mComp.get(idComponente);
-		return componente_richiesto;
-	}
-	
-	public void aggiungiComponente(Componente comp) {
-		this.mComp.put(comp.getId(), comp);
-	}
-	
 	
 	public String toString() {
 		String str = "";
