@@ -2,7 +2,7 @@ package dominio;
 
 import java.util.*;
 
-import Utility.Counter;
+import Utility.*;
 
 /**
  * @author Bartolomeo Caruso
@@ -25,6 +25,14 @@ public class Configurazione {
 	
 	/********** COSTRUTTORI *********/
 	
+	public Configurazione() {
+		this.id = (int) Counter.getNextNumber();
+		this.setPrezzo(0);
+		this.setConsumo(0);
+		this.bundle = null;
+		listaComponenti = new LinkedList<>();
+	}
+	
 	public Configurazione(int id) {
 		this.setId(id);
 		this.setPrezzo(0);
@@ -32,20 +40,22 @@ public class Configurazione {
 		this.bundle = null;
 		this.listaComponenti = new LinkedList<Componente>();
 	}
-	
-	public Configurazione(){
-		this.bundle = null;
-		listaComponenti = new LinkedList<>();
-	}
-	
+
 	
 	/********** FUNZIONI di PROGETTO **********/
 	
+	/**
+	 * Aggiunge un Componente alla Configurazione, e aggiorna prezzo e consumo
+	 * @param c: il Componente da aggiungere
+	 */
 	public void addComponente(Componente c) {
 		this.listaComponenti.add(c);
-		this.aggiornaAttributi();
+		this.aggiornaAttributi(c);
 	}
 	
+	/**
+	 * Calcola gli attributi sulla base dell'intera lista
+	 */
 	public void aggiornaAttributi() {
 		double prezzo = 0;
 		int consumo = 0;
@@ -58,15 +68,29 @@ public class Configurazione {
 		this.setConsumo(consumo);
 	}
 
+	/**
+	 * Aggiorna gli attributi sulla base dell'ultimo Componente aggiunto
+	 * @param componente
+	 */
 	public void aggiornaAttributi(Componente componente){
 		this.consumo_energetico += componente.getConsumo_energetico();
 		this.prezzo_tot += componente.getPrezzo();
 	}
 	
+	/**
+	 * Controlla la validità della configurazione
+	 * @return un booleano (al momento, costante True)
+	 */
 	public boolean controllaConfigurazione() {
 		return true;
 	}
 	
+	/**
+	 * Genera un Bundle da legare a questa Configurazione
+	 * @param nome
+	 * @param descrizione
+	 * @param sconto
+	 */
 	public void generaBundle(String nome, String descrizione, double sconto){
 		this.bundle = new Bundle(nome,descrizione,sconto);
 	}
@@ -129,5 +153,4 @@ public class Configurazione {
 		}
 		return str;
 	}
-
 }

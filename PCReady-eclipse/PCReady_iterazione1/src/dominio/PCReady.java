@@ -42,7 +42,7 @@ public class PCReady {
 	 * Si assicura che non esistano più istanze di PCReady
 	 * @return l'istanza singleton di PCReady
 	 */
-	public static synchronized PCReady getIstance() {
+	public static synchronized PCReady getInstance() {
 		if(singleton == null) {
 			singleton = new PCReady();
 			singleton.caricaSistema();
@@ -56,7 +56,7 @@ public class PCReady {
 	protected void caricaSistema() {
 		// riempie il sistema con i dati conosciuti tramite la lettura di un
 		// file JSON
-		Parser par = new Parser("data/test_data.json");
+		Parser par = new Parser();
 		par.initialParsing();
 		System.out.println("PC Ready correttamente caricato.\n");
 		System.out.println(this.toString());
@@ -67,14 +67,17 @@ public class PCReady {
 	 * Aggiorna il JSON con tutte le nuove informazioni generate
 	 */
 	public void salvaSistema() {
-		Parser.saveAll("data/test_data.json");
+		Parser.saveAll();
 	}
 	
 	
 	/********** FUNZIONI di PROGETTO **********/
 	
-	/* POSSIBILI GETTER e SETTER, MA IN REALTA' SONO FUNZIONI DI PROGETTO */
-	
+	/**
+	 * Ritorna uno dei Componente presenti nel sistema, se esiste
+	 * @param id: l'id del Componente cercato
+	 * @return una istanza di Componente, oppure null
+	 */
 	public Componente selezionaComponente(int id) {
 		Componente comp = null;
 		try {
@@ -85,6 +88,11 @@ public class PCReady {
 		return comp;
 	}
 	
+	/**
+	 * Ritorna una delle Categoria presenti nel sistema, se esiste
+	 * @param id: l'id della Categoria cercata
+	 * @return una istanza di Categoria, oppure null
+	 */
 	public Categoria selezionaCategoria(int id) {
 		Categoria cat = null;
 		try {
@@ -95,8 +103,13 @@ public class PCReady {
 		return cat;
 	}
 	
+	/**
+	 * Aggiunge una configurazione alla lista delle Configurazione di sistema
+	 * @param conf
+	 */
 	public void aggiungiConfigurazione(Configurazione conf) {
 		this.listaConfigurazioni.add(conf);
+		Parser.saveConfigurazioni(PCReady.getInstance());
 	}
 	
 	/**
@@ -106,26 +119,54 @@ public class PCReady {
 		this.conf = new Configurazione();
 	}
 	
+	/**
+	 * Aggiunge il Componente selezionato alla Configurazione corrente
+	 */
 	public void confermaComponente() {
 		this.aggiungiComponenteInConfigurazione(this.componenteSelezionato);
 	}
 	
+	/**
+	 * Controlla se ci sono i presupposti per accettare la nuova Configurazione
+	 */
 	public void terminaAssemblaggio() {
 		if(this.conf.controllaConfigurazione()) this.confermaConfigurazione();
 	}
 	
+	/**
+	 * Aggiunge la Configurazione corrente alla lista delle Configurazione
+	 */
 	public void confermaConfigurazione() {
 		this.listaConfigurazioni.add(this.conf);
+		Parser.saveConfigurazioni(PCReady.getInstance());
 	}
 	
+	/**
+	 * Mostra a schermo i Componente presenti nella Configurazione corrente
+	 */
 	public void riepilogaConfigurazione() {
 		String str = this.conf.toString();
 	}
 	
+	/**
+	 * Accetta i parametri necessari per creare un Bundle relativo alla Configurazione corrente
+	 * @param nome
+	 * @param descrizione
+	 * @param sconto
+	 */
 	public void infoConfigurazione(String nome, String descrizione, double sconto) {
 		this.conf.generaBundle(nome, descrizione, sconto);
 	}
 	
+	/**
+	 * Crea un nuovo Componente
+	 * @param nome
+	 * @param codiceCategoria
+	 * @param consumo
+	 * @param prezzo
+	 * @param descrizione
+	 * @return
+	 */
 	public Componente creaComponente(String nome, int codiceCategoria, int consumo, double prezzo, String descrizione) {
 		this.c = new Componente(nome, consumo, prezzo, descrizione);
 		this.aggiungiInMappa(this.c);
@@ -133,16 +174,30 @@ public class PCReady {
 		return this.c;
 	}
 	
+	/**
+	 * Crea un numero finito di CopiaComponente per il Componente corrente
+	 * @param numero
+	 */
 	public void creaCopie(int numero) {
 		this.c.aggiungiCopie(numero);
 	}
 	
+	/**
+	 * Aggiunge un Componente alla mappaComponentiSistema
+	 * @param c: l'oggetto Componente da aggiungere
+	 */
 	public void aggiungiInMappa(Componente c) {
 		this.mappaComponentiSistema.put(c.getId(), c);
 	}
 	
+	/**
+	 * Aggiunge un Componente alla sua Categoria di riferimento
+	 * @param id: l'id numerico della Categoria
+	 * @param c: l'oggetto Componente da aggiungere
+	 */
 	public void aggiungiInCategoria(int id, Componente c) {
 		this.mCat.get(id).aggiungiComponente(c);
+		Parser.saveCategorie(PCReady.getInstance());
 	}
 	
 	
@@ -158,6 +213,7 @@ public class PCReady {
 	
 	public void aggiungiCategoria(Categoria cat) {
 		this.mCat.put(cat.getId(), cat);
+		Parser.saveCategorie(PCReady.getInstance());
 	}
 	
 	public Map<Integer, Categoria> ottieniMappaCategorie(){
