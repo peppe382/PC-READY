@@ -18,13 +18,23 @@ import dominio.*;
 
 public class Parser {
 	
-	private String dataFile;
-	private String jsonText;
-	private JSONObject object;
-
+	public void initialParsing() {
+		PCReady sistema = PCReady.getIstance();
+		
+		this.parseCategorie(sistema);
+		this.parseConfigurazioni(sistema);
+	}
 	
-	public Parser(String filename) {
-		this.dataFile = filename;
+	public static void saveAll(String filename) {
+		PCReady sistema = PCReady.getIstance();
+		
+		Parser.saveCategorie(sistema);
+		Parser.saveConfigurazioni(sistema);
+	}
+	
+// -------------------------------------------------------------------
+
+	public String getFileContent(String filename) {
 		String content;
 		try {
 			content = new String ( Files.readAllBytes( Paths.get(filename) ) );
@@ -33,17 +43,34 @@ public class Parser {
 			content = new String("");
 			e.printStackTrace();
 		}
-		this.setJsonText(content);
-		
-		this.setObject(new JSONObject(content));
+		return content;
 	}
 	
+	public JSONArray getArrayFromFile(String filename) {
+		return new JSONArray(getFileContent(filename));
+	}
 	
+	public JSONObject getObjectFromFile(String filename) {
+		return new JSONObject(getFileContent(filename));
+	}
 	
-	public void initialParsing() {
-		PCReady sistema = PCReady.getIstance();
-		
-		JSONArray categorie = this.getObject().getJSONArray("categorie");
+	public static void writeToFile(String filename, String content) {
+		try {
+			FileWriter file = new FileWriter(filename);
+			file.write(content);
+			file.close();
+		} catch(Exception e) {
+			System.out.println("Errore nel salvare su file: " + filename);
+			System.out.println("---------------------------------------------------");
+			System.out.println(content);
+			e.printStackTrace();
+		}
+	}
+
+// -------------------------------------------------------------------
+	
+	public void parseCategorie(PCReady sistema) {
+		JSONArray categorie = this.getArrayFromFile("data/categorie.json");
 		for(int i = 0; i < categorie.length(); i++) {
 			JSONObject currCat = categorie.getJSONObject(i);
 			Categoria cat = this.processCategoria(categorie.getJSONObject(i));
@@ -62,8 +89,10 @@ public class Parser {
 			}
 			sistema.aggiungiCategoria(cat);
 		}
-		
-		JSONArray configurazioni = this.getObject().getJSONArray("configurazioni");
+	}
+	
+	public void parseConfigurazioni(PCReady sistema) {
+		JSONArray configurazioni = this.getArrayFromFile("data/configurazioni.json");
 		for(int l = 0; l < configurazioni.length(); l++) {
 			JSONObject currConf = configurazioni.getJSONObject(l);
 			Configurazione conf = this.processConfigurazione(currConf);
@@ -77,34 +106,23 @@ public class Parser {
 		}
 	}
 	
-	public static void saveAll(String filename) {
-		PCReady sistema = PCReady.getIstance();
-		
-		JSONObject main = new JSONObject();
-		
-		JSONArray categorie = new JSONArray();
-		Map<Integer, Categoria> mCat = sistema.ottieniMappaCategorie();
-		for(Map.Entry<Integer, Categoria> entry : mCat.entrySet()) categorie.put(jsonCategoria(entry.getValue()));
-		main.put("categorie", categorie);
-		
-		JSONArray configurazioni = new JSONArray();
-		List<Configurazione> confList = sistema.ottieniListaConfigurazioni();
-		for(int i = 0; i < confList.size(); i++) configurazioni.put(jsonConfigurazione(confList.get(i)));
-		main.put("configurazioni", configurazioni);
-		
-		try {
-			FileWriter file = new FileWriter(filename);
-			file.write(main.toString());
-			file.close();
-		} catch(Exception e) {
-			System.out.println("Errore nel salvare su file: " + filename);
-			System.out.println("---------------------------------------------------");
-			System.out.println(main.toString());
-			e.printStackTrace();
-		}
-	}
+	// -------------------------------------------------------------------
 	
-// -------------------------------------------------------------------
+		public static void saveCategorie(PCReady sistema) {
+			JSONArray categorie = new JSONArray();
+			Map<Integer, Categoria> mCat = sistema.ottieniMappaCategorie();
+			for(Map.Entry<Integer, Categoria> entry : mCat.entrySet()) categorie.put(jsonCategoria(entry.getValue()));
+			Parser.writeToFile("data/categorie.json", categorie.toString());
+		}
+		
+		public static void saveConfigurazioni(PCReady sistema) {
+			JSONArray configurazioni = new JSONArray();
+			List<Configurazione> confList = sistema.ottieniListaConfigurazioni();
+			for(int i = 0; i < confList.size(); i++) configurazioni.put(jsonConfigurazione(confList.get(i)));
+			Parser.writeToFile("data/configurazioni.json", configurazioni.toString());
+		}
+		
+	// -------------------------------------------------------------------
 	
 	public Categoria processCategoria(JSONObject cat) {
 		int id = cat.getInt("id");
@@ -174,29 +192,4 @@ public class Parser {
 		
 		return core;
 	}
-
-// -------------------------------------------------------------------
-
-	public String getJsonText() {
-		return jsonText;
-	}
-
-
-
-	public void setJsonText(String jsonText) {
-		this.jsonText = jsonText;
-	}
-
-
-
-	public JSONObject getObject() {
-		return object;
-	}
-
-
-
-	public void setObject(JSONObject object) {
-		this.object = object;
-	}
-	
 }
