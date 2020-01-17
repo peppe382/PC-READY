@@ -19,14 +19,14 @@ import dominio.*;
 public class Parser {
 	
 	public void initialParsing() {
-		PCReady sistema = PCReady.getIstance();
+		PCReady sistema = PCReady.getInstance();
 		
 		this.parseCategorie(sistema);
 		this.parseConfigurazioni(sistema);
 	}
 	
-	public static void saveAll(String filename) {
-		PCReady sistema = PCReady.getIstance();
+	public static void saveAll() {
+		PCReady sistema = PCReady.getInstance();
 		
 		Parser.saveCategorie(sistema);
 		Parser.saveConfigurazioni(sistema);

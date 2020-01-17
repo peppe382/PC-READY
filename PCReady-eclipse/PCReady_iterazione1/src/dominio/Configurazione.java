@@ -2,6 +2,8 @@ package dominio;
 
 import java.util.*;
 
+import Utility.*;
+
 /**
  * @author Bartolomeo Caruso
  * @author Gabriele Costanzo
@@ -117,11 +119,7 @@ public class Configurazione {
 
 	public void setConsumo(int consumo_energetico) {
 		this.consumo_energetico = consumo_energetico;
-<<<<<<< Updated upstream
 	}
-=======
-	}	
->>>>>>> Stashed changes
 	
 	public List<Componente> getComponenti(){
 		return this.listaComponenti;

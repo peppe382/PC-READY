@@ -42,7 +42,7 @@ public class PCReady {
 	 * Si assicura che non esistano più istanze di PCReady
 	 * @return l'istanza singleton di PCReady
 	 */
-	public static synchronized PCReady getIstance() {
+	public static synchronized PCReady getInstance() {
 		if(singleton == null) {
 			singleton = new PCReady();
 			singleton.caricaSistema();
@@ -67,7 +67,7 @@ public class PCReady {
 	 * Aggiorna il JSON con tutte le nuove informazioni generate
 	 */
 	public void salvaSistema() {
-		Parser.saveAll("data/test_data.json");
+		Parser.saveAll();
 	}
 	
 	
@@ -109,6 +109,7 @@ public class PCReady {
 	 */
 	public void aggiungiConfigurazione(Configurazione conf) {
 		this.listaConfigurazioni.add(conf);
+		Parser.saveConfigurazioni(PCReady.getInstance());
 	}
 	
 	/**
@@ -137,6 +138,7 @@ public class PCReady {
 	 */
 	public void confermaConfigurazione() {
 		this.listaConfigurazioni.add(this.conf);
+		Parser.saveConfigurazioni(PCReady.getInstance());
 	}
 	
 	/**
@@ -195,6 +197,7 @@ public class PCReady {
 	 */
 	public void aggiungiInCategoria(int id, Componente c) {
 		this.mCat.get(id).aggiungiComponente(c);
+		Parser.saveCategorie(PCReady.getInstance());
 	}
 	
 	
@@ -210,6 +213,7 @@ public class PCReady {
 	
 	public void aggiungiCategoria(Categoria cat) {
 		this.mCat.put(cat.getId(), cat);
+		Parser.saveCategorie(PCReady.getInstance());
 	}
 	
 	public Map<Integer, Categoria> ottieniMappaCategorie(){
