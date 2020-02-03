@@ -129,7 +129,6 @@ public class Configurazione {
 		this.listaComponenti = listaComponenti;
 		
 	}
-
 	public Configurazione(){
 		
 		this.id = (int) Counter.getNextNumber();
@@ -141,7 +140,6 @@ public class Configurazione {
 		return this.listaComponenti;
 	}
 	
-
 	public String toString() {
 		String str = "";
 		str += "Conf. #"+this.getId()+"\n";
