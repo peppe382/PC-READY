@@ -4,11 +4,17 @@
 .classpath
 _old/*
 *.lock
-PCReady-eclipse/.gitignore
-PCReady-eclipse/.settings/org.eclipse.jdt.ui.prefs
+ITERAZIONE 1/PCReady-eclipse/.gitignore
+ITERAZIONE 1/PCReady-eclipse/.settings/org.eclipse.jdt.ui.prefs
 ITERAZIONE 1/SSD e CONTRATTI/~$ntratti delle Operazioni.docx
 ITERAZIONE 1/SSD e CONTRATTI/~WRL1074.tmp
 ITERAZIONE 1/SSD e CONTRATTI/~$erazione 1.docx
+ITERAZIONE 2/~$ntratti delle Operazioni.docx
+ITERAZIONE 2/~WRL1074.tmp
+ITERAZIONE 2/~$erazione 2.docx
+ITERAZIONE 2/~$scussione Iterazione 2.docx
 ITERAZIONE 1/SSD e CONTRATTI/Astah/Iterazione 1.asta.lock
 
 
+ITERAZIONE 2/~WRL1431.tmp
+*.tmp
