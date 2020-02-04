@@ -1,14 +1,3 @@
-/bin/
-.project
 .DS_Store
-.classpath
 _old/*
 *.lock
-PCReady-eclipse/.gitignore
-PCReady-eclipse/.settings/org.eclipse.jdt.ui.prefs
-ITERAZIONE 1/SSD e CONTRATTI/~$ntratti delle Operazioni.docx
-ITERAZIONE 1/SSD e CONTRATTI/~WRL1074.tmp
-ITERAZIONE 1/SSD e CONTRATTI/~$erazione 1.docx
-ITERAZIONE 1/SSD e CONTRATTI/Astah/Iterazione 1.asta.lock
-
-
