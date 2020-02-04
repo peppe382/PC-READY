@@ -12,6 +12,7 @@ import dominio.CopiaComponente;
 class ComponenteTest {
 	
 	private static Componente componente;
+	
 
 	@BeforeAll
 	static void setupAll() {
@@ -26,4 +27,5 @@ class ComponenteTest {
 			System.out.println(elemento.getCodice());
 		}
 	}
+
 }
