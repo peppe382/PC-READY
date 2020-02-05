@@ -58,9 +58,6 @@ public class PCReady {
 		// file JSON
 		Parser par = new Parser();
 		par.initialParsing();
-		System.out.println("PC Ready correttamente caricato.\n");
-		System.out.println(this.toString());
-		System.out.println("-------------------------------------------------------------");
 	}
 	
 	/**

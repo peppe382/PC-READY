@@ -2,6 +2,7 @@ package handlers;
 
 import java.util.*;
 import dominio.*;
+import dominio.componenti.*;
 
 public class ConfigurationHandler {
 

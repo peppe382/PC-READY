@@ -13,7 +13,6 @@ import Utility.*;
  */
 public class Configurazione {
 
-
 	private int id; // id univoco della Configurazione
 	private double prezzo_tot; // prezzo finale della Configurazione all'acquisto, in Euro
 	private int consumo_energetico; // consumo totale, in Watt
@@ -120,26 +119,13 @@ public class Configurazione {
 
 	public void setConsumo(int consumo_energetico) {
 		this.consumo_energetico = consumo_energetico;
-	}	
-	public Configurazione(int id, double prezzo_tot, int consumo_energetico, List<Componente> listaComponenti) {
-		
-		this.id = id;
-		this.prezzo_tot = prezzo_tot;
-		this.consumo_energetico = consumo_energetico;
-		this.listaComponenti = listaComponenti;
-		
-	}
-	public Configurazione(){
-		
-		this.id = (int) Counter.getNextNumber();
-		listaComponenti = new LinkedList<>();
-
 	}
 	
 	public List<Componente> getComponenti(){
 		return this.listaComponenti;
 	}
 	
+
 	public String toString() {
 		String str = "";
 		str += "Conf. #"+this.getId()+"\n";

@@ -5,12 +5,12 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Componente {
 
+	private String categoria;
 	private int id; // id univoco del Componente
 	private String nome; // nome da mostrare all'utente
 	private double prezzo; // prezzo in Euro
 	private int consumo_energetico; // Consumo in Watt
 	private String descrizione; // Descrizione completa
-	private String categoria;
 	private static final AtomicLong counter = new AtomicLong(0);
 	
 	private List<CopiaComponente> listaCopie; // Elenco di tutte le copie disponibili del componente

@@ -2,6 +2,8 @@ package dominio;
 
 import java.util.*;
 
+import dominio.componenti.Configurazione;
+
 public class Catalogo {
 
 	private Map<String,ArrayList<Componente>> mappaComponenti;
@@ -16,7 +18,7 @@ public class Catalogo {
 	
 	public Catalogo() {
 		this.mappaComponenti = new HashMap<String, ArrayList<Componente>>();
-		//Necessito una logica di inserimento delle componenti giá esistenti: vedi Parser
+		//Necessito una logica di inserimento delle componenti giï¿½ esistenti: vedi Parser
 		//Tutte le chiavi della mappa devono essere inizializzate...
 	}
 	
@@ -50,7 +52,7 @@ public class Catalogo {
 	
 	
 	public void aggiungiInCatalogo(Configurazione configurazione) {
-		//La funzione é universale sia per un Bundle sia per una Configurazione
+		//La funzione ï¿½ universale sia per un Bundle sia per una Configurazione
 		this.mappaComponenti.get(configurazione.getCategoria()).add(configurazione);
 	}
 	

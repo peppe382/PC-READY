@@ -18,6 +18,12 @@ import dominio.*;
 
 public class Parser {
 	
+// -------------------------------------------------------------------
+	// Funzioni di lettura/scrittura TOTALI
+	
+	/**
+	 * Inizializza il sistema PCReady con tutti i dati presenti sul database
+	 */
 	public void initialParsing() {
 		PCReady sistema = PCReady.getInstance();
 		
@@ -25,50 +31,23 @@ public class Parser {
 		this.parseConfigurazioni(sistema);
 	}
 	
+	/**
+	 * Salva tutti i dati presenti nel sistema PCReady sul database
+	 */
 	public static void saveAll() {
 		PCReady sistema = PCReady.getInstance();
 		
 		Parser.saveCategorie(sistema);
 		Parser.saveConfigurazioni(sistema);
 	}
-	
-// -------------------------------------------------------------------
-
-	public String getFileContent(String filename) {
-		String content;
-		try {
-			content = new String ( Files.readAllBytes( Paths.get(filename) ) );
-		}
-		catch(IOException e) {
-			content = new String("");
-			e.printStackTrace();
-		}
-		return content;
-	}
-	
-	public JSONArray getArrayFromFile(String filename) {
-		return new JSONArray(getFileContent(filename));
-	}
-	
-	public JSONObject getObjectFromFile(String filename) {
-		return new JSONObject(getFileContent(filename));
-	}
-	
-	public static void writeToFile(String filename, String content) {
-		try {
-			FileWriter file = new FileWriter(filename);
-			file.write(content);
-			file.close();
-		} catch(Exception e) {
-			System.out.println("Errore nel salvare su file: " + filename);
-			System.out.println("---------------------------------------------------");
-			System.out.println(content);
-			e.printStackTrace();
-		}
-	}
 
 // -------------------------------------------------------------------
+	// Funzioni di lettura SINGOLE
 	
+	/**
+	 * Caricamento delle Categoria nel sistema PCReady
+	 * @param sistema
+	 */
 	public void parseCategorie(PCReady sistema) {
 		JSONArray categorie = this.getArrayFromFile("data/categorie.json");
 		for(int i = 0; i < categorie.length(); i++) {
@@ -91,6 +70,10 @@ public class Parser {
 		}
 	}
 	
+	/**
+	 * Caricamento delle Configurazione nel sistema PCReady
+	 * @param sistema
+	 */
 	public void parseConfigurazioni(PCReady sistema) {
 		JSONArray configurazioni = this.getArrayFromFile("data/configurazioni.json");
 		for(int l = 0; l < configurazioni.length(); l++) {
@@ -106,7 +89,7 @@ public class Parser {
 		}
 	}
 	
-	// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 	
 		public static void saveCategorie(PCReady sistema) {
 			JSONArray categorie = new JSONArray();
@@ -122,7 +105,7 @@ public class Parser {
 			Parser.writeToFile("data/configurazioni.json", configurazioni.toString());
 		}
 		
-	// -------------------------------------------------------------------
+// -------------------------------------------------------------------
 	
 	public Categoria processCategoria(JSONObject cat) {
 		int id = cat.getInt("id");
@@ -148,6 +131,41 @@ public class Parser {
 		int id = conf.getInt("id");
 		return new Configurazione(id);
 	}
+	
+// -------------------------------------------------------------------
+		
+		public String getFileContent(String filename) {
+			String content;
+			try {
+				content = new String ( Files.readAllBytes( Paths.get(filename) ) );
+			}
+			catch(IOException e) {
+				content = new String("");
+				e.printStackTrace();
+			}
+			return content;
+		}
+		
+		public JSONArray getArrayFromFile(String filename) {
+			return new JSONArray(getFileContent(filename));
+		}
+		
+		public JSONObject getObjectFromFile(String filename) {
+			return new JSONObject(getFileContent(filename));
+		}
+		
+		public static void writeToFile(String filename, String content) {
+			try {
+				FileWriter file = new FileWriter(filename);
+				file.write(content);
+				file.close();
+			} catch(Exception e) {
+				System.out.println("Errore nel salvare su file: " + filename);
+				System.out.println("---------------------------------------------------");
+				System.out.println(content);
+				e.printStackTrace();
+			}
+		}
 	
 // -------------------------------------------------------------------
 	
