@@ -1,4 +1,4 @@
-package dominio;
+package dominio.componenti;
 
 public class Bundle extends Configurazione{
 
@@ -7,9 +7,15 @@ public class Bundle extends Configurazione{
 
 	//Costruttori 
 	
+	public Bundle(String nome, double prezzo, int consumo_energetico, String descrizione) {
+		super(nome, prezzo, consumo_energetico, descrizione);
+		super.setCategoria("Bundle");
+		this.sconto = 0.00;
+	}
+	
 	public Bundle() {
 		super();
-		super.setCategoria("Configurazione");
+		super.setCategoria("Bundle");
 		this.sconto = 0.00;
 	}
 	

@@ -1,0 +1,45 @@
+package dominio.componenti;
+
+import dominio.Componente;
+
+public class RAM extends Componente {
+	
+	private String tipologia;
+	private int frequenza;
+
+	public RAM(String nome, double prezzo, int consumo_energetico, String descrizione, String tipologia, int frequenza) {
+		super(nome, prezzo, consumo_energetico, descrizione, "RAM");
+		this.setTipologia(tipologia);
+		this.setFrequenza(frequenza);
+	}
+
+
+	public RAM(String tipologia, int frequenza) { // Costruttore di default
+		super();
+		super.setCategoria("RAM");
+		this.setTipologia(tipologia);
+		this.setFrequenza(frequenza);
+	}
+
+
+	public String getTipologia() {
+		return tipologia;
+	}
+
+
+	public void setTipologia(String tipologia) {
+		this.tipologia = tipologia;
+	}
+
+
+	public int getFrequenza() {
+		return frequenza;
+	}
+
+
+	public void setFrequenza(int frequenza) {
+		this.frequenza = frequenza;
+	}
+
+
+}

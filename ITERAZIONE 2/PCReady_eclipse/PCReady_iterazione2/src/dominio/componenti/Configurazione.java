@@ -1,6 +1,8 @@
-package dominio;
+package dominio.componenti;
+import dominio.Componente;
 
 import java.util.*;
+
 
 public class Configurazione extends Componente {
 
@@ -9,9 +11,8 @@ public class Configurazione extends Componente {
 	
 	//  Costruttori
 	
-	public Configurazione(int id, String nome, double prezzo, int consumo_energetico, String descrizione,
-			String categoria) {
-		super(nome, prezzo, consumo_energetico, descrizione, categoria);
+	public Configurazione(String nome, double prezzo, int consumo_energetico, String descrizione) {
+		super(nome, prezzo, consumo_energetico, descrizione, "Configurazione");
 		this.listaComponenti = new ArrayList<Componente>();
 	}
 
@@ -19,6 +20,7 @@ public class Configurazione extends Componente {
 	public Configurazione() { // Costruttore di default
 		super();
 		super.setCategoria("Configurazione");
+		this.listaComponenti = new ArrayList<Componente>();
 	}
 
 	

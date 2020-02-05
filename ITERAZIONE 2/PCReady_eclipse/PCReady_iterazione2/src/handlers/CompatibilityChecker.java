@@ -1,6 +1,7 @@
 package handlers;
 
-import dominio.Catalogo;
+import dominio.*;
+import dominio.componenti.*;
 
 public class CompatibilityChecker {
 	
