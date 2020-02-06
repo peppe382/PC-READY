@@ -61,12 +61,9 @@ public class Catalogo {
 	
 	
 	public Componente getComponente(int id, String categoria) {
+		this.mappaComponenti.get(categoria).get(id);
 		try {
-			for (Componente elemento : this.mappaComponenti.get(categoria)) {
-				if (elemento.getId() == id) {
-					return elemento;
-				}
-			}
+			return this.mappaComponenti.get(categoria).get(id);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
