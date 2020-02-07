@@ -40,11 +40,12 @@ public class PCReady {
 	protected void caricaSistema() {
 		// riempie il sistema con i dati conosciuti tramite la lettura di un
 		// file JSON
-		Parser par = new Parser("data/test_data.json");
+		/*Parser par = new Parser("data/test_data.json");
 		par.initialParsing();
 		System.out.println("PC Ready correttamente caricato.\n");
 		System.out.println(this.toString());
 		System.out.println("-------------------------------------------------------------");
+		*/
 	}
 	
 	
@@ -52,7 +53,7 @@ public class PCReady {
 	 * Aggiorna il JSON con tutte le nuove informazioni generate **/
 	 
 	public void salvaSistema() {
-		Parser.saveAll("data/test_data.json");
+		/*Parser.saveAll("data/test_data.json");*/
 	}
 	
 	

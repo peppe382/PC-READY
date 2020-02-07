@@ -15,10 +15,29 @@ public class Configurazione extends Componente {
 		super(nome, prezzo, consumo_energetico, descrizione, "Configurazione");
 		this.listaComponenti = new ArrayList<Componente>();
 	}
+	
+	
+	public Configurazione(String nome, double prezzo, int consumo_energetico, String descrizione, List<Componente> listaComponenti) {
+		super(nome, prezzo, consumo_energetico, descrizione, "Configurazione");
+		this.setListaComponenti(listaComponenti);
+	}
+	
+	
+	public Configurazione(Componente comp, List<Componente> listaComponenti) {
+		super(comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "Configurazione");
+		this.setListaComponenti(listaComponenti);
+	}
 
 
 	public Configurazione() { // Costruttore di default
 		super();
+		super.setCategoria("Configurazione");
+		this.listaComponenti = new ArrayList<Componente>();
+	}
+	
+	public Configurazione(int id) { // Costruttore di default con id prestabilito
+		super();
+		super.setId(id);
 		super.setCategoria("Configurazione");
 		this.listaComponenti = new ArrayList<Componente>();
 	}

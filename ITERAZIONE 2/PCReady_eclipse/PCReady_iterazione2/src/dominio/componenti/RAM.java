@@ -12,6 +12,13 @@ public class RAM extends Componente {
 		this.setTipologia(tipologia);
 		this.setFrequenza(frequenza);
 	}
+	
+	
+	public RAM(Componente comp, String tipologia, int frequenza) {
+		super(comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "RAM");
+		this.setTipologia(tipologia);
+		this.setFrequenza(frequenza);
+	}
 
 
 	public RAM(String tipologia, int frequenza) { // Costruttore di default

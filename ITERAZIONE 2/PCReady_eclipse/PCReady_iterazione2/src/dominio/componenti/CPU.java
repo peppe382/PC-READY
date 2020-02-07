@@ -10,6 +10,12 @@ public class CPU extends Componente {
 		super(nome, prezzo, consumo_energetico, descrizione, "CPU");
 		this.setSocket(socket);
 	}
+	
+	
+	public CPU(Componente comp, String socket) {
+		super(comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "CPU");
+		this.setSocket(socket);
+	}
 
 
 	public CPU(String socket) { // Costruttore di default

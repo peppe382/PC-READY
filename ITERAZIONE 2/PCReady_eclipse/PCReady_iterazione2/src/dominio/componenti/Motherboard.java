@@ -14,6 +14,14 @@ public class Motherboard extends Componente {
 		this.setFormFactor(formFactor);
 		this.setTipologiaRAM(tipologiaRAM);
 	}
+	
+	
+	public Motherboard(Componente comp, String socket, String formFactor, String tipologiaRAM) {
+        super(comp.getNome(),comp.getPrezzo(),comp.getConsumo_energetico(),comp.getDescrizione(), "Motherboard");
+        this.setSocket(socket);
+        this.setFormFactor(formFactor);
+        this.setTipologiaRAM(tipologiaRAM);
+    }
 
 
 	public Motherboard(String socket, String formFactor, String tipologiaRAM) { // Costruttore di default

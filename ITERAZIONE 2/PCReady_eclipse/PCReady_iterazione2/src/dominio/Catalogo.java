@@ -50,6 +50,9 @@ public class Catalogo {
 		return mappa;
 	}
 	
+	public void aggiungiCategoria(String cat) {
+		this.mappaComponenti.put(cat, new ArrayList<Componente>());
+	}
 	
 	public void aggiungiInCatalogo(Componente componente) {
 		this.mappaComponenti.get(componente.getCategoria()).add(componente);
@@ -64,6 +67,21 @@ public class Catalogo {
 	public Componente getComponente(int id, String categoria) {
 		try {
 			return this.mappaComponenti.get(categoria).get(id);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Componente getComponente(int id) {
+		try {
+			for(Map.Entry<String, ArrayList<Componente>> entry : this.mappaComponenti.entrySet()) {
+				ArrayList<Componente> tempList = entry.getValue();
+				for(Componente c : tempList) {
+					if(c.getId() == id) return c;
+				}
+			}
+			return null;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

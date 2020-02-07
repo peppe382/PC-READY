@@ -32,9 +32,10 @@
 				"prezzo": 59.99,
 				"consumo_energetico": 5,
 				"descrizione": "Seagate Barracuda, HDD Storage, 2TB, 2.5'",
-				"memoria": 2048,
+				"memoria": "2 TB",
 				"dimensioni": 2.5,
 				"velocita": 6144,
+				"tipologia": "HDD",
 				"copie": [ {"codice": 277} ]		}
 		],
 		
@@ -78,10 +79,13 @@
 		],
 		
 	"Configurazione":
-	[
-		{
-			"id": 1,
-			"componenti": [1, 2, 2, 3, 4, 5, 6]
-		}
-	]
+		[
+			{
+				"id": 1,
+				"componenti": [1, 2, 2, 3, 4, 5, 6]
+			}
+		],
+	
+	"Bundle":
+		[]
 }

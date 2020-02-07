@@ -17,6 +17,14 @@ public class Storage extends Componente {
 		this.setTipologia(tipologia);
 	}
 
+	
+	public Storage(Componente comp, String memoria, double dimensioni, int velocita, String tipologia) {
+		super(comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "Storage");
+		this.setMemoria(memoria);
+		this.setDimensioni(dimensioni);
+		this.setVelocita(velocita);
+		this.setTipologia(tipologia);
+	}
 
 	public Storage(String memoria, double dimensioni, int velocita, String tipologia) { // Costruttore di default
 		super();

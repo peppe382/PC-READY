@@ -29,6 +29,16 @@ public class Componente {
 		this.setListaCopie(new LinkedList<CopiaComponente>());
 	}
 	
+	public Componente(int id, String nome, double prezzo, int consumo_energetico, String descrizione, String categoria) {
+		this.setId();
+		this.setNome(nome);
+		this.setPrezzo(prezzo);
+		this.setConsumo_energetico(consumo_energetico);
+		this.setDescrizione(descrizione);
+		this.setCategoria(categoria);
+		this.setListaCopie(new LinkedList<CopiaComponente>());
+	}
+	
 	public Componente() {  //Valori di default
 		this.setId();
 		this.nome = "default";
@@ -72,6 +82,10 @@ public class Componente {
 
 	public void setId() {
 		this.id = (int) counter.incrementAndGet();
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setNome(String nome) {
@@ -124,6 +138,9 @@ public class Componente {
 	}
 	
 	
+	public void aggiungiCopia(CopiaComponente c) {
+		this.listaCopie.add(c);
+	}
 	
 	
 	

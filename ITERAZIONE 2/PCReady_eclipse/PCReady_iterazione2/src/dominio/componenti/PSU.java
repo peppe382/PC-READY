@@ -14,6 +14,14 @@ public class PSU extends Componente {
 		this.setTipologia(tipologia);
 		this.setFormFactor(formFactor);
 	}
+	
+	
+	public PSU(Componente comp, int potenzaErogata, String tipologia, String formFactor) {
+		super(comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "PSU");
+		this.setPotenzaErogata(potenzaErogata);
+		this.setTipologia(tipologia);
+		this.setFormFactor(formFactor);
+	}
 
 
 	public PSU(int potenzaErogata, String tipologia, String formFactor) { // Costruttore di default

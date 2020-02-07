@@ -10,9 +10,15 @@ public class GPU extends Componente {
 		super(nome, prezzo, consumo_energetico, descrizione, "GPU");
 		this.setSlot(slot);
 	}
+	
+	
+	public GPU(Componente comp, int slot) {
+		super(comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "GPU");
+		this.setSlot(slot);
+	}
 
 
-	public GPU(String formFactor) { // Costruttore di default
+	public GPU(int slot) { // Costruttore di default
 		super();
 		super.setCategoria("GPU");
 		this.setSlot(slot);

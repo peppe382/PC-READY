@@ -13,6 +13,18 @@ public class Bundle extends Configurazione{
 		this.sconto = 0.00;
 	}
 	
+	
+	public Bundle(Configurazione conf, double sconto) {
+		super(conf.getNome(), conf.getPrezzo(), conf.getConsumo_energetico(), conf.getDescrizione(), conf.getListaComponenti());
+		super.setCategoria("Bundle");
+		
+		double prezzoScontato = conf.getPrezzo() * (1 - sconto/100);
+		
+		this.setPrezzo(prezzoScontato);
+		this.setSconto(sconto);
+	}
+	
+	
 	public Bundle() {
 		super();
 		super.setCategoria("Bundle");

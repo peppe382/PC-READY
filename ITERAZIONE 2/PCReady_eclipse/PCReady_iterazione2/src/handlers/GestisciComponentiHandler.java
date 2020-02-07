@@ -1,7 +1,7 @@
 package handlers;
 
-import dominio.Catalogo;
-import dominio.Componente;
+import dominio.*;
+import data.Parser;
 
 public class GestisciComponentiHandler {
 
@@ -16,7 +16,7 @@ private Componente componenteCorrente;
 	}
 	
 	public GestisciComponentiHandler() {
-		this.catalogo = new Catalogo();
+		this.catalogo = Parser.createCatalogo();
 	}
 
 	
