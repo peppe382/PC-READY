@@ -14,17 +14,13 @@ public class ConfigurationHandler {
 	
 	
 	//  Costruttori
-	public ConfigurationHandler() {
+	public ConfigurationHandler(Catalogo catalogo) {
+		this.creaConfigurazione();
 		this.mappaCorrente = new HashMap<Integer, Componente>();
-		this.checker = new CompatibilityChecker();
-		this.catalogo = new Catalogo();
-	}
-	
-	
-	public ConfigurationHandler(CompatibilityChecker checker, Catalogo catalogo) {
-		this.checker = checker;
+		this.checker = new CompatibilityChecker(this.conf);
 		this.catalogo = catalogo;
 	}
+
 
 
 
@@ -89,24 +85,30 @@ public class ConfigurationHandler {
 	}
 	
 	
-	public  Map<Integer, Componente> selezionaCategoria(String idCategoria) {
-		return this.mappaCorrente = this.catalogo.ottieniComponentiByCategoria(idCategoria);
+	public Map<Integer, Componente> selezionaCategoria(String idCategoria) {
+		try {
+			return this.mappaCorrente = this.catalogo.ottieniComponentiByCategoria(idCategoria);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
+	
 	
 	public String confermaComponente() {
 		if (this.checker.controlloComponente(this.componenteCorrente)) {
 			return this.conf.aggiungiComponenteInConfigurazione(this.componenteCorrente);
 		}
 		//Da decidere la policy comportamentale else
+		else return null;
 	}
 	
 	
 	public String terminaAssemblaggio() {
-		if (this.checker.controllaPresenzaComponenti()) {
-			if (this.checker.controllaConsumoEnergetico()) {
-				this.conf.riepilogaConfigurazione();
-			}
+		if (this.checker.controllaPresenzaComponenti() && this.checker.controllaConsumoEnergetico()) {
+			return this.conf.riepilogaConfigurazione();
 		}
+		else return null;
 	}
 	
 	public void confermaConfigurazione() {

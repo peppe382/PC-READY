@@ -4,25 +4,29 @@ import dominio.Componente;
 
 public class GPU extends Componente {
 	
-	private String formFactor;
+	private int slot;
 
-	public GPU(String nome, double prezzo, int consumo_energetico, String descrizione, String formFactor) {
+	public GPU(String nome, double prezzo, int consumo_energetico, String descrizione, int slot) {
 		super(nome, prezzo, consumo_energetico, descrizione, "GPU");
-		this.setFormFactor(formFactor);
+		this.setSlot(slot);
 	}
 
 
 	public GPU(String formFactor) { // Costruttore di default
 		super();
 		super.setCategoria("GPU");
-		this.setFormFactor(formFactor);
+		this.setSlot(slot);
+	}
+
+
+	public int getSlot() {
+		return slot;
+	}
+
+
+	public void setSlot(int slot) {
+		this.slot = slot;
 	}
 	
-	public String getFormFactor() {
-		return this.formFactor;
-	}
-	
-	public void setFormFactor(String formFactor) {
-		this.formFactor = formFactor;
-	}
+
 }
