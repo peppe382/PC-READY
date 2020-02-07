@@ -105,11 +105,10 @@ public class ConfigurationHandler {
 	
 	
 	public String terminaAssemblaggio() {
-		if (this.checker.controllaPresenzaComponenti()) {
-			if (this.checker.controllaConsumoEnergetico()) {
-				this.conf.riepilogaConfigurazione();
-			}
+		if (this.checker.controllaPresenzaComponenti() && this.checker.controllaConsumoEnergetico()) {
+			return this.conf.riepilogaConfigurazione();
 		}
+		else return null;
 	}
 	
 	public void confermaConfigurazione() {

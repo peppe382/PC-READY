@@ -51,14 +51,13 @@ public class Catalogo {
 	}
 	
 	
-	public void aggiungiInCatalogo(Configurazione configurazione) {
-		//La funzione � universale sia per un Bundle sia per una Configurazione
-		this.mappaComponenti.get(configurazione.getCategoria()).add(configurazione);
+	public void aggiungiInCatalogo(Componente componente) {
+		this.mappaComponenti.get(componente.getCategoria()).add(componente);
 	}
 	
 	
-	public void aggiungiInCatalogo(Componente componente) {
-		this.mappaComponenti.get(componente.getCategoria()).add(componente);
+	public void salvaConfigurazione(Configurazione conf) {
+		this.aggiungiInCatalogo((Componente) conf);
 	}
 	
 	
