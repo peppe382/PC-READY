@@ -65,8 +65,24 @@ public class ConfigurationHandler {
 	}
 	
 	
-	//  Funzioni di progetto
+	public Catalogo getCatalogo() {
+		return catalogo;
+	}
+
+
+
+
+	public void setCatalogo(Catalogo catalogo) {
+		this.catalogo = catalogo;
+	}
+
+
+
 	
+	
+	
+	//  Funzioni di progetto
+
 	public void creaConfigurazione() {
 		this.conf = new Configurazione();
 		/* Una funzione console dopo tale operazione deve ritornare all'utente/amministratore
