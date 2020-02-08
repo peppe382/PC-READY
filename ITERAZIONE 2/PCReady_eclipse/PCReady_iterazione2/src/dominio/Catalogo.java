@@ -51,12 +51,64 @@ public class Catalogo {
 	}
 	
 	public void aggiungiCategoria(String cat) {
-		this.mappaComponenti.put(cat, new ArrayList<Componente>());
+<<<<<<< HEAD
+<<<<<<< HEAD
+        try{
+          this.mappaComponenti.put(cat, new ArrayList<Componente>());
+        }catch(Exception e){
+          e.printStackTrace();
+        }
+  }
+
+  public void aggiungiInCatalogo(Componente componente) {
+      try {
+          ArrayList <Componente> arrayComponenti = new ArrayList<Componente>();
+          arrayComponenti.add(componente);
+          ArrayList <Componente> arrayMappa = this.mappaComponenti.get(componente.getCategoria());
+          if (arrayMappa == null) {
+              aggiungiCategoria(componente.getCategoria());
+              this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
+          }
+          else {
+              for (Componente elemento : arrayMappa) {
+                  arrayComponenti.add(elemento);
+              }
+              this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
+          }
+      }catch(Exception e){
+          e.printStackTrace();
+      }
+  }
+=======
+=======
+>>>>>>> 54b6d457310e0a7e009cd461c5e0c49e4cd98082
+	      try{
+	        this.mappaComponenti.put(cat, new ArrayList<Componente>());
+	      }catch(Exception e){
+	        e.printStackTrace();
+	      }
 	}
 	
 	public void aggiungiInCatalogo(Componente componente) {
-		this.mappaComponenti.get(componente.getCategoria()).add(componente);
+		try {
+			ArrayList <Componente> arrayComponenti = new ArrayList<Componente>();
+			arrayComponenti.add(componente);
+			ArrayList <Componente> arrayMappa = this.mappaComponenti.get(componente.getCategoria());
+			if (arrayMappa == null) {
+				aggiungiCategoria(componente.getCategoria());
+				this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
+			}
+			else {
+				for (Componente elemento : arrayMappa) {
+					arrayComponenti.add(elemento);
+				}
+				this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
+			}
+		}catch(Exception e){
+	        e.printStackTrace();
+	    }
 	}
+>>>>>>> 54b6d457310e0a7e009cd461c5e0c49e4cd98082
 	
 	
 	public void salvaConfigurazione(Configurazione conf) {
@@ -65,13 +117,32 @@ public class Catalogo {
 	
 	
 	public Componente getComponente(int id, String categoria) {
+<<<<<<< HEAD
+        try {
+            for (Componente elemento : this.mappaComponenti.get(categoria)) {
+                if (elemento.getId() == id) {
+                    return elemento;
+                }
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+	
+=======
 		try {
-			return this.mappaComponenti.get(categoria).get(id);
+			for (Componente elemento : this.mappaComponenti.get(categoria)) {
+				if (elemento.getId() == id) {
+					return elemento;
+				}
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+>>>>>>> 54b6d457310e0a7e009cd461c5e0c49e4cd98082
 	
 	public Componente getComponente(int id) {
 		try {

@@ -111,16 +111,14 @@ public class Componente {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-
-	
 	
 	//  toString
 	public String toString() {
 		String str = "";
 		str += "#"+this.getId()+" : "+this.getNome()+"\n";
 		str += "EUR "+this.getPrezzo()+", consumo: "+this.getConsumo_energetico()+"W\n";
-		str += "DESC: "+this.getDescrizione()+"\n\n";
-		str += "Copie disponibili: "+this.getListaCopie().size();
+		str += "DESC: "+this.getDescrizione()+"\n";
+		str += "Copie disponibili: "+this.getListaCopie().size()+"\n\n";
 		return str;
 	}
 	
