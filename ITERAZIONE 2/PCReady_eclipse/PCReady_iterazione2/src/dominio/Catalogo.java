@@ -51,8 +51,6 @@ public class Catalogo {
 	}
 	
 	public void aggiungiCategoria(String cat) {
-<<<<<<< HEAD
-<<<<<<< HEAD
         try{
           this.mappaComponenti.put(cat, new ArrayList<Componente>());
         }catch(Exception e){
@@ -79,9 +77,7 @@ public class Catalogo {
           e.printStackTrace();
       }
   }
-=======
-=======
->>>>>>> 54b6d457310e0a7e009cd461c5e0c49e4cd98082
+
 	      try{
 	        this.mappaComponenti.put(cat, new ArrayList<Componente>());
 	      }catch(Exception e){
@@ -108,7 +104,6 @@ public class Catalogo {
 	        e.printStackTrace();
 	    }
 	}
->>>>>>> 54b6d457310e0a7e009cd461c5e0c49e4cd98082
 	
 	
 	public void salvaConfigurazione(Configurazione conf) {
@@ -117,7 +112,6 @@ public class Catalogo {
 	
 	
 	public Componente getComponente(int id, String categoria) {
-<<<<<<< HEAD
         try {
             for (Componente elemento : this.mappaComponenti.get(categoria)) {
                 if (elemento.getId() == id) {
@@ -129,20 +123,6 @@ public class Catalogo {
         }
         return null;
     }
-	
-=======
-		try {
-			for (Componente elemento : this.mappaComponenti.get(categoria)) {
-				if (elemento.getId() == id) {
-					return elemento;
-				}
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
->>>>>>> 54b6d457310e0a7e009cd461c5e0c49e4cd98082
 	
 	public Componente getComponente(int id) {
 		try {
