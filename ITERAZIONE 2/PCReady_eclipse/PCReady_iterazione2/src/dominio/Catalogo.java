@@ -51,11 +51,31 @@ public class Catalogo {
 	}
 	
 	public void aggiungiCategoria(String cat) {
-		this.mappaComponenti.put(cat, new ArrayList<Componente>());
+	      try{
+	        this.mappaComponenti.put(cat, new ArrayList<Componente>());
+	      }catch(Exception e){
+	        e.printStackTrace();
+	      }
 	}
 	
 	public void aggiungiInCatalogo(Componente componente) {
-		this.mappaComponenti.get(componente.getCategoria()).add(componente);
+		try {
+			ArrayList <Componente> arrayComponenti = new ArrayList<Componente>();
+			arrayComponenti.add(componente);
+			ArrayList <Componente> arrayMappa = this.mappaComponenti.get(componente.getCategoria());
+			if (arrayMappa == null) {
+				aggiungiCategoria(componente.getCategoria());
+				this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
+			}
+			else {
+				for (Componente elemento : arrayMappa) {
+					arrayComponenti.add(elemento);
+				}
+				this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
+			}
+		}catch(Exception e){
+	        e.printStackTrace();
+	    }
 	}
 	
 	
@@ -66,7 +86,11 @@ public class Catalogo {
 	
 	public Componente getComponente(int id, String categoria) {
 		try {
-			return this.mappaComponenti.get(categoria).get(id);
+			for (Componente elemento : this.mappaComponenti.get(categoria)) {
+				if (elemento.getId() == id) {
+					return elemento;
+				}
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
