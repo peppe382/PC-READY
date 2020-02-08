@@ -29,15 +29,13 @@ public class CompatibilityChecker {
 	public Componente trovaAlimentatore(Map<Integer, Componente> mappaAlimentatori) {
 		//Per prima cosa calcolo il consumo della nostra configurazione
 		int consumoEnergetico = 0;
-		Componente alimentatore = null;
 		for(Componente comp : this.getConf().getListaComponenti()) {
 			String cat = comp.getCategoria();
 			if(cat=="PSU") {
 				consumoEnergetico += 0; //É un PSU e non consuma...
-				alimentatore = comp; 
+				this.getConf().rimuoviComponenteInConfigurazione(comp); //Rimuovi il PSU
 			}else consumoEnergetico += comp.getConsumo_energetico();
 		}
-		this.getConf().rimuoviComponenteInConfigurazione(alimentatore);//Rimuovi il PSU
 		//Dunque trovo il primo alimentatore compatibile per la sostituzione
 		for (Integer key : mappaAlimentatori.keySet()) {
 			PSU psu = (PSU) mappaAlimentatori.get(key);
@@ -88,7 +86,6 @@ public class CompatibilityChecker {
 	
 	public String controllaPresenzaComponenti() {
 		HashMap<String, Integer> presenze = new HashMap<String, Integer>();
-		String[] categorie = {"CPU", "GPU", "RAM", "Case", "Motherboard", "Storage", "PSU"};
 		List<Componente> list = this.getConf().getListaComponenti();
 		
 		for(Componente comp : list) {
@@ -97,11 +94,11 @@ public class CompatibilityChecker {
 			else presenze.put(cat, 1);
 		}
 		
-		for(String key : categorie) {
+		for(String key : presenze.keySet()) {
 			/*Non devono esserci zero componenti, ma almeno uno di ogni tipo.
 			I controlli specifici impediscono l'inserimento oltre il limite numerico 
 			superiore di componenti di data categoria: controllo "maggiore di" non necessario */
-			if(presenze.get(key) == null) return key;
+			if(presenze.get(key)<1) return key;
 		}
 		return null;
 	}
@@ -126,11 +123,9 @@ public class CompatibilityChecker {
 	
 	public boolean controlloComponente(GPU gpu, List<Componente> list) {
 		int availableSlots = 0;
-		boolean thereIsAnyCase = false;
 		for(Componente comp : list) {
 			switch(comp.getCategoria()) {
 				case "Case":
-					thereIsAnyCase = true;
 					Case c = (Case) comp;
 					availableSlots += c.getSlot();
 					break;
@@ -140,11 +135,7 @@ public class CompatibilityChecker {
 					break;
 			}
 		}
-		if (thereIsAnyCase == true) {
-			return (availableSlots >= gpu.getSlot());
-		}
-		else return true;
-		
+		return (availableSlots >= gpu.getSlot());
 	}
 	
 	public boolean controlloComponente(CPU cpu, List<Componente> list) {

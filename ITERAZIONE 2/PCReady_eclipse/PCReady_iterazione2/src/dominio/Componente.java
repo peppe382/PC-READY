@@ -117,8 +117,8 @@ public class Componente {
 		String str = "";
 		str += "#"+this.getId()+" : "+this.getNome()+"\n";
 		str += "EUR "+this.getPrezzo()+", consumo: "+this.getConsumo_energetico()+"W\n";
-		str += "DESC: "+this.getDescrizione()+"\n";
-		str += "Copie disponibili: "+this.getListaCopie().size()+"\n\n";
+		str += "DESC: "+this.getDescrizione()+"\n\n";
+		str += "Copie disponibili: "+this.getListaCopie().size();
 		return str;
 	}
 	
