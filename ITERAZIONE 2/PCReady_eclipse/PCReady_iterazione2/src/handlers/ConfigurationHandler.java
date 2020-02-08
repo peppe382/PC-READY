@@ -75,13 +75,12 @@ public class ConfigurationHandler {
 	
 	
 	public Componente selezionaComponente(int idComponente) {
-		Componente comp = null;
 		try {
-			comp = this.mappaCorrente.get(idComponente);
+			this.componenteCorrente  = this.mappaCorrente.get(idComponente);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return comp;
+		return this.componenteCorrente ;
 	}
 	
 	
@@ -100,15 +99,32 @@ public class ConfigurationHandler {
 			return this.conf.aggiungiComponenteInConfigurazione(this.componenteCorrente);
 		}
 		//Da decidere la policy comportamentale else
-		else return null;
+		else{
+			Componente alternativa = this.checker.trovaAlternativa(this.mappaCorrente);
+			String consiglio = null;
+			if ( alternativa != null) {
+				consiglio =  "COMPONENTE SOSTITUTIVO CONSIGLIATO:"+alternativa.toString() ;
+			}
+			return consiglio;
+			//Se consiglio é null, non é presente nessun componente sostitutivo...
+		}
 	}
 	
 	
 	public String terminaAssemblaggio() {
-		if (this.checker.controllaPresenzaComponenti() && this.checker.controllaConsumoEnergetico()) {
-			return this.conf.riepilogaConfigurazione();
+		String componenteMancante = this.checker.controllaPresenzaComponenti();
+		if (componenteMancante == null){
+			if (this.checker.controllaConsumoEnergetico()) {
+				return this.conf.riepilogaConfigurazione();
+			}
+			else {
+				String stringa = "CONSUMO ENERGETICO ECCESSIVO, PROVA CON QUESTO ALIMENTATORE COMPATIBILE: ";
+				return stringa+this.checker.trovaAlimentatore(selezionaCategoria("PSU")).toString();
+			}
 		}
-		else return null;
+		else{
+			return "ASSENTE UN COMPONENTE DI CATEGORIA: "+componenteMancante;
+		}
 	}
 	
 	public void confermaConfigurazione() {

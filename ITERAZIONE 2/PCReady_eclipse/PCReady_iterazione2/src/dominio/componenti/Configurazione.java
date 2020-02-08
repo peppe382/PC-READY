@@ -65,9 +65,20 @@ public class Configurazione extends Componente {
 		return this.toString();
 	}
 	
+	public String rimuoviComponenteInConfigurazione(Componente componenteCorrente) {
+		this.listaComponenti.remove(componenteCorrente);
+		aggiornaAttributiRimozione(componenteCorrente);
+		return this.toString();
+	}
+	
 	private void aggiornaAttributi(Componente componenteCorrente) {
 		super.setConsumo_energetico((super.getConsumo_energetico() + componenteCorrente.getConsumo_energetico()));
 		super.setPrezzo((super.getConsumo_energetico() + componenteCorrente.getConsumo_energetico()));
+	}
+	
+	private void aggiornaAttributiRimozione(Componente componenteCorrente) {
+		super.setConsumo_energetico((super.getConsumo_energetico() - componenteCorrente.getConsumo_energetico()));
+		super.setPrezzo((super.getConsumo_energetico() - componenteCorrente.getConsumo_energetico()));
 	}
 	
 	public String riepilogaConfigurazione() {
