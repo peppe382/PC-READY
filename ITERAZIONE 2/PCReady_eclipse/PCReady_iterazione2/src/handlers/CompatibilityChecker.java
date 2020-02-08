@@ -16,6 +16,39 @@ public class CompatibilityChecker {
 	
 	// FUNZIONI di PROGETTO
 	
+	public Componente trovaAlternativa(Map<Integer, Componente> mappaRicerca){
+		//Questa funzione ha lo scopo di trovare il primo componente compatibile per la sostituzione
+		for (Integer key : mappaRicerca.keySet()) {
+			if (controlloComponente(mappaRicerca.get(key))){
+				return mappaRicerca.get(key);
+			}
+		}
+		return null;
+	}
+	
+	public Componente trovaAlimentatore(Map<Integer, Componente> mappaAlimentatori) {
+		//Per prima cosa calcolo il consumo della nostra configurazione
+		int consumoEnergetico = 0;
+		for(Componente comp : this.getConf().getListaComponenti()) {
+			String cat = comp.getCategoria();
+			if(cat=="PSU") {
+				consumoEnergetico += 0; //É un PSU e non consuma...
+				this.getConf().rimuoviComponenteInConfigurazione(comp); //Rimuovi il PSU
+			}else consumoEnergetico += comp.getConsumo_energetico();
+		}
+		//Dunque trovo il primo alimentatore compatibile per la sostituzione
+		for (Integer key : mappaAlimentatori.keySet()) {
+			PSU psu = (PSU) mappaAlimentatori.get(key);
+			if (psu.getPotenzaErogata() > consumoEnergetico) {
+				if (controlloComponente(psu, this.getConf().getListaComponenti())){ //Il form factor deve essere compatibile
+					return psu;
+				}
+			}
+		}
+		return null;
+	}
+
+	
 	public boolean controlloComponente(Componente comp) {
 		List<Componente> tempList = this.getConf().getListaComponenti();
 		try {
@@ -51,7 +84,7 @@ public class CompatibilityChecker {
 	}
 	
 	
-	public boolean controllaPresenzaComponenti() {
+	public String controllaPresenzaComponenti() {
 		HashMap<String, Integer> presenze = new HashMap<String, Integer>();
 		List<Componente> list = this.getConf().getListaComponenti();
 		
@@ -62,21 +95,12 @@ public class CompatibilityChecker {
 		}
 		
 		for(String key : presenze.keySet()) {
-			switch(key) {
-				case "CPU":
-				case "PSU":
-				case "Motherboard":
-				case "Case":
-					if(presenze.get(key)>1) return false;
-				case "GPU":
-				case "Storage":
-				case "RAM":
-					if(presenze.get(key)<1) return false;
-				default:
-					break;
-			}
+			/*Non devono esserci zero componenti, ma almeno uno di ogni tipo.
+			I controlli specifici impediscono l'inserimento oltre il limite numerico 
+			superiore di componenti di data categoria: controllo "maggiore di" non necessario */
+			if(presenze.get(key)<1) return key;
 		}
-		return true;
+		return null;
 	}
 	
 	
@@ -171,6 +195,8 @@ public class CompatibilityChecker {
 					Case ca = (Case) comp;
 					if(ca.getFormFactorMotherboard() != mboard.getFormFactor()) return false;
 					break;
+				case "Motherboard":  //Aggiunto
+					return false;
 			}
 		}
 		return true;
@@ -193,6 +219,8 @@ public class CompatibilityChecker {
 					availableSlots -= g.getSlot();
 					if(availableSlots < 0) return false;
 					break;
+				case "Case" :  //Aggiunto
+					return false;
 			}
 		}
 		return true;
