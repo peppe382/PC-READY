@@ -19,11 +19,10 @@ public abstract class Comando {
 		this.setDescrizioneComando(descrizione);
 	}
 	
-	public Comando(Console console) { // questi tipi di Comandi sono solo di Utility e non verranno chiamati dall'Utente, ma solo da
+	public Comando() { // questi tipi di Comandi sono solo di Utility e non verranno chiamati dall'Utente, ma solo da
 						// altri Comandi
 		this.setCodiceComando(-1);
 		this.setDescrizioneComando("");
-		this.esegui(console);
 	}
 
 	public int getCodiceComando() {

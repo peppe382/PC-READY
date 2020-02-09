@@ -11,6 +11,7 @@ public class ConfigurationHandler {
 	private Configurazione conf;
 	private CompatibilityChecker checker;
 	private Catalogo catalogo;
+	private String stringaComunicazioni;
 	
 	
 	//  Costruttori
@@ -19,6 +20,7 @@ public class ConfigurationHandler {
 		this.mappaCorrente = new HashMap<Integer, Componente>();
 		this.checker = new CompatibilityChecker(this.conf);
 		this.catalogo = catalogo;
+		this.stringaComunicazioni = null;
 	}
 
 
@@ -65,6 +67,16 @@ public class ConfigurationHandler {
 	}
 	
 	
+	public String getStringaComunicazioni() {
+		return stringaComunicazioni;
+	}
+
+
+	public void setStringaComunicazioni(String stringaComunicazioni) {
+		this.stringaComunicazioni = stringaComunicazioni;
+	}
+
+
 	//  Funzioni di progetto
 	
 	public void creaConfigurazione() {
@@ -111,19 +123,22 @@ public class ConfigurationHandler {
 	}
 	
 	
-	public String terminaAssemblaggio() {
+	public Boolean terminaAssemblaggio() {
 		String componenteMancante = this.checker.controllaPresenzaComponenti();
 		if (componenteMancante == null){
 			if (this.checker.controllaConsumoEnergetico()) {
-				return this.conf.riepilogaConfigurazione();
+				setStringaComunicazioni(this.conf.riepilogaConfigurazione());
+				return true;
 			}
 			else {
 				String stringa = "CONSUMO ENERGETICO ECCESSIVO, PROVA CON QUESTO ALIMENTATORE COMPATIBILE: ";
-				return stringa+this.checker.trovaAlimentatore(selezionaCategoria("PSU")).toString();
+				setStringaComunicazioni (stringa+this.checker.trovaAlimentatore(selezionaCategoria("PSU")).toString());
+				return false;
 			}
 		}
 		else{
-			return "ASSENTE UN COMPONENTE DI CATEGORIA: "+componenteMancante;
+			setStringaComunicazioni ("ASSENTE UN COMPONENTE DI CATEGORIA: "+componenteMancante);
+			return false;
 		}
 	}
 	
