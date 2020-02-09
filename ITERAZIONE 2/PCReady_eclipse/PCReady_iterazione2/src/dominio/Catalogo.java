@@ -51,32 +51,32 @@ public class Catalogo {
 	}
 	
 	public void aggiungiCategoria(String cat) {
-        try{
-          this.mappaComponenti.put(cat, new ArrayList<Componente>());
-        }catch(Exception e){
-          e.printStackTrace();
-        }
-  }
-
-  public void aggiungiInCatalogo(Componente componente) {
-      try {
-          ArrayList <Componente> arrayComponenti = new ArrayList<Componente>();
-          arrayComponenti.add(componente);
-          ArrayList <Componente> arrayMappa = this.mappaComponenti.get(componente.getCategoria());
-          if (arrayMappa == null) {
-              aggiungiCategoria(componente.getCategoria());
-              this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
-          }
-          else {
-              for (Componente elemento : arrayMappa) {
-                  arrayComponenti.add(elemento);
-              }
-              this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
-          }
-      }catch(Exception e){
-          e.printStackTrace();
-      }
-  }
+	      try{
+	        this.mappaComponenti.put(cat, new ArrayList<Componente>());
+	      }catch(Exception e){
+	        e.printStackTrace();
+	      }
+	}
+	
+	public void aggiungiInCatalogo(Componente componente) {
+		try {
+			ArrayList <Componente> arrayComponenti = new ArrayList<Componente>();
+			arrayComponenti.add(componente);
+			ArrayList <Componente> arrayMappa = this.mappaComponenti.get(componente.getCategoria());
+			if (arrayMappa == null) {
+				aggiungiCategoria(componente.getCategoria());
+				this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
+			}
+			else {
+				for (Componente elemento : arrayMappa) {
+					arrayComponenti.add(elemento);
+				}
+				this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
+			}
+		}catch(Exception e){
+	        e.printStackTrace();
+	    }
+	}
 	
 	
 	public void salvaConfigurazione(Configurazione conf) {
@@ -85,18 +85,17 @@ public class Catalogo {
 	
 	
 	public Componente getComponente(int id, String categoria) {
-        try {
-            for (Componente elemento : this.mappaComponenti.get(categoria)) {
-                if (elemento.getId() == id) {
-                    return elemento;
-                }
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-	
+		try {
+			for (Componente elemento : this.mappaComponenti.get(categoria)) {
+				if (elemento.getId() == id) {
+					return elemento;
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	public Componente getComponente(int id) {
 		try {
