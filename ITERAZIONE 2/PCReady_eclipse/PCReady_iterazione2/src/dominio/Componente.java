@@ -111,8 +111,6 @@ public class Componente {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-
-	
 	
 	//  toString
 	public String toString() {
