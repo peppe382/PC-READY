@@ -19,6 +19,7 @@ class GestisciComponentiHandlerTest {
 	
 	@BeforeAll
 	static void setupAll() {
+		catalogo = new Catalogo();
 		handler = new GestisciComponentiHandler();
 		componenteCorrente = new Componente("Corsaire RAM DDR4 4GB Stick", 41.99, 5, "RAM DDR4 3000MHz", "RAM");
 	}

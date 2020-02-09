@@ -53,8 +53,8 @@ public class PCReady {
 	}
 
 	public void setHandlerConfigurazioni() {
-        this.handlerConfigurazioni = new ConfigurationHandler(getHandlerComponenti().getCatalogo());
-    }
+		this.handlerConfigurazioni = new ConfigurationHandler(getHandlerComponenti().getCatalogo());
+	}
 
 	public void setHandlerComponenti() {
 		this.handlerComponenti = GestisciComponentiHandler.getInstance();
