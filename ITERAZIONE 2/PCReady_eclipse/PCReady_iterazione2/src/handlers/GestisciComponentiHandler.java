@@ -5,20 +5,29 @@ import data.Parser;
 
 public class GestisciComponentiHandler {
 
-private Catalogo catalogo;
-private Componente componenteCorrente;
+	private static GestisciComponentiHandler singleton;
+	
+	private Catalogo catalogo;
+	private Componente componenteCorrente;
 	
 	
 	//  Costruttori 
-	
-	public GestisciComponentiHandler(Catalogo catalogo) {
-		this.catalogo = catalogo;
+	protected GestisciComponentiHandler() {
+		this.catalogo = Parser.createCatalogo();
+		this.componenteCorrente = null;
 	}
 	
-	public GestisciComponentiHandler() {
-		this.catalogo = Parser.createCatalogo();
+	
+	public static synchronized GestisciComponentiHandler getInstance() {
+		if(singleton == null) {
+			singleton = new GestisciComponentiHandler();
+		}
+		return singleton;
 	}
 
+	public void salvaCatalogo() {
+		Parser.salvaCatalogo(this.catalogo);
+	}
 	
 	
 	//  Getters e Setters 

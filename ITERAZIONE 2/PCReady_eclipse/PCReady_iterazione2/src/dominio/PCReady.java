@@ -1,6 +1,5 @@
 package dominio;
 
-import data.Parser;
 import handlers.*;
 
 public class PCReady {
@@ -22,42 +21,26 @@ public class PCReady {
 	 * usando la funzione "getIstance()"  **/
 	
 	protected PCReady() {
-		
+		this.handlerComponenti = GestisciComponentiHandler.getInstance();
+		this.handlerConfigurazioni = null;
 	}
 	
-	public static synchronized PCReady getIstance() {
+	public static synchronized PCReady getInstance() {
 		if(singleton == null) {
 			singleton = new PCReady();
-			singleton.caricaSistema();
 		}
 		return singleton;
 	}
 	
 	
 	/**
-	 * Da chiamare solo all'avvio, riempie il sistema con le informazioni salvate su JSON **/
+	 * Arresta il Sistema dopo aver salvato i dati permanenti su database
+	 **/
 	 
-	protected void caricaSistema() {
-		// riempie il sistema con i dati conosciuti tramite la lettura di un
-		// file JSON
-		/*Parser par = new Parser("data/test_data.json");
-		par.initialParsing();
-		System.out.println("PC Ready correttamente caricato.\n");
-		System.out.println(this.toString());
-		System.out.println("-------------------------------------------------------------");
-		*/
+	public void spegniSistema() {
+		this.getHandlerComponenti().salvaCatalogo();
 	}
-	
-	
-	/**
-	 * Aggiorna il JSON con tutte le nuove informazioni generate **/
-	 
-	public void salvaSistema() {
-		/*Parser.saveAll("data/test_data.json");*/
-	}
-	
-	
-	
+
 	
 	/********** GETTERS E SETTERS  **********/
 	
@@ -73,8 +56,8 @@ public class PCReady {
 		this.handlerConfigurazioni = handlerConfigurazioni;
 	}
 
-	public void setHandlerComponenti(GestisciComponentiHandler handlerComponenti) {
-		this.handlerComponenti = handlerComponenti;
+	public void setHandlerComponenti() {
+		this.handlerComponenti = GestisciComponentiHandler.getInstance();
 	}
 	
 }

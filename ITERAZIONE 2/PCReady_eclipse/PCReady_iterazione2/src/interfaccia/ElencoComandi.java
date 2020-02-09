@@ -8,10 +8,15 @@ package interfaccia;
  * @version 0.1
  */
 
-public class ElencoComandi {
-	public static final Comando[] elenco = {};
+public final class ElencoComandi {
+	public static final Comando[] elenco = {new ComandoUC1(), new ComandoSpegniConsole()};
 	
-	public String toString() {
+	public static Comando getComando(int codice) {
+		for(Comando cmd : ElencoComandi.elenco) if(cmd.getCodiceComando() == codice) return cmd;
+		return null;
+	}
+	
+	public static String string() {
 		String str = "";
 		str += "Elenco dei comandi disponibili:\n";
 		str += "--------------------------------\n";

@@ -11,19 +11,26 @@ import dominio.*;
  */
 public abstract class Comando {
 	
-	private String codice;
+	private int codice;
 	private String descrizione;
 	
-	public Comando(String codice, String descrizione) {
+	public Comando(int codice, String descrizione) {
 		this.setCodiceComando(codice);
 		this.setDescrizioneComando(descrizione);
 	}
+	
+	public Comando(Console console) { // questi tipi di Comandi sono solo di Utility e non verranno chiamati dall'Utente, ma solo da
+						// altri Comandi
+		this.setCodiceComando(-1);
+		this.setDescrizioneComando("");
+		this.esegui(console);
+	}
 
-	public String getCodiceComando() {
+	public int getCodiceComando() {
 		return this.codice;
 	}
 	
-	public void setCodiceComando(String codice){
+	public void setCodiceComando(int codice){
 		this.codice = codice;
 	}
 	
@@ -35,6 +42,6 @@ public abstract class Comando {
 		this.descrizione = descrizione;
 	}
 	
-    public abstract void esegui(PCReady sistema);
+    public abstract void esegui(Console console);
 	
 }

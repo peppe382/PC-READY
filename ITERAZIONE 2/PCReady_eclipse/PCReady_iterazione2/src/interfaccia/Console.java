@@ -16,6 +16,7 @@ public class Console {
 	
 	private PCReady sistema; // il sistema su cui deve operare la Console
 	private static Scanner in = new Scanner(System.in);
+	private boolean on = true;
 	
 	/********** COSTRUTTORI e FUNZ. SINGLETON *********/
 	
@@ -23,7 +24,33 @@ public class Console {
 	 * Costruttore principale, non-singleton, di Console
 	 */
 	public Console() {
-		this.sistema = PCReady.getInstance();
+		this.setSistema();
+	}
+	
+	public void esegui() {
+		if(this.isOn()) {
+			boolean inEsecuzione = true;
+			while(inEsecuzione) {
+				this.print(ElencoComandi.string());
+				Integer codice = this.getInt();
+				try {
+					ElencoComandi.getComando(codice).esegui(this);
+					inEsecuzione = false;
+				}catch(Exception e) {
+					e.printStackTrace();
+					
+					this.print("Codice inserito non valido!\n\n\n");
+				}
+			}
+		}
+	}
+	
+	public boolean isOn() {
+		return this.on;
+	}
+	
+	public void spegni() {
+		this.on = false;
 	}
 	
 	// -------------------------------------------------------------------
@@ -31,7 +58,7 @@ public class Console {
 	
 	// Funzioni di Utility
 	public void print(String message) {
-		System.out.println(message);
+		System.out.print(message);
 	}
 	
 	
@@ -74,8 +101,14 @@ public class Console {
 		else if(val=="no"||val=="n") return false;
 		else return null;
 	}
-	
+
 	
 	/********** GETTERS & SETTERS + TO-STRING **********/
-	
+	public PCReady getSistema() {
+		return sistema;
+	}
+
+	public void setSistema() {
+		this.sistema = PCReady.getInstance();
+	}
 }
