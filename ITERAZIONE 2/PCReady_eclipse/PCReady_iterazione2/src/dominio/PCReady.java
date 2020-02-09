@@ -52,12 +52,14 @@ public class PCReady {
 		return this.handlerComponenti;
 	}
 
-	public void setHandlerConfigurazioni(ConfigurationHandler handlerConfigurazioni) {
-		this.handlerConfigurazioni = handlerConfigurazioni;
-	}
+	public void setHandlerConfigurazioni() {
+        this.handlerConfigurazioni = new ConfigurationHandler(getHandlerComponenti().getCatalogo());
+    }
 
 	public void setHandlerComponenti() {
 		this.handlerComponenti = GestisciComponentiHandler.getInstance();
 	}
+	
+	
 	
 }

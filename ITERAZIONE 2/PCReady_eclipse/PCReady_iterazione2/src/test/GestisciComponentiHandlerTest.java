@@ -13,16 +13,13 @@ import dominio.Componente;
 import handlers.GestisciComponentiHandler;
 
 class GestisciComponentiHandlerTest {
-
-	private static Catalogo catalogo;
 	private static GestisciComponentiHandler handler;
 	private static Componente componenteCorrente;
 		// TODO Auto-generated constructor stub
 	
 	@BeforeAll
 	static void setupAll() {
-		catalogo = new Catalogo();
-		handler = new GestisciComponentiHandler(catalogo);
+		handler = new GestisciComponentiHandler();
 		componenteCorrente = new Componente("Corsaire RAM DDR4 4GB Stick", 41.99, 5, "RAM DDR4 3000MHz", "RAM");
 	}
 	

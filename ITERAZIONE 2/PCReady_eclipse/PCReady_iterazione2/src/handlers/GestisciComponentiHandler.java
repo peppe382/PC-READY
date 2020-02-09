@@ -12,7 +12,7 @@ public class GestisciComponentiHandler {
 	
 	
 	//  Costruttori 
-	protected GestisciComponentiHandler() {
+	public GestisciComponentiHandler() {
 		this.catalogo = Parser.createCatalogo();
 		this.componenteCorrente = null;
 	}
