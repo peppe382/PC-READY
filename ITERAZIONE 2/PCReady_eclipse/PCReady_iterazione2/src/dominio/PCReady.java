@@ -62,11 +62,11 @@ public class PCReady {
 	/********** GETTERS E SETTERS  **********/
 	
 	public ConfigurationHandler getHandlerConfigurazioni() {
-		return handlerConfigurazioni;
+		return this.handlerConfigurazioni;
 	}
 
 	public GestisciComponentiHandler getHandlerComponenti() {
-		return handlerComponenti;
+		return this.handlerComponenti;
 	}
 
 	public void setHandlerConfigurazioni(ConfigurationHandler handlerConfigurazioni) {
