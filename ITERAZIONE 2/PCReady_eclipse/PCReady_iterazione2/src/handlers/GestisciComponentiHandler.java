@@ -31,7 +31,13 @@ private Componente componenteCorrente;
 		this.catalogo = catalogo;
 	}
 	
+	public void setComponenteCorrente(Componente componenteCorrente) {
+		this.componenteCorrente = componenteCorrente;
+	}
 	
+	public Componente getComponenteCorrente() {
+		return componenteCorrente;
+	}
 	
 	//  Funzioni di Progetto
 	
