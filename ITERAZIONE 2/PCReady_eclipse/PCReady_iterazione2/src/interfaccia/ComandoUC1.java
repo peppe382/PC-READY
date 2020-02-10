@@ -55,17 +55,19 @@ public class ComandoUC1 extends Comando {
 					
 					console.print("Desideri continuare con l'inserimento componenti? \n");
 					if (!console.getYesNo()) { //Nel caso di valore true o non valido continuo con l'inserimento delle componenti
-						console.print("---TERMINA ASSEMBLAGGIO: ESECUZIONE DEI CONTROLLI---");
+						console.print("---TERMINA ASSEMBLAGGIO: ESECUZIONE DEI CONTROLLI--- \n");
 						if (this.handlerConfigurazione.terminaAssemblaggio() == true) {
 							fine = false;
-							console.print("---ASSEMBLAGGIO ANDATO A BUON FINE: RIEPILOGO---");
+							console.print("---ASSEMBLAGGIO ANDATO A BUON FINE: RIEPILOGO--- \n");
 							console.print(this.handlerConfigurazione.getStringaComunicazioni());
 							this.handlerConfigurazione.confermaConfigurazione();
+							console.print("---SALVATAGGIO IN CATALOGO IN CORSO--- \n");
+							console.getSistema().getHandlerComponenti().salvaCatalogo();
 						}
 						else {
-							console.print("---ASSEMBLAGGIO NON RIUSCITO---");
+							console.print("---ASSEMBLAGGIO NON RIUSCITO--- \n");
 							console.print(this.handlerConfigurazione.getStringaComunicazioni());
-							console.print("---RIPROVA INSERENDO UN NUOVO COMPONENTE---");
+							console.print("---RIPROVA INSERENDO UN NUOVO COMPONENTE--- \n");
 						}
 						
 					}

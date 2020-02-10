@@ -69,6 +69,8 @@ public class ComandoUC2 extends Comando {
 							String descrizione = console.getString();
 							this.handlerConfigurazione.infoConfigurazione(sconto, nome, descrizione);
 							console.print("---INSERIMENTO BUNDLE COMPLETATO---");
+							console.print("---SALVATAGGIO IN CATALOGO IN CORSO--- \n");
+							console.getSistema().getHandlerComponenti().salvaCatalogo();
 						}
 						else {
 							console.print("---ASSEMBLAGGIO NON RIUSCITO---");

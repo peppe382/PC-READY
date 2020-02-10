@@ -20,6 +20,7 @@ public class ComandoUC4 extends Comando {
 		String categoria = console.getString();
 		
 		Componente comp = console.getSistema().getHandlerComponenti().selezionaComponente(codice, categoria);
+		console.print(comp.toString());
 		
 		console.print("Quante copie vuoi inserire:");
 		int num_copie = console.getInt();
@@ -33,6 +34,8 @@ public class ComandoUC4 extends Comando {
 			console.print("Codice della copia" + counter +": " + cop.getCodice());
 			counter++;
 		}
+		
+		console.getSistema().getHandlerComponenti().salvaCatalogo();
 		
 	}
 

@@ -53,7 +53,7 @@ public class GestisciComponentiHandler {
 	
 	//GPU
 	public void creaComponente(String nome, String codiceCategoria, int consumo, double prezzo, String descrizione, int slotOccupati ) {
-		if(codiceCategoria == "GPU") {
+		if(codiceCategoria.equals("GPU")) {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
 			GPU gpu = new GPU (this.componenteCorrente, slotOccupati);
 			this.catalogo.aggiungiInCatalogo(gpu);
@@ -63,7 +63,7 @@ public class GestisciComponentiHandler {
 	
 	//PSU
 	public void creaComponente(String nome, String codiceCategoria, int consumo, double prezzo, String descrizione, int potenzaErogata, String tipologia, String formFactor ) {
-		if(codiceCategoria == "PSU") {
+		if(codiceCategoria.equals("PSU")) {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
 			PSU psu = new PSU (this.componenteCorrente, potenzaErogata, tipologia, formFactor);
 			this.catalogo.aggiungiInCatalogo(psu);
@@ -73,17 +73,17 @@ public class GestisciComponentiHandler {
 	
 	//CPU
 	public void creaComponente(String nome, String codiceCategoria, int consumo, double prezzo, String descrizione, String socket) {
-		if(codiceCategoria == "CPU") {
+		if(codiceCategoria.equals("CPU")) {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
 			CPU cpu = new CPU (this.componenteCorrente, socket);
 			this.catalogo.aggiungiInCatalogo(cpu);
-			this.componenteCorrente = cpu;
+			this.componenteCorrente = (Componente) cpu;
 		}
 	}
 	
 	//Storage
 	public void creaComponente(String nome, String codiceCategoria, int consumo, double prezzo, String descrizione, String memoria, double dimensioni, int velocitá, String tipologia ) {
-		if (codiceCategoria == "Storage") {
+		if (codiceCategoria.equals("Storage")) {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
 			Storage storage = new Storage (this.componenteCorrente, memoria, dimensioni, velocitá, tipologia);
 			this.catalogo.aggiungiInCatalogo(storage);
@@ -93,7 +93,7 @@ public class GestisciComponentiHandler {
 	
 	//RAM
 	public void creaComponente(String nome, String codiceCategoria, int consumo, double prezzo, String descrizione, String tipologia, int frequenza ) {
-		if(codiceCategoria == "RAM") {
+		if(codiceCategoria.equals("RAM")) {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
 			RAM ram = new RAM (this.componenteCorrente, tipologia, frequenza);
 			this.catalogo.aggiungiInCatalogo(ram);
@@ -103,7 +103,7 @@ public class GestisciComponentiHandler {
 	
 	//Case
 	public void creaComponente(String nome, String codiceCategoria, int consumo, double prezzo, String descrizione, String formFactorPSU, int slot, String formFactorMotherboard) {
-		if(codiceCategoria == "Case") {
+		if(codiceCategoria.equals("Case")) {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
 			Case caseC = new Case (this.componenteCorrente, formFactorMotherboard, formFactorPSU, slot);
 			this.catalogo.aggiungiInCatalogo(caseC);
@@ -113,7 +113,7 @@ public class GestisciComponentiHandler {
 	
 	//Motherboard
     public void creaComponente(String nome, String codiceCategoria, int consumo, double prezzo, String descrizione, String socket, String formFactor, String tipologiaRAM) {
-        if(codiceCategoria == "Case") {
+        if(codiceCategoria.equals("Motherboard")) {
             this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
             Motherboard motherboard = new Motherboard (this.componenteCorrente, socket, formFactor, tipologiaRAM);
             this.catalogo.aggiungiInCatalogo(motherboard);

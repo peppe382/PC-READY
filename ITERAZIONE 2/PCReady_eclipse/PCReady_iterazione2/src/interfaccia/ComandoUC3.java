@@ -22,7 +22,7 @@ public class ComandoUC3 extends Comando {
 		int consumo_energetico = console.getInt();
 		console.print("Dimmi il prezzo del componente da aggiungere:");
 		double prezzo = console.getDouble();
-		console.print("Dimmi il descrizione del componente da aggiungere:");
+		console.print("Dimmi la descrizione del componente da aggiungere:");
 		String descrizione = console.getString();
 		
 		switch(categoria) {
@@ -30,6 +30,7 @@ public class ComandoUC3 extends Comando {
 				console.print("Quanti slot occupa la tua GPU:");
 				int slotGPU = console.getInt();
 				console.getSistema().getHandlerComponenti().creaComponente(nome, categoria, consumo_energetico, prezzo, descrizione, slotGPU);
+				break;
 			case "PSU":
 				console.print("Quanta potenza eroga il PSU:");
 				int potenza = console.getInt();
@@ -38,10 +39,12 @@ public class ComandoUC3 extends Comando {
 				console.print("Che forma ha:");
 				String formFactor = console.getString();
 				console.getSistema().getHandlerComponenti().creaComponente(nome, categoria, consumo_energetico, prezzo, descrizione, potenza, tipologiaPSU, formFactor);
+				break;
 			case "CPU":
 				console.print("Socket della CPU:");
 				String socket = console.getString();
 				console.getSistema().getHandlerComponenti().creaComponente(nome, categoria, consumo_energetico, prezzo, descrizione, socket);
+				break;
 			case "Storage":
 				console.print("Quanta memoria possiede lo storage:");
 				String memoria = console.getString();
@@ -52,33 +55,38 @@ public class ComandoUC3 extends Comando {
 				console.print("A che tipologia appartiene:");
 				String tipologiaStorage = console.getString();
 				console.getSistema().getHandlerComponenti().creaComponente(nome, categoria, consumo_energetico, prezzo, descrizione, memoria, dimensione, velocità, tipologiaStorage);
+				break;
 			case "RAM":
 				console.print("A Quale tipologia appartiene la RAM:");
 				String tipologiaRAM = console.getString();
 				console.print("Quale è la sua frequenza:");
 				int frequenza = console.getInt();
 				console.getSistema().getHandlerComponenti().creaComponente(nome, categoria, consumo_energetico, prezzo, descrizione, tipologiaRAM, frequenza);
+				break;
 			case "Case":
-				console.print("Quanle è il formFactor della PSU da poter inserire nel Case:");
+				console.print("Quale è il formFactor della PSU da poter inserire nel Case:");
 				String formFactorPSU = console.getString();
 				console.print("Quale è quello della Motherboard:");
 				String formFactorMotherboard = console.getString();
 				console.print("Quati slot possiede:");
 				int slotCase = console.getInt();
 				console.getSistema().getHandlerComponenti().creaComponente(nome, categoria, consumo_energetico, prezzo, descrizione, formFactorPSU, slotCase, formFactorMotherboard);
+				break;
 			case "Motherboard":
-				console.print("Quanle è la socket della Motherboard:");
+				console.print("Quale è la socket della Motherboard:");
 				String socketMotherboard = console.getString();
 				console.print("Quale è il suo FormFactor:");
 				String formFactorM = console.getString();
 				console.print("Quale è la tipologia di RAM compatibile:");
 				String tipologiaR = console.getString();
 				console.getSistema().getHandlerComponenti().creaComponente(nome, categoria, consumo_energetico, prezzo, descrizione, socketMotherboard, formFactorM, tipologiaR);
+				break;
 		}		
 		console.print("Quante copie del tuo componente vuoi aggiungere:");
 		int num_copie = console.getInt();
+		System.out.println(console.getSistema().getHandlerComponenti().getComponenteCorrente());
 		console.getSistema().getHandlerComponenti().creaCopie(num_copie);
-		
+
 		Componente comp = console.getSistema().getHandlerComponenti().getComponenteCorrente();
 		List<CopiaComponente> lista_copie = comp.getListaCopie();
 		int counter = 1;
@@ -86,7 +94,7 @@ public class ComandoUC3 extends Comando {
 			console.print("Codice della copia " + counter +": " + cop.getCodice()+"\n");
 			counter++;
 		}
-		
+		console.getSistema().getHandlerComponenti().salvaCatalogo();
 	}
 }
 
