@@ -57,6 +57,7 @@ public class GestisciComponentiHandler {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
 			GPU gpu = new GPU (this.componenteCorrente, slotOccupati);
 			this.catalogo.aggiungiInCatalogo(gpu);
+			this.componenteCorrente = gpu;
 		}
 	}
 	
@@ -66,6 +67,7 @@ public class GestisciComponentiHandler {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
 			PSU psu = new PSU (this.componenteCorrente, potenzaErogata, tipologia, formFactor);
 			this.catalogo.aggiungiInCatalogo(psu);
+			this.componenteCorrente = psu;
 		}
 	}
 	
@@ -75,6 +77,7 @@ public class GestisciComponentiHandler {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
 			CPU cpu = new CPU (this.componenteCorrente, socket);
 			this.catalogo.aggiungiInCatalogo(cpu);
+			this.componenteCorrente = cpu;
 		}
 	}
 	
@@ -84,6 +87,7 @@ public class GestisciComponentiHandler {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
 			Storage storage = new Storage (this.componenteCorrente, memoria, dimensioni, velocitá, tipologia);
 			this.catalogo.aggiungiInCatalogo(storage);
+			this.componenteCorrente = storage;
 		}
 	}
 	
@@ -93,6 +97,7 @@ public class GestisciComponentiHandler {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
 			RAM ram = new RAM (this.componenteCorrente, tipologia, frequenza);
 			this.catalogo.aggiungiInCatalogo(ram);
+			this.componenteCorrente = ram;
 		}
 	}
 	
@@ -102,9 +107,18 @@ public class GestisciComponentiHandler {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
 			Case caseC = new Case (this.componenteCorrente, formFactorMotherboard, formFactorPSU, slot);
 			this.catalogo.aggiungiInCatalogo(caseC);
+			this.componenteCorrente = caseC;
 		}
 	}
-		
+	//Motherboard
+	public void creaComponente(String nome, String codiceCategoria, int consumo, double prezzo, String descrizione, String socket, String formFactor, String tipologiaRAM) {
+		if(codiceCategoria == "Case") {
+			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
+			Motherboard motherboard = new Motherboard (this.componenteCorrente, socket, formFactor, tipologiaRAM);
+			this.catalogo.aggiungiInCatalogo(motherboard);
+			this.componenteCorrente = motherboard;
+		}
+	}
 	
 	public String creaCopie (int numero) {
 		return this.componenteCorrente.aggiungiCopie(numero);
