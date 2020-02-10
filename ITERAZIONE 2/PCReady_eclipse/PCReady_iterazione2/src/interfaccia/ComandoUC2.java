@@ -1,5 +1,6 @@
 package interfaccia;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import dominio.Componente;
@@ -13,6 +14,7 @@ public class ComandoUC2 extends Comando {
 	public ComandoUC2() {
 		super(2, "Crea un bundle");
 		int i = 1;
+		this.mappaCorrispondenzaCategorie = new HashMap<Integer, String>();
 		for (String cat : categorie) {
 			this.mappaCorrispondenzaCategorie.put(i,cat);
 			i++;

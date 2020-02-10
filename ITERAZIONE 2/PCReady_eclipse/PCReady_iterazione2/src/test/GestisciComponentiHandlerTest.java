@@ -15,21 +15,20 @@ import handlers.GestisciComponentiHandler;
 class GestisciComponentiHandlerTest {
 	private static GestisciComponentiHandler handler;
 	private static Componente componenteCorrente;
+	private static Catalogo catalogoCorrente;
 		// TODO Auto-generated constructor stub
 	
 	@BeforeAll
 	static void setupAll() {
-		catalogo = new Catalogo();
 		handler = new GestisciComponentiHandler();
+		catalogoCorrente = handler.getCatalogo();
 		componenteCorrente = new Componente("Corsaire RAM DDR4 4GB Stick", 41.99, 5, "RAM DDR4 3000MHz", "RAM");
 	}
 	
 	@Test
 	void creaComponenteTest() {
-		
 		handler.creaComponente(componenteCorrente.getNome(), componenteCorrente.getCategoria(), componenteCorrente.getConsumo_energetico(), componenteCorrente.getPrezzo(), componenteCorrente.getDescrizione());
-		Catalogo g = handler.getCatalogo();
-		assertNotNull(g.getComponente(componenteCorrente.getId()));
+		assertNotNull(handler.selezionaComponente(componenteCorrente.getId(), componenteCorrente.getCategoria()));
 	}
 	
 	@Test

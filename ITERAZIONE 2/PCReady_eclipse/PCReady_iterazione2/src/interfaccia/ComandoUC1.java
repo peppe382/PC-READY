@@ -1,5 +1,6 @@
 package interfaccia;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import dominio.*;
@@ -14,6 +15,7 @@ public class ComandoUC1 extends Comando {
 	public ComandoUC1() {
 		super(1, "Crea una configurazione");
 		int i = 1;
+		this.mappaCorrispondenzaCategorie = new HashMap<Integer, String>();
 		for (String cat : categorie) {
 			this.mappaCorrispondenzaCategorie.put(i,cat);
 			i++;
@@ -25,16 +27,17 @@ public class ComandoUC1 extends Comando {
 		//Genero l'handler per il caso d'uso, che a sua volta genera la configurazione.
 		console.getSistema().setHandlerComponenti();
 		this.handlerConfigurazione = console.getSistema().getHandlerConfigurazioni();
+		System.out.println(console.getSistema().getHandlerComponenti().getCatalogo().getComponente(1));
 		//Genero una variabile per il loop
 		Boolean fine = true;
 		String cat = null;
 		while (fine) {
 			console.print(categorieList());
-			console.print("Seleziona una categoria inserendo il suo codice intero:"); 
+			console.print("Seleziona una categoria inserendo il suo codice intero: \n"); 
 			Integer selezione = console.getInt();
 			if (selezione != null) {
 				cat = this.mappaCorrispondenzaCategorie.get(selezione.intValue());
-				console.print("Seleziona una componente, tra quelle che vengono mostrate a video, inserendo il suo codice numerico:");
+				console.print("Seleziona una componente, tra quelle che vengono mostrate a video, inserendo il suo codice numerico: \n");
 				Map<Integer, Componente> mappaComponenti = this.handlerConfigurazione.selezionaCategoria(cat);
 				for (Integer key : mappaComponenti.keySet()) {
 					console.print("---Codice: "+key +"Componente: "+ mappaComponenti.get(key) +"--- \n");

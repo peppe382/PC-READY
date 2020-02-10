@@ -16,7 +16,7 @@ public class ComandoUC3 extends Comando {
 		
 		console.print("Benvenuto! Dimmi il nome del componente da aggiungere:");
 		String nome = console.getString();
-		console.print("Dimmi il categoria del componente da aggiungere:");
+		console.print("Dimmi la categoria del componente da aggiungere:");
 		String categoria = console.getString();
 		console.print("Dimmi il Consumo del componente da aggiungere:");
 		int consumo_energetico = console.getInt();
@@ -35,7 +35,7 @@ public class ComandoUC3 extends Comando {
 		List<CopiaComponente> lista_copie = comp.getListaCopie();
 		int counter = 1;
 		for(CopiaComponente cop : lista_copie) {
-			console.print("Codice della copia" + counter +": " + cop.getCodice());
+			console.print("Codice della copia " + counter +": " + cop.getCodice()+"\n");
 			counter++;
 		}
 		

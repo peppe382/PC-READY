@@ -35,7 +35,6 @@ public class Console {
 				Integer codice = this.getInt();
 				try {
 					ElencoComandi.getComando(codice).esegui(this);
-					inEsecuzione = false;
 				}catch(Exception e) {
 					e.printStackTrace();
 					
