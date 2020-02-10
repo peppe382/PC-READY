@@ -29,8 +29,7 @@ public class Console {
 	
 	public void esegui() {
 		if(this.isOn()) {
-			boolean inEsecuzione = true;
-			while(inEsecuzione) {
+			while(on) {
 				this.print(ElencoComandi.string());
 				Integer codice = this.getInt();
 				try {
@@ -96,8 +95,13 @@ public class Console {
 	
 	public Boolean getYesNo() {
 		String val = this.getString().toLowerCase();
-		if(val=="si"||val=="sì"||val=="s"||val=="yes"||val=="y") return true;
+		System.out.println("STO LEGGENDO LA MINCHIA DI STRINGA: "+val);
+		if(val == "si"||val == "sì"||val=="s"||val=="yes"||val=="y") {
+			System.out.println("TRUE");
+			return true;
+		}
 		else if(val=="no"||val=="n") return false;
+		if (val == "si") return true;
 		else return null;
 	}
 

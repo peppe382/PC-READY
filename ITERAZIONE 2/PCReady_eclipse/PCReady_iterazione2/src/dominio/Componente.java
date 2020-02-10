@@ -30,7 +30,7 @@ public class Componente {
 	}
 	
 	public Componente(int id, String nome, double prezzo, int consumo_energetico, String descrizione, String categoria) {
-		this.setId();
+		this.id = id;
 		this.setNome(nome);
 		this.setPrezzo(prezzo);
 		this.setConsumo_energetico(consumo_energetico);
@@ -116,6 +116,7 @@ public class Componente {
 	public String toString() {
 		String str = "";
 		str += "#"+this.getId()+" : "+this.getNome()+"\n";
+		str += "CATEGORIA: "+this.getCategoria()+"\n";
 		str += "EUR "+this.getPrezzo()+", consumo: "+this.getConsumo_energetico()+"W\n";
 		str += "DESC: "+this.getDescrizione()+"\n\n";
 		str += "Copie disponibili: "+this.getListaCopie().size();

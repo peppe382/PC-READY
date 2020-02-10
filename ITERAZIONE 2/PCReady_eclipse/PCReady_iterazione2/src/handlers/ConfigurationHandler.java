@@ -76,6 +76,15 @@ public class ConfigurationHandler {
 		this.stringaComunicazioni = stringaComunicazioni;
 	}
 
+	
+	public Catalogo getCatalogo() {
+		return catalogo;
+	}
+
+	public void setCatalogo(Catalogo catalogo) {
+		this.catalogo = catalogo;
+	}
+	
 
 	//  Funzioni di progetto
 	

@@ -111,4 +111,17 @@ public class Catalogo {
 		}
 		return null;
 	}
+
+	@Override
+	public String toString() {
+		String str = "---CATALOGO--- \n";
+		for (String key : this.mappaComponenti.keySet()) {
+			for (Componente elemento : this.mappaComponenti.get(key)) {
+				str += "--- \n" +elemento.toString()+ "\n ---";
+			}
+		}
+		return str;
+	}
+	
+	
 }
