@@ -152,7 +152,7 @@ public class CompatibilityChecker {
 			switch(comp.getCategoria()) {
 				case "Motherboard":
 					Motherboard m = (Motherboard) comp;
-					if(m.getSocket() != cpu.getSocket()) return false;
+					if(!m.getSocket().equals(cpu.getSocket())) return false;
 					break;
 				case "CPU":
 					return false;
@@ -166,7 +166,7 @@ public class CompatibilityChecker {
 			switch(comp.getCategoria()) {
 				case "Case":
 					Case c = (Case) comp;
-					if(c.getFormFactorPSU() != psu.getFormFactor()) return false;
+					if(!c.getFormFactorPSU().equals(psu.getFormFactor())) return false;
 					break;
 				case "PSU":
 					return false;
@@ -183,7 +183,7 @@ public class CompatibilityChecker {
 		for(Componente comp : list) {
 			if(comp.getCategoria()=="Motherboard") {
 				Motherboard m = (Motherboard) comp;
-				if(m.getTipologiaRAM()!= ram.getTipologia()) return false;
+				if(!m.getTipologiaRAM().equals(ram.getTipologia())) return false;
 			}
 		}
 		return true;
@@ -194,15 +194,15 @@ public class CompatibilityChecker {
 			switch(comp.getCategoria()) {
 				case "CPU":
 					CPU c = (CPU) comp;
-					if(c.getSocket() != mboard.getSocket()) return false;
+					if(!c.getSocket().equals(mboard.getSocket())) return false;
 					break;
 				case "RAM":
 					RAM r = (RAM) comp;
-					if(r.getTipologia() != mboard.getTipologiaRAM()) return false;
+					if(!r.getTipologia().equals(mboard.getTipologiaRAM())) return false;
 					break;
 				case "Case":
 					Case ca = (Case) comp;
-					if(ca.getFormFactorMotherboard() != mboard.getFormFactor()) return false;
+					if(!ca.getFormFactorMotherboard().equals(mboard.getFormFactor())) return false;
 					break;
 				case "Motherboard":  //Aggiunto
 					return false;
@@ -217,11 +217,11 @@ public class CompatibilityChecker {
 			switch(comp.getCategoria()) {
 				case "Motherboard":
 					Motherboard m = (Motherboard) comp;
-					if(caseComp.getFormFactorMotherboard()!=m.getFormFactor()) return false;
+					if(!caseComp.getFormFactorMotherboard().equals(m.getFormFactor())) return false;
 					break;
 				case "PSU":
 					PSU p = (PSU) comp;
-					if(caseComp.getFormFactorPSU()!=p.getFormFactor()) return false;
+					if(!caseComp.getFormFactorPSU().equals(p.getFormFactor())) return false;
 					break;
 				case "GPU":
 					GPU g = (GPU) comp;

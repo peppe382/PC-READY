@@ -49,6 +49,7 @@ public class Console {
 	
 	public void spegni() {
 		this.on = false;
+		//Salva su sistema PC Ready prima di sfanculare.
 	}
 	
 	// -------------------------------------------------------------------
@@ -62,29 +63,30 @@ public class Console {
 	
 	public Integer getInt() {
 		try {
-			int val = Console.in.nextInt();
-			if(val < 0) return null;
+		    int val = Integer.parseInt(in.nextLine());
+		    if(val < 0) return null;
 			else return val;
-		}catch(Exception e) {
-			e.printStackTrace();
+		} catch (NumberFormatException e) {
+		    e.printStackTrace();
 		}
 		return null;
 	}
 	
 	public Double getDouble() {
 		try {
-			double val = Console.in.nextDouble();
+			double val = Double.parseDouble(in.nextLine());
 			if(val < 0) return null;
 			else return val;
-		}catch(Exception e) {
-			e.printStackTrace();
+		}catch (NumberFormatException e) {
+		    e.printStackTrace();
 		}
 		return null;
 	}
 	
 	public String getString() {
 		try {
-			String val = Console.in.next();
+			String val = Console.in.nextLine();
+			System.out.println(val);
 			if(val.length()<1) return null;
 			else return val;
 		}catch(Exception e) {
@@ -94,13 +96,12 @@ public class Console {
 	}
 	
 	public Boolean getYesNo() {
-		String val = this.getString().toLowerCase();
-		System.out.println("STO LEGGENDO LA MINCHIA DI STRINGA: "+val);
-		if(val == "si"||val == "sì"||val=="s"||val=="yes"||val=="y") {
-			System.out.println("TRUE");
+		String val = null;
+		val = this.getString().toLowerCase();
+		if(val.equals("si")||val.equals("sì")||val.equals("s")||val.equals("yes")||val.contentEquals("y")){
 			return true;
 		}
-		else if(val=="no"||val=="n") return false;
+		else if(val.equals("no")||val.equals("n")) return false;
 		if (val == "si") return true;
 		else return null;
 	}
