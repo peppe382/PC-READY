@@ -24,7 +24,7 @@ public class Configurazione extends Componente {
 	
 	
 	public Configurazione(Componente comp, List<Componente> listaComponenti) {
-		super(comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "Configurazione");
+		super(comp.getId(), comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "Configurazione");
 		this.setListaComponenti(listaComponenti);
 	}
 

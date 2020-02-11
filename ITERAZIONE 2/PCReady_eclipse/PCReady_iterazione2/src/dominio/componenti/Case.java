@@ -17,7 +17,7 @@ public class Case extends Componente {
 
 	
 	public Case(Componente comp, String formFactorMotherboard, String formFactorPSU, int slot) {
-		super(comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "Case");
+		super(comp.getId(), comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "Case");
 		this.setFormFactorMotherboard(formFactorMotherboard);
 		this.setFormFactorPSU(formFactorPSU);
 		this.setSlot(slot);

@@ -13,7 +13,7 @@ public class CPU extends Componente {
 	
 	
 	public CPU(Componente comp, String socket) {
-		super(comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "CPU");
+		super(comp.getId(), comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "CPU");
 		this.setSocket(socket);
 	}
 

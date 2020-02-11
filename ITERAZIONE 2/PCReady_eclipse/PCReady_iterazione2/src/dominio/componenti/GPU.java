@@ -13,7 +13,7 @@ public class GPU extends Componente {
 	
 	
 	public GPU(Componente comp, int slot) {
-		super(comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "GPU");
+		super(comp.getId(), comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "GPU");
 		this.setSlot(slot);
 	}
 

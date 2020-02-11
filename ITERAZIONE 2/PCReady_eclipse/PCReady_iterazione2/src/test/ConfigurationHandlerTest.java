@@ -13,6 +13,7 @@ class ConfigurationHandlerTest {
 	
 	private static Catalogo catalogo;
 	private static ConfigurationHandler handler;
+	private static ConfigurationHandler handler2;
 	private static Map<Integer, Componente> mappa;
 	
 	@BeforeAll
@@ -35,6 +36,7 @@ class ConfigurationHandlerTest {
 		catalogo.aggiungiInCatalogo(componente7);
 		catalogo.aggiungiInCatalogo(componente8);
 		handler = new ConfigurationHandler(catalogo);
+		handler2 = new ConfigurationHandler(catalogo, "Bundle");
 	}
 
 	@org.junit.jupiter.api.Test
@@ -97,6 +99,56 @@ class ConfigurationHandlerTest {
 		}
 		assertTrue(condizione);
 	}
+	
+	@org.junit.jupiter.api.Test
+	@DisplayName("Crea Bundle Test")
+	void testBundle() {
+		System.out.println("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+		
+		handler2.selezionaCategoria("CPU");
+		handler2.selezionaComponente(1);
+		handler2.confermaComponente();
+		
+		handler2.selezionaCategoria("GPU");
+		handler2.selezionaComponente(2);
+		handler2.confermaComponente();
+		
+		handler2.selezionaCategoria("RAM");
+		handler2.selezionaComponente(3);
+		handler2.confermaComponente();
+		
+		handler2.selezionaCategoria("Case");
+		handler2.selezionaComponente(4);
+		handler2.confermaComponente();
+		
+		handler2.selezionaCategoria("PSU");
+		handler2.selezionaComponente(5);
+		handler2.confermaComponente();
+		
+		handler2.selezionaCategoria("Motherboard");
+		handler2.selezionaComponente(6);
+		handler2.confermaComponente();
+		
+		handler2.selezionaCategoria("Storage");
+		handler2.selezionaComponente(7);
+		handler2.confermaComponente();
+		
+		
+		handler2.infoConfigurazione(20.00, "WOW", "Bomba atomica");
+		handler2.confermaConfigurazione();
+		Boolean condizione = false;
+		for (String key : handler2.getCatalogo().getMappaComponenti().keySet()) {
+			for (Componente elemento : handler2.getCatalogo().getMappaComponenti().get(key)) {
+				if (elemento.getCategoria().equals("Bundle")) {
+					condizione = true;
+					System.out.println(elemento);
+				}
+			}
+		}
+		System.out.println("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+		assertTrue(condizione);
+	}
+	
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Doppia Motherboard Test")

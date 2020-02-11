@@ -17,7 +17,7 @@ public class Motherboard extends Componente {
 	
 	
 	public Motherboard(Componente comp, String socket, String formFactor, String tipologiaRAM) {
-        super(comp.getNome(),comp.getPrezzo(),comp.getConsumo_energetico(),comp.getDescrizione(), "Motherboard");
+        super(comp.getId(), comp.getNome(),comp.getPrezzo(),comp.getConsumo_energetico(),comp.getDescrizione(), "Motherboard");
         this.setSocket(socket);
         this.setFormFactor(formFactor);
         this.setTipologiaRAM(tipologiaRAM);

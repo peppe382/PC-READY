@@ -24,9 +24,8 @@ public class ComandoUC2 extends Comando {
 	@Override
 	public void esegui(Console console) {
 		//Genero l'handler per il caso d'uso, che a sua volta genera la configurazione.
-		console.getSistema().setHandlerConfigurazioni();
+		console.getSistema().setHandlerConfigurazioni("Bundle");
 		this.handlerConfigurazione = console.getSistema().getHandlerConfigurazioni();
-		this.handlerConfigurazione.getConf().setCategoria("Bundle"); //Necessario specificare che si sta creando un bundle...
 		//Genero una variabile per il loop
 		Boolean fine = true;
 		String cat = null;
@@ -60,7 +59,6 @@ public class ComandoUC2 extends Comando {
 							fine = false;
 							console.print("---ASSEMBLAGGIO ANDATO A BUON FINE: RIEPILOGO---");
 							console.print(this.handlerConfigurazione.getStringaComunicazioni());
-							this.handlerConfigurazione.confermaConfigurazione();
 							console.print("---INSERISCI NOME BUNDLE---");
 							String nome = console.getString();
 							console.print("---INSERISCI SCONTO BUNDLE---");
@@ -68,6 +66,7 @@ public class ComandoUC2 extends Comando {
 							console.print("---INSERISCI DESCRIZIONE BUNDLE---");
 							String descrizione = console.getString();
 							this.handlerConfigurazione.infoConfigurazione(sconto, nome, descrizione);
+							this.handlerConfigurazione.confermaConfigurazione();
 							console.print("---INSERIMENTO BUNDLE COMPLETATO---");
 							console.print("---SALVATAGGIO IN CATALOGO IN CORSO--- \n");
 							console.getSistema().getHandlerComponenti().salvaCatalogo();
@@ -93,7 +92,7 @@ public class ComandoUC2 extends Comando {
 		str += "\n Elenco delle categorie disponibili:\n";
 		str += "--------------------------------\n";
 		for(String cat : categorie) {
-			str += "Codice: "+i +"Categoria: "+cat +"\n";
+			str += "Codice: "+i +" Categoria: "+cat +"\n";
 			i++;
 		}
 		str += "--------------------------------\n";

@@ -36,10 +36,10 @@ public class ComandoUC1 extends Comando {
 			Integer selezione = console.getInt();
 			if (selezione != null) {
 				cat = this.mappaCorrispondenzaCategorie.get(selezione.intValue());
-				console.print("Seleziona una componente, tra quelle che vengono mostrate a video, inserendo il suo codice numerico: \n");
+				console.print("Seleziona una componente, tra quelle che vengono mostrate a video, inserendo il suo codice numerico:\n");
 				Map<Integer, Componente> mappaComponenti = this.handlerConfigurazione.selezionaCategoria(cat);
 				for (Integer key : mappaComponenti.keySet()) {
-					console.print("---Codice: "+key +"  Componente: "+ mappaComponenti.get(key) +"--- \n");
+					console.print("\n ---Codice: "+key +"  Componente: "+ mappaComponenti.get(key) +"--- \n");
 				}
 				console.print("---INSERISCI CODICE COMPONENTE--- \n");
 				Componente componenteAttuale = this.handlerConfigurazione.selezionaComponente(console.getInt());
@@ -85,7 +85,7 @@ public class ComandoUC1 extends Comando {
 		str += "\n Elenco delle categorie disponibili:\n";
 		str += "--------------------------------\n";
 		for(String cat : categorie) {
-			str += "Codice: "+i +"Categoria: "+cat +"\n";
+			str += "Codice: "+i +" Categoria: "+cat +"\n";
 			i++;
 		}
 		str += "--------------------------------\n";

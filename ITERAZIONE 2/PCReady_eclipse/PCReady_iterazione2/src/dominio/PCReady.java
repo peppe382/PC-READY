@@ -55,6 +55,12 @@ public class PCReady {
 	public void setHandlerConfigurazioni() {
 		this.handlerConfigurazioni = new ConfigurationHandler(getHandlerComponenti().getCatalogo());
 	}
+	
+	public void setHandlerConfigurazioni(String comando_bundle) {
+		if (comando_bundle.equals("Bundle")){ //In futuro tale if controllerá se un admin loggato sta chiamando il comando...
+			this.handlerConfigurazioni = new ConfigurationHandler(getHandlerComponenti().getCatalogo(), comando_bundle);
+		}
+	}
 
 	public void setHandlerComponenti() {
 		this.handlerComponenti = GestisciComponentiHandler.getInstance();

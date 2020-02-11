@@ -22,6 +22,14 @@ public class ConfigurationHandler {
 		this.catalogo = catalogo;
 		this.stringaComunicazioni = null;
 	}
+	
+	public ConfigurationHandler(Catalogo catalogo, String comando_bundle) {
+		this.creaBundle(comando_bundle);
+		this.mappaCorrente = new HashMap<Integer, Componente>();
+		this.checker = new CompatibilityChecker(this.conf);
+		this.catalogo = catalogo;
+		this.stringaComunicazioni = null;
+	}
 
 
 
@@ -94,6 +102,10 @@ public class ConfigurationHandler {
 		   tutte le categorie presenti nel sistema da cui scegliere le componenti */
 	}
 	
+	public void creaBundle(String comando_bundle) {
+		if (comando_bundle.equals("Bundle")) this.conf = new Bundle();
+	}
+	
 	
 	public Componente selezionaComponente(int idComponente) {
 		try {
@@ -156,7 +168,7 @@ public class ConfigurationHandler {
 	}
 	
 	public void infoConfigurazione(Double sconto, String nome, String descrizione) {
-		if (this.conf.getCategoria() == "Bundle") {
+		if (this.conf.getCategoria().contentEquals("Bundle")) {
 			((Bundle) this.conf).infoBundle(nome,descrizione,sconto);
 		}
 	}

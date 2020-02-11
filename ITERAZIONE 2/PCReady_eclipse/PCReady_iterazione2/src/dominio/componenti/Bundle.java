@@ -51,4 +51,11 @@ public class Bundle extends Configurazione{
 		super.setNome(nome);
 		this.setSconto(sconto);
 	}
+	
+//  toString
+	public String toString() {
+		String str = super.toString();
+		str += "SCONTO "+getSconto();
+		return str;
+	}
 }

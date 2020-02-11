@@ -19,7 +19,7 @@ public class Storage extends Componente {
 
 	
 	public Storage(Componente comp, String memoria, double dimensioni, int velocita, String tipologia) {
-		super(comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "Storage");
+		super(comp.getId(), comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "Storage");
 		this.setMemoria(memoria);
 		this.setDimensioni(dimensioni);
 		this.setVelocita(velocita);

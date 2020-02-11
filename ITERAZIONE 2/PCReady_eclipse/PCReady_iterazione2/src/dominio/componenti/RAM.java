@@ -15,7 +15,7 @@ public class RAM extends Componente {
 	
 	
 	public RAM(Componente comp, String tipologia, int frequenza) {
-		super(comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "RAM");
+		super(comp.getId(), comp.getNome(), comp.getPrezzo(), comp.getConsumo_energetico(), comp.getDescrizione(), "RAM");
 		this.setTipologia(tipologia);
 		this.setFrequenza(frequenza);
 	}

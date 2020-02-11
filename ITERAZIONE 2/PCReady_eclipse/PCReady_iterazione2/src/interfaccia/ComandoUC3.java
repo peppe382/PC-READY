@@ -73,16 +73,16 @@ public class ComandoUC3 extends Comando {
 				console.getSistema().getHandlerComponenti().creaComponente(nome, categoria, consumo_energetico, prezzo, descrizione, formFactorPSU, slotCase, formFactorMotherboard);
 				break;
 			case "Motherboard":
-				console.print("Quale è la socket della Motherboard:");
+				console.print("Quale è la socket della Motherboard: ");
 				String socketMotherboard = console.getString();
-				console.print("Quale è il suo FormFactor:");
+				console.print("Quale è il suo FormFactor: ");
 				String formFactorM = console.getString();
-				console.print("Quale è la tipologia di RAM compatibile:");
+				console.print("Quale è la tipologia di RAM compatibile: ");
 				String tipologiaR = console.getString();
 				console.getSistema().getHandlerComponenti().creaComponente(nome, categoria, consumo_energetico, prezzo, descrizione, socketMotherboard, formFactorM, tipologiaR);
 				break;
 		}		
-		console.print("Quante copie del tuo componente vuoi aggiungere:");
+		console.print("Quante copie del tuo componente vuoi aggiungere: ");
 		int num_copie = console.getInt();
 		System.out.println(console.getSistema().getHandlerComponenti().getComponenteCorrente());
 		console.getSistema().getHandlerComponenti().creaCopie(num_copie);
@@ -91,7 +91,7 @@ public class ComandoUC3 extends Comando {
 		List<CopiaComponente> lista_copie = comp.getListaCopie();
 		int counter = 1;
 		for(CopiaComponente cop : lista_copie) {
-			console.print("Codice della copia " + counter +": " + cop.getCodice()+"\n");
+			console.print("Codice della copia numero " + counter +": " + cop.getCodice()+"\n");
 			counter++;
 		}
 		console.getSistema().getHandlerComponenti().salvaCatalogo();
