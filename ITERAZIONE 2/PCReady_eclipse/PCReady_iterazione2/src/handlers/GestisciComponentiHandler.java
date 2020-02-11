@@ -82,10 +82,10 @@ public class GestisciComponentiHandler {
 	}
 	
 	//Storage
-	public void creaComponente(String nome, String codiceCategoria, int consumo, double prezzo, String descrizione, String memoria, double dimensioni, int velocitá, String tipologia ) {
+	public void creaComponente(String nome, String codiceCategoria, int consumo, double prezzo, String descrizione, String memoria, double dimensioni, int velocita, String tipologia ) {
 		if (codiceCategoria.equals("Storage")) {
 			this.componenteCorrente = new Componente(nome, prezzo, consumo, descrizione, codiceCategoria);
-			Storage storage = new Storage (this.componenteCorrente, memoria, dimensioni, velocitá, tipologia);
+			Storage storage = new Storage (this.componenteCorrente, memoria, dimensioni, velocita, tipologia);
 			this.catalogo.aggiungiInCatalogo(storage);
 			this.componenteCorrente = storage;
 		}
