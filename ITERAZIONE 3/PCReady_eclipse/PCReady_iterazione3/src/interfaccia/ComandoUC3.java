@@ -50,7 +50,7 @@ public class ComandoUC3 extends Comando {
 				String memoria = console.getString();
 				console.print("Quale � la dimensione (2.5 o 3.5):");
 				double dimensione = console.getDouble();
-				console.print("Quale � la velocita:");
+				console.print("Quale � la velocit�:");
 				int velocita = console.getInt();
 				console.print("A che tipologia appartiene:");
 				String tipologiaStorage = console.getString();
