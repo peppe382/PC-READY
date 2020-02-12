@@ -9,5 +9,14 @@ package interfaccia;
  */
 
 public class ElencoComandi {
+	public static final Comando[] elenco = {};
 	
+	public String toString() {
+		String str = "";
+		str += "Elenco dei comandi disponibili:\n";
+		str += "--------------------------------\n";
+		for(Comando cmd : elenco) str += cmd.getCodiceComando() + ": " + cmd.getDescrizioneComando() + "\n";
+		str += "--------------------------------\n";
+		return str;
+	}
 }
