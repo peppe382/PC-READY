@@ -1,0 +1,29 @@
+{
+	"Amministratori":
+		[
+			{
+				"id": 0,
+				"nome": "Bartolomeo",
+				"cognome": "Caruso",
+				"email": "bartolomeo@caruso.it",
+				"password": "password"
+			},
+			{
+				"id": 1,
+				"nome": "Gabriele",
+				"cognome": "Costanzo",
+				"email": "gabriele@costanzo.it",
+				"password": "123456"
+			},
+			{
+				"id": 2,
+				"nome": "Giuseppe",
+				"cognome": "Fallica",
+				"email": "giuseppe@fallica.it",
+				"password": "pass123"
+			}
+		],
+		
+	"Clienti":
+		[]
+}
