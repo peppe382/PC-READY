@@ -1,5 +1,7 @@
 package dominio;
 
+import java.util.*;
+
 import handlers.*;
 
 public class PCReady {
@@ -13,7 +15,7 @@ public class PCReady {
 	private GestisciComponentiHandler handlerComponenti;
 	private AcquistoHandler handlerAcquisto;
 	private Cliente clienteCorrente;
-	
+	private Map<Integer, List<Ordine>> mappaOrdini;
 	
 	/** COSTRUTTORI e FUNZ. SINGLETON 
 	
@@ -24,6 +26,7 @@ public class PCReady {
 		this.handlerComponenti = GestisciComponentiHandler.getInstance();
 		this.handlerConfigurazioni = null;
 		this.handlerAcquisto = null;
+		this.mappaOrdini = null; //Verrá modificata con info dal parser...
 	}
 	
 	public static synchronized PCReady getInstance() {
@@ -71,4 +74,26 @@ public class PCReady {
 		this.handlerAcquisto = new AcquistoHandler(getHandlerComponenti().getCatalogo(), this.clienteCorrente);
 	}
 	
+	
+	//Funzioni di progetto
+	public void salvaOrdine(Ordine ordine, int idCliente) {
+		boolean clienteInMappaOrdini = false;
+		try {
+			 if (!this.mappaOrdini.get(idCliente).isEmpty()) {
+				 clienteInMappaOrdini = true;
+			 }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		List<Ordine> nuovaLista = new ArrayList<Ordine>();
+		nuovaLista.add(ordine);
+		if (clienteInMappaOrdini) {
+			for (Ordine elemento : this.mappaOrdini.get(idCliente)) {
+				nuovaLista.add(elemento);
+			}
+			this.mappaOrdini.put(idCliente, nuovaLista);
+		}
+		else this.mappaOrdini.put(idCliente, nuovaLista);
+	}
 }

@@ -91,7 +91,25 @@ public class AcquistoHandler {
 	
 	
 	public Ordine terminaAcquisto(String indirizzo, String citta, int CAP) {
-		return this.ordineCorrente;
+		if (!this.carrello.getMappaComponenti().isEmpty()) {
+			this.ordineCorrente = new Ordine(this.clienteCorrente, this.carrello.getMappaComponentiCarrello() ,indirizzo, citta, CAP);
+			return this.ordineCorrente;
+		}
+		else return null;
+	}
+	
+	
+	public String selezionaModalitaDiPagamento(String metodoPagamento, int numeroCarta, int cvv) {
+		String str = "";
+		str = this.ordineCorrente.selezionaModalit‡DiPagamento(metodoPagamento, numeroCarta, cvv);
+		PCReady sistema = PCReady.getInstance();
+		sistema.salvaOrdine(this.ordineCorrente, this.clienteCorrente.getId());
+		return str;
+	}
+	
+	
+	public void rimuoviCopieComponente() {
+		this.ordineCorrente.rimuoviCopieOrdinate();
 	}
 	
 	

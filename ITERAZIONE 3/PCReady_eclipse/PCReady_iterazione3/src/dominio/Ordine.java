@@ -1,12 +1,12 @@
 package dominio;
 
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Ordine {
 	
-	Map<Integer,Componente> mappaComponenti;
-	Cliente cliente;
+	private Map<Componente,List<CopiaComponente>>  mappaComponenti;
+	private Cliente cliente;
 	private String indirizzo;
 	private String citta;
 	private int CAP;
@@ -16,32 +16,146 @@ public class Ordine {
 	private int cvv;  
 	private static final AtomicLong counter = new AtomicLong(0);
 	
-	public Ordine(Cliente cliente, Map<Integer,Componente> mappaComponentiCarrello, String indirizzo, String citta, int CAP) {
-		// TODO Auto-generated constructor stub 
+	
+	//Costruttori
+	public Ordine(Cliente cliente, Map<Componente,List<CopiaComponente>> mappaComponentiCarrello, String indirizzo, String citta, int CAP) {
 		this.cliente = cliente;
 		this.mappaComponenti = mappaComponentiCarrello;
 		this.indirizzo = indirizzo;
 		this.citta = citta;
 		this.CAP = CAP;
 		setId();
-		
+		this.metodoPagamento = null;
+		this.numeroCarta = 0;
+		this.cvv = 0;	
 	}
 	
+	
+	
+	//Getters e setters
+	public Map<Componente, List<CopiaComponente>> getMappaComponenti() {
+		return mappaComponenti;
+	}
+
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	
+	public String getIndirizzo() {
+		return indirizzo;
+	}
+
+
+
+
+
+	public String getCitta() {
+		return citta;
+	}
+
+
+	public int getCAP() {
+		return CAP;
+	}
+
+
+	public String getMetodoPagamento() {
+		return metodoPagamento;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public int getNumeroCarta() {
+		return numeroCarta;
+	}
+
+
+	public int getCvv() {
+		return cvv;
+	}
+
+
+	public void setMappaComponenti(Map<Componente, List<CopiaComponente>> mappaComponenti) {
+		this.mappaComponenti = mappaComponenti;
+	}
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+	public void setIndirizzo(String indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+
+
+	public void setCitta(String citta) {
+		this.citta = citta;
+	}
+
+
+	public void setCAP(int cAP) {
+		CAP = cAP;
+	}
+
+
+	public void setMetodoPagamento(String metodoPagamento) {
+		this.metodoPagamento = metodoPagamento;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
+	public void setId() {
+		this.id = (int) counter.incrementAndGet();
+	}
+
+
+	public void setNumeroCarta(int numeroCarta) {
+		this.numeroCarta = numeroCarta;
+	}
+
+
+	public void setCvv(int cvv) {
+		this.cvv = cvv;
+	}
+
+
+	//Funzioni di progetto
 	public String selezionaModalit‡DiPagamento(String metodoPagamento, int numeroCarta, int cvv){
 		
-		this.metodoPagamento = metodoPagamento;
-		this.numeroCarta = numeroCarta;
-		this.cvv = cvv;
-		String infoOrdine = "Riepilogo ordine "+ id+":\n Cliente: "+cliente+":\n Indirizzo: "+indirizzo+":\n Citt‡: "+citta+":\n CAP: "+CAP+":\n Riepilogo delle componenti:\n";
-		for(Integer key : mappaComponenti.keySet()) {
-			Componente comp = mappaComponenti.get(key);
-			infoOrdine += comp.toString();
+		setMetodoPagamento(metodoPagamento);
+		setNumeroCarta(numeroCarta);
+		setCvv(cvv);
+		
+		String infoOrdine = "---Riepilogo ordine--- \n"+ id+"\n Cliente: "+cliente+"\n Indirizzo: "+indirizzo+"\n Citt‡: "+citta+"\n CAP: "+CAP+"\n ---Riepilogo delle componenti--- \n";
+		for(Componente key : mappaComponenti.keySet()) {
+			infoOrdine += key.toString() + "\n COPIE SELEZIONATE: "+mappaComponenti.get(key).toString();
 		}
 		return infoOrdine;
 	}
-
-	public void setId() {
-		this.id = (int) counter.incrementAndGet();
+	
+	
+	public void rimuoviCopieOrdinate() {
+		Componente componenteLoop = null;
+		List<CopiaComponente> copieLoop = new ArrayList<CopiaComponente>();
+		for (Componente key : this.mappaComponenti.keySet()) {
+			componenteLoop = key;
+			for (CopiaComponente elemento : this.mappaComponenti.get(key)) {
+				copieLoop.add(elemento);
+			}
+			componenteLoop.rimozioneCopie(copieLoop);
+		}
 	}
 	
 }

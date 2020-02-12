@@ -157,4 +157,13 @@ public class Componente {
 	}
 	
 	
+	public void rimozioneCopie(List<CopiaComponente> listaCopie) {
+		for (CopiaComponente elemento : this.listaCopie) {
+			if (listaCopie.contains(elemento)) {
+				this.listaCopie.remove(elemento);
+			}
+		}
+	}
+	
+	
 }
