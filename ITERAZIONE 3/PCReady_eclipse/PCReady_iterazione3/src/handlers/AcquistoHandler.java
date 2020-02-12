@@ -76,13 +76,17 @@ public class AcquistoHandler {
 		}
 		
 		if (listaCopie.size() != 0) {
-			str = "PREZZO TOTALE: " + this.carrello.aggiungiComponente(this.componenteCorrente, listaCopie) + "/n";
+			str = "\n---CARRELLO RIEPILOGO---\nPREZZO TOTALE: " + this.carrello.aggiungiComponente(this.componenteCorrente, listaCopie) + "\n";
 		}
-		else return str = "NON CI SONO COPIE DISPONIBILI PER IL COMPONENTE SCELTO, CARRELLO INVARIATO /n" + "L'IMPORTO AMMONTA A: " + this.carrello.getPrezzoTotale();
+		else return str = "NON CI SONO COPIE DISPONIBILI PER IL COMPONENTE SCELTO, CARRELLO INVARIATO \n" + "L'IMPORTO AMMONTA A: " + this.carrello.getPrezzoTotale();
 		
 		
-		str += "ECCO L'ELENCO DELLE COMPONENTI PRESENTI NEL CARRELLO: /n";
+		str += "ECCO L'ELENCO DELLE COMPONENTI PRESENTI NEL CARRELLO: \n";
 		for (Componente componente : this.carrello.getMappaComponenti().keySet()) {
+			str += "ID COPIE DEL COMPONENTE "+componente.getNome();
+			for (CopiaComponente copia : this.carrello.getMappaComponenti().get(componente)) {
+				str += ": "+copia.getCodice()+"\n";
+			}
 			str += componente.toString();
 		}
 		return str;

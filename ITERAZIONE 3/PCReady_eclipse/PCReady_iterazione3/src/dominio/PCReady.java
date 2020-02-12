@@ -173,7 +173,7 @@ public class PCReady {
 	public void salvaOrdine(Ordine ordine, int idCliente) {
 		boolean clienteInMappaOrdini = false;
 		try {
-			 if (!this.mappaOrdini.get(idCliente).isEmpty()) {
+			 if (!this.mappaOrdini.containsKey(idCliente)) {
 				 clienteInMappaOrdini = true;
 			 }
 		}
