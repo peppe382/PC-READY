@@ -71,11 +71,13 @@ public class Carrello {
 	public double aggiungiComponente(Componente componente, List<CopiaComponente> listaCopie) {
 		List<CopiaComponente> listaAttuale = new ArrayList<CopiaComponente>();
 		try {
-			for (CopiaComponente elemento : this.mappaComponentiCarrello.get(componente)){
-				listaAttuale.add(elemento);
-			}
-			for (CopiaComponente elemento : listaCopie) {
-				listaAttuale.add(elemento);
+			if (this.mappaComponentiCarrello.containsKey(componente)) {
+				for (CopiaComponente elemento : this.mappaComponentiCarrello.get(componente)){
+					listaAttuale.add(elemento);
+				}
+				for (CopiaComponente elemento : listaCopie) {
+					listaAttuale.add(elemento);
+				}
 			}
 		}
 		catch(Exception e) {
