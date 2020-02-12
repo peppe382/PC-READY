@@ -69,14 +69,25 @@ public class Carrello {
 	
 	
 	public double aggiungiComponente(Componente componente, List<CopiaComponente> listaCopie) {
-		List<CopiaComponente> listaAttuale = this.mappaComponentiCarrello.get(componente);
-		for (CopiaComponente elemento : listaCopie) {
-			listaAttuale.add(elemento);
+		List<CopiaComponente> listaAttuale = new ArrayList<CopiaComponente>();
+		try {
+			for (CopiaComponente elemento : this.mappaComponentiCarrello.get(componente)){
+				listaAttuale.add(elemento);
+			}
+			for (CopiaComponente elemento : listaCopie) {
+				listaAttuale.add(elemento);
+			}
 		}
-		this.mappaComponentiCarrello.put(componente, listaAttuale);
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		if (listaAttuale.size() == 0) { //Ovvero se non é presente almeno un elemento di quel tipo
+			this.mappaComponentiCarrello.put(componente, listaCopie);
+		} else this.mappaComponentiCarrello.put(componente, listaAttuale);
+		
 		this.prezzoTotale += componente.getPrezzo();
-	    this.numeroPezzi += 1;
-	    return this.prezzoTotale;
+		this.numeroPezzi += 1;
+		return this.prezzoTotale;
 	}
 	
 	

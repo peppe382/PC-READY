@@ -15,9 +15,13 @@ public class AcquistoHandler {
 	private Componente componenteCorrente;
 	private Map<Integer, Componente> mappaCorrente;
 
-	public AcquistoHandler(Catalogo catalogo) {
+	public AcquistoHandler(Catalogo catalogo, Cliente cliente) {
 		this.catalogo = catalogo;
+		this.carrello = new Carrello();
 		this.mappaCorrente = new HashMap<Integer, Componente>();
+		this.clienteCorrente = cliente;
+		this.ordineCorrente = null;
+		this.componenteCorrente = null;
 	}
 	
 	public void iniziaAcquisto() {
@@ -83,10 +87,12 @@ public class AcquistoHandler {
 		}
 		return str;
 		
-		
-		
 	}
 	
+	
+	public Ordine terminaAcquisto(String indirizzo, String citta, int CAP) {
+		return this.ordineCorrente;
+	}
 	
 	
 	

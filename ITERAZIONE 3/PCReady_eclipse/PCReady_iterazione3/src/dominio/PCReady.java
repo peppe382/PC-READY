@@ -12,8 +12,7 @@ public class PCReady {
 	private ConfigurationHandler handlerConfigurazioni;
 	private GestisciComponentiHandler handlerComponenti;
 	private AcquistoHandler handlerAcquisto;
-	
-	
+	private Cliente clienteCorrente;
 	
 	
 	/** COSTRUTTORI e FUNZ. SINGLETON 
@@ -69,7 +68,7 @@ public class PCReady {
 	}
 	
 	public void setHandlerAcquisto() {
-		this.handlerAcquisto = new AcquistoHandler(getHandlerComponenti().getCatalogo());
+		this.handlerAcquisto = new AcquistoHandler(getHandlerComponenti().getCatalogo(), this.clienteCorrente);
 	}
 	
 }
