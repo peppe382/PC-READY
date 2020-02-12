@@ -28,8 +28,8 @@ public class PCReady {
      * usando la funzione "getIstance()"  **/
     
     protected PCReady() {
-    	this.mappaClienti = null;   //Gabriele prendila dal parser
-    	this.mappaAmministratori = null; //Gabriele prendila dal parser
+    	this.mappaClienti = new HashMap<String, Cliente>();   //Gabriele prendila dal parser
+    	this.mappaAmministratori = new HashMap<String, Amministratore>();; //Gabriele prendila dal parser
     	this.mappaOrdini = null; //Gabriele prendila dal parser
         this.handlerComponenti = GestisciComponentiHandler.getInstance();
         this.handlerConfigurazioni = null;
@@ -70,12 +70,30 @@ public class PCReady {
         this.handlerConfigurazioni = new ConfigurationHandler(getHandlerComponenti().getCatalogo());
     }
     
+    
+    
     public void setHandlerConfigurazioni(String comando_bundle) {
         if (comando_bundle.equals("Bundle")){        //In futuro tale if controller� se un admin loggato sta chiamando il comando...
             this.handlerConfigurazioni = new ConfigurationHandler(getHandlerComponenti().getCatalogo(), comando_bundle);
         }
     }
 
+    public void setMappaAmministratori(Map<String, Amministratore> mappaAmministratori) {
+		this.mappaAmministratori = mappaAmministratori;
+	}
+    
+    public void setMappaClienti(Map<String, Cliente> mappaClienti) {
+		this.mappaClienti = mappaClienti;
+	}
+    
+    public Map<String, Cliente> getMappaClienti() {
+		return mappaClienti;
+	}
+    
+    public Map<String, Amministratore> getMappaAmministratori() {
+		return mappaAmministratori;
+	}
+    
 	public void setHandlerComponenti() {
 		this.handlerComponenti = GestisciComponentiHandler.getInstance();
 	}
@@ -88,63 +106,67 @@ public class PCReady {
 
 
     public String richiediRegistrazione(String nome,String cognome,String email, String password, String confermaPassword) {
-    	Cliente clienteAttuale = null;
+    	boolean clienteAttuale = false;
     	
     	try {
-    		clienteAttuale = mappaClienti.get(email);
+    		clienteAttuale = this.mappaClienti.containsKey(email);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-    	
-    	if(clienteAttuale == null){
+    		
+    	if(!clienteAttuale){
     		if(password.equals(confermaPassword)){
     			Cliente cliente = new Cliente(nome,cognome,email,password);
-    			return "Cliente:"+cliente.getNome()+" creato con successo";
-    			mappaClienti.put(cliente.getEmail(),cliente);
+    			this.mappaClienti.put(cliente.getEmail(), cliente);
+    			return "Cliente: "+cliente.getNome()+" "+ cliente.getCognome()+" creato con successo";
     		}else return "Le password non coincidono";
     	}
-    	else return "Email gi� utilizzata";
+    	else return "Email gia utilizzata";
     }
+    
+    
+    
+    
     
     public String effettuaLogin(String tipologia,String email,String password){
     	switch(tipologia){
     		case "Amministratore":
     			
-    	    	Amministratore amministratoreAttuale = null;
+    	    	boolean amministratoreAttuale = false;
     	    	
     	    	try {
-    	    		amministratoreAttuale = mappaAmministratori.get(email);
+    	    		amministratoreAttuale = this.mappaAmministratori.containsKey(email);
     			}catch(Exception e) {
     				e.printStackTrace();
     			}
     	    	
-    	    	if(amministratoreAttuale != null){
-    	    		if(amministratoreAttuale.getPassword().equals(password)) {
-        				this.amministratore = amministratoreAttuale;
-        				return "L'amministratore "+amministratoreAttuale.getNome()+" ha effettuato il login"; 
+    	    	if(amministratoreAttuale){
+    	    		if(mappaAmministratori.get(email).getPassword().equals(password)) {
+        				this.amministratore = mappaAmministratori.get(email);
+        				return "L'amministratore "+amministratore.getNome()+" ha effettuato il login"; 
         			}
     	    	}
-    	    	else return "Email gi� registrata";
+    	    	else return "Email non registrata";
     			
     		case "Cliente":
     			
-    			Cliente clienteAttuale = null;
+    			boolean clienteAttuale = false;
     	    	
     	    	try {
-    	    		clienteAttuale = mappaClienti.get(email);
+    	    		clienteAttuale = this.mappaClienti.containsKey(email);
     			}catch(Exception e) {
     				e.printStackTrace();
     			}
     	    	
-    	    	if(clienteAttuale != null){
-    	    		if(clienteAttuale.getPassword().equals(password)) {
-        				this.cliente = clienteAttuale;
-        				return "Il cliente "+clienteAttuale.getNome()+" ha effettuato il login"; 
+    	    	if(clienteAttuale){
+    	    		if(mappaClienti.get(email).getPassword().equals(password)) {
+        				this.cliente = mappaClienti.get(email);
+        				return "Il cliente "+cliente.getNome()+" ha effettuato il login"; 
         			}
     	    	}
-    	    	else return "Email gi� registrata";
+    	    	else return "Email non registrata";
     	}
-		return "Email gi� registrata";
+		return "Email non registrata";
     }	
 	
 	//Funzioni di progetto
@@ -170,5 +192,4 @@ public class PCReady {
 	}
 }
     
-}
 
