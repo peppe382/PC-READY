@@ -11,6 +11,7 @@ public class PCReady {
 	
 	private ConfigurationHandler handlerConfigurazioni;
 	private GestisciComponentiHandler handlerComponenti;
+	private AcquistoHandler handlerAcquisto;
 	
 	
 	
@@ -23,6 +24,7 @@ public class PCReady {
 	protected PCReady() {
 		this.handlerComponenti = GestisciComponentiHandler.getInstance();
 		this.handlerConfigurazioni = null;
+		this.handlerAcquisto = null;
 	}
 	
 	public static synchronized PCReady getInstance() {
@@ -66,6 +68,8 @@ public class PCReady {
 		this.handlerComponenti = GestisciComponentiHandler.getInstance();
 	}
 	
-	
+	public void setHandlerAcquisto() {
+		this.handlerAcquisto = new AcquistoHandler(getHandlerComponenti().getCatalogo());
+	}
 	
 }

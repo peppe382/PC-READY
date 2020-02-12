@@ -1,13 +1,10 @@
 package handlers;
 
-import java.util.Map;
+import java.util.*;
 
-import dominio.Carrello;
-import dominio.Catalogo;
-import dominio.Cliente;
-import dominio.Componente;
-import dominio.CopiaComponente;
-import dominio.Ordine;
+import dominio.*;
+import dominio.componenti.*;
+
 
 public class AcquistoHandler {
 
@@ -19,8 +16,8 @@ public class AcquistoHandler {
 	private Map<Integer, Componente> mappaCorrente;
 
 	public AcquistoHandler(Catalogo catalogo) {
-		// TODO Auto-generated constructor stub
 		this.catalogo = catalogo;
+		this.mappaCorrente = new HashMap<Integer, Componente>();
 	}
 	
 	public void iniziaAcquisto() {
@@ -45,15 +42,52 @@ public class AcquistoHandler {
 		return this.componenteCorrente ;
 	}
 	
+	
 	//fai aggiungere String codice
-	public CopiaComponente controllaDisponibilitaCopie(int codice) {
-
-		Componente comp = catalogo.getComponente(codice);
-		if(comp.getListaCopie().size() > 0){
-			return comp.getListaCopie().get(comp.getListaCopie().size()); //se c'è ritorna l'ultima copia
+	public String aggiungiInCarrello() {
+		
+		String str = "";
+		int numeroDoppioni = 0;
+		List<CopiaComponente> listaCopie = new ArrayList<CopiaComponente>();
+		
+		switch(this.componenteCorrente.getCategoria()) {
+			case "Configurazione":
+				Configurazione conf = (Configurazione) this.componenteCorrente;
+				for (Componente elemento : conf.getListaComponenti()) {
+						numeroDoppioni = this.carrello.controllaDoppioni(elemento); //Controllo i doppioni per l'elemento corrente
+						CopiaComponente copiaDaAggiungere = elemento.controllaDisponibilitaCopie(numeroDoppioni);
+						if (copiaDaAggiungere != null) {
+							listaCopie.add(copiaDaAggiungere);
+						}
+						numeroDoppioni = 0; //Re-inizializzo il numero dei doppioni a zero
+				}
+				break;
+			default: 
+				numeroDoppioni = this.carrello.controllaDoppioni(this.componenteCorrente);
+				CopiaComponente copiaDaAggiungere = this.componenteCorrente.controllaDisponibilitaCopie(numeroDoppioni);
+				if (copiaDaAggiungere != null) {
+					listaCopie.add(copiaDaAggiungere);
+				}
+				break;
 		}
-		else return null;
+		
+		if (listaCopie.size() != 0) {
+			str = "PREZZO TOTALE: " + this.carrello.aggiungiComponente(this.componenteCorrente, listaCopie) + "/n";
+		}
+		else return str = "NON CI SONO COPIE DISPONIBILI PER IL COMPONENTE SCELTO, CARRELLO INVARIATO /n" + "L'IMPORTO AMMONTA A: " + this.carrello.getPrezzoTotale();
+		
+		
+		str += "ECCO L'ELENCO DELLE COMPONENTI PRESENTI NEL CARRELLO: /n";
+		for (Componente componente : this.carrello.getMappaComponenti().keySet()) {
+			str += componente.toString();
+		}
+		return str;
+		
+		
+		
 	}
+	
+	
 	
 	
 }

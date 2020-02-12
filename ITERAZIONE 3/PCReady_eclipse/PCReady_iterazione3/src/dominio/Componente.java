@@ -3,6 +3,8 @@ package dominio;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
+import dominio.componenti.*;
+
 public class Componente {
 
 	private String categoria;
@@ -142,6 +144,17 @@ public class Componente {
 	}
 	
 	
+	public CopiaComponente controllaDisponibilitaCopie(int numeroDoppioni) {
+		
+		if (this.listaCopie.size() > numeroDoppioni) {
+			if (!this.categoria.equals("Configurazione") || !this.categoria.equals("Bundle")) {
+				//Logica: prendo la prima copia componente disponibile!
+				return this.listaCopie.get(numeroDoppioni); 
+			}	
+		}
+		return null;
+		
+	}
 	
 	
 }
