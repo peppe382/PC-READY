@@ -1,7 +1,6 @@
 package dominio;
 
 import java.util.*;
-import java.util.Map;
 
 import handlers.*;
 
@@ -18,6 +17,7 @@ public class PCReady {
     private ConfigurationHandler handlerConfigurazioni;
     private GestisciComponentiHandler handlerComponenti;
     private AcquistoHandler handlerAcquisto;
+	private Cliente clienteCorrente;
     private Map<Integer, List<Ordine>> mappaOrdini;
 
     
@@ -30,7 +30,7 @@ public class PCReady {
     protected PCReady() {
     	this.mappaClienti = null;   //Gabriele prendila dal parser
     	this.mappaAmministratori = null; //Gabriele prendila dal parser
-    	 this.mappaOrdini = null; //Gabriele prendila dal parser
+    	this.mappaOrdini = null; //Gabriele prendila dal parser
         this.handlerComponenti = GestisciComponentiHandler.getInstance();
         this.handlerConfigurazioni = null;
         this.handlerAcquisto = null;
@@ -55,6 +55,7 @@ public class PCReady {
     
     /********** GETTERS E SETTERS  **********/
     
+	
     public ConfigurationHandler getHandlerConfigurazioni() {
         return this.handlerConfigurazioni;
     }
@@ -63,25 +64,29 @@ public class PCReady {
         return this.handlerComponenti;
     }
 
+
+
     public void setHandlerConfigurazioni() {
         this.handlerConfigurazioni = new ConfigurationHandler(getHandlerComponenti().getCatalogo());
     }
     
     public void setHandlerConfigurazioni(String comando_bundle) {
-        if (comando_bundle.equals("Bundle")){        //In futuro tale if controllerá se un admin loggato sta chiamando il comando...
+        if (comando_bundle.equals("Bundle")){        //In futuro tale if controllerï¿½ se un admin loggato sta chiamando il comando...
             this.handlerConfigurazioni = new ConfigurationHandler(getHandlerComponenti().getCatalogo(), comando_bundle);
         }
     }
 
-    public void setHandlerComponenti() {
-        this.handlerComponenti = GestisciComponentiHandler.getInstance();
-    }
+	public void setHandlerComponenti() {
+		this.handlerComponenti = GestisciComponentiHandler.getInstance();
+	}
+	
+	public void setHandlerAcquisto() {
+		this.handlerAcquisto = new AcquistoHandler(getHandlerComponenti().getCatalogo(), this.clienteCorrente);
+	}
     
-    public void setHandlerAcquisto() {
-        this.handlerAcquisto = new AcquistoHandler(getHandlerComponenti().getCatalogo());
-    }
-    
-    
+
+
+
     public String richiediRegistrazione(String nome,String cognome,String email, String password, String confermaPassword) {
     	Cliente clienteAttuale = null;
     	
@@ -98,10 +103,8 @@ public class PCReady {
     			mappaClienti.put(cliente.getEmail(),cliente);
     		}else return "Le password non coincidono";
     	}
-    	else return "Email già utilizzata";
+    	else return "Email giï¿½ utilizzata";
     }
-    
-    
     
     public String effettuaLogin(String tipologia,String email,String password){
     	switch(tipologia){
@@ -121,7 +124,7 @@ public class PCReady {
         				return "L'amministratore "+amministratoreAttuale.getNome()+" ha effettuato il login"; 
         			}
     	    	}
-    	    	else return "Email già registrata";
+    	    	else return "Email giï¿½ registrata";
     			
     		case "Cliente":
     			
@@ -139,9 +142,33 @@ public class PCReady {
         				return "Il cliente "+clienteAttuale.getNome()+" ha effettuato il login"; 
         			}
     	    	}
-    	    	else return "Email già registrata";
+    	    	else return "Email giï¿½ registrata";
     	}
-		return "Email già registrata";
-    }
+		return "Email giï¿½ registrata";
+    }	
+	
+	//Funzioni di progetto
+	public void salvaOrdine(Ordine ordine, int idCliente) {
+		boolean clienteInMappaOrdini = false;
+		try {
+			 if (!this.mappaOrdini.get(idCliente).isEmpty()) {
+				 clienteInMappaOrdini = true;
+			 }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		List<Ordine> nuovaLista = new ArrayList<Ordine>();
+		nuovaLista.add(ordine);
+		if (clienteInMappaOrdini) {
+			for (Ordine elemento : this.mappaOrdini.get(idCliente)) {
+				nuovaLista.add(elemento);
+			}
+			this.mappaOrdini.put(idCliente, nuovaLista);
+		}
+		else this.mappaOrdini.put(idCliente, nuovaLista);
+	}
+}
     
 }
+
