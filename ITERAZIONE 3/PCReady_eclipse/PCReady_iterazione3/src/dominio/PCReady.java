@@ -99,11 +99,11 @@ public class PCReady {
     	if(clienteAttuale == null){
     		if(password.equals(confermaPassword)){
     			Cliente cliente = new Cliente(nome,cognome,email,password);
-    			return "Cliente:"+cliente.getNome()+" creato con successo";
     			mappaClienti.put(cliente.getEmail(),cliente);
+    			return "Cliente:"+cliente.getNome()+" creato con successo";
     		}else return "Le password non coincidono";
     	}
-    	else return "Email gi� utilizzata";
+    	else return "Email gia utilizzata";
     }
     
     public String effettuaLogin(String tipologia,String email,String password){
@@ -124,7 +124,7 @@ public class PCReady {
         				return "L'amministratore "+amministratoreAttuale.getNome()+" ha effettuato il login"; 
         			}
     	    	}
-    	    	else return "Email gi� registrata";
+    	    	else return "Email gia registrata";
     			
     		case "Cliente":
     			
@@ -142,16 +142,16 @@ public class PCReady {
         				return "Il cliente "+clienteAttuale.getNome()+" ha effettuato il login"; 
         			}
     	    	}
-    	    	else return "Email gi� registrata";
+    	    	else return "Email gia registrata";
     	}
-		return "Email gi� registrata";
+		return "Email gia registrata";
     }	
 	
 	//Funzioni di progetto
 	public void salvaOrdine(Ordine ordine, int idCliente) {
 		boolean clienteInMappaOrdini = false;
 		try {
-			 if (!this.mappaOrdini.get(idCliente).isEmpty()) {
+			 if (!this.mappaOrdini.containsKey(idCliente)) {
 				 clienteInMappaOrdini = true;
 			 }
 		}
@@ -170,5 +170,4 @@ public class PCReady {
 	}
 }
     
-}
 
