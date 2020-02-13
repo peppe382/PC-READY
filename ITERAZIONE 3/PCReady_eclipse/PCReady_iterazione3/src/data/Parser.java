@@ -19,11 +19,13 @@ import dominio.componenti.*;
 
 public class Parser {
 	
-	public static final String database = "data/catalogo.json";
+	public static final String file_catalogo = "data/catalogo.json";
+	public static final String file_utenti = "data/utenti.json";
+	public static final String file_ordini = "data/ordini.json";
 	
 	// Funzioni handler
 	public static Catalogo createCatalogo() {
-		JSONObject catalogo = Parser.getObjectFromFile(Parser.database);
+		JSONObject catalogo = Parser.getObjectFromFile(Parser.file_catalogo);
 		return Parser.parseCatalogo(catalogo);
 	}
 	
@@ -40,7 +42,61 @@ public class Parser {
 			}
 			jsonString.put(categoria, tempArray);
 		}
-		Parser.writeToFile(Parser.database, jsonString.toString());
+		Parser.writeToFile(Parser.file_catalogo, jsonString.toString());
+	}
+	
+	// - - - - - - - - - - - - - - - - - -
+	
+	public static Map<String, Amministratore> caricaAdmin() {
+		Map<String, Amministratore> mappa = new HashMap<String, Amministratore>();
+		JSONArray amministratori = Parser.getObjectFromFile(Parser.file_utenti).getJSONArray("Amministratori");
+		for(int i = 0; i < amministratori.length(); i++) {
+			JSONObject adminJson = amministratori.getJSONObject(i);
+			Amministratore ad = Parser.processAdmin(adminJson);
+			mappa.put(ad.getEmail(), ad);
+		}
+		return mappa;
+	}
+	
+	public static Map<String, Cliente> caricaClienti() {
+		Map<String, Cliente> mappa = new HashMap<String, Cliente>();
+		JSONArray clienti = Parser.getObjectFromFile(Parser.file_utenti).getJSONArray("Clienti");
+		for(int i = 0; i < clienti.length(); i++) {
+			JSONObject clienteJson = clienti.getJSONObject(i);
+			Cliente cl = Parser.processCliente(clienteJson);
+			mappa.put(cl.getEmail(), cl);
+		}
+		return mappa;
+	}
+	
+	public static void salvaUtenti(Map<String, Cliente> clienti, Map<String, Amministratore> amministratori) {
+		JSONObject core = new JSONObject();
+		
+		JSONArray arClienti = new JSONArray();
+		for(Map.Entry<String, Cliente> entry: clienti.entrySet()) {
+			Cliente cl = entry.getValue();
+			arClienti.put(Parser.jsonUtente(cl));
+		}
+		core.put("Clienti", arClienti);
+		JSONArray arAdmin = new JSONArray();
+		for(Map.Entry<String, Amministratore> entry: amministratori.entrySet()) {
+			Amministratore ad = entry.getValue();
+			arAdmin.put(Parser.jsonUtente(ad));
+		}
+		core.put("Amministratori", arAdmin);
+		
+		Parser.writeToFile(Parser.file_utenti, core.toString());
+	}
+	
+	// - - - - - - - - - - - - - - - - - -
+	
+	public static Map<String, List<Ordine>> caricaOrdini(){
+		Map<String, List<Ordine>> mappa = new HashMap<String, List<Ordine>>();
+		JSONArray ordiniJson = Parser.getArrayFromFile(Parser.file_ordini);
+		for(int i = 0; i < ordiniJson.length(); i++) {
+			
+		}
+		return null;
 	}
 	
 	// -------------------------------------------------------------------
@@ -192,6 +248,28 @@ public class Parser {
 			return b;
 		}
 		
+		public static Amministratore processAdmin(JSONObject adminJson) {
+			
+			int id = adminJson.getInt("id");
+			String nome = adminJson.getString("nome");
+			String cognome = adminJson.getString("cognome");
+			String email = adminJson.getString("email");
+			String password = adminJson.getString("password");
+			
+			return new Amministratore(id, nome, cognome, email, password);
+		}
+		
+		public static Cliente processCliente(JSONObject clienteJson) {
+			
+			int id = clienteJson.getInt("id");
+			String nome = clienteJson.getString("nome");
+			String cognome = clienteJson.getString("cognome");
+			String email = clienteJson.getString("email");
+			String password = clienteJson.getString("password");
+			
+			return new Cliente(id, nome, cognome, email, password);
+		}
+		
 		// -------------------------------------------------------------------
 		
 		// Scrittura singoli Componenti
@@ -280,6 +358,26 @@ public class Parser {
 			JSONObject core = jsonConfigurazione((Configurazione)b);
 			core.put("sconto", b.getSconto());
 			return core;
+		}
+		
+		public static JSONObject jsonUtente(Cliente u) {
+			JSONObject json = new JSONObject();
+			json.put("id", u.getId());
+			json.put("nome", u.getNome());
+			json.put("cognome", u.getCognome());
+			json.put("email", u.getEmail());
+			json.put("password", u.getPassword());
+			return json;
+		}
+		
+		public static JSONObject jsonUtente(Amministratore u) {
+			JSONObject json = new JSONObject();
+			json.put("id", u.getId());
+			json.put("nome", u.getNome());
+			json.put("cognome", u.getCognome());
+			json.put("email", u.getEmail());
+			json.put("password", u.getPassword());
+			return json;
 		}
 		
 	// -------------------------------------------------------------------

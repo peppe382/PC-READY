@@ -3,7 +3,7 @@ package interfaccia;
 public class ComandoSpegniConsole extends Comando {
 
 	public ComandoSpegniConsole() {
-		super(0, "Spegni la Console");
+		super(0, "Spegni la Console", false);
 	}
 
 	@Override

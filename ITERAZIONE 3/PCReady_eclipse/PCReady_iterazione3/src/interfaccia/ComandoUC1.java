@@ -13,7 +13,7 @@ public class ComandoUC1 extends Comando {
 	private ConfigurationHandler handlerConfigurazione;
 
 	public ComandoUC1() {
-		super(1, "Crea una configurazione");
+		super(1, "Crea una configurazione", false);
 		int i = 1;
 		this.mappaCorrispondenzaCategorie = new HashMap<Integer, String>();
 		for (String cat : categorie) {
@@ -48,7 +48,7 @@ public class ComandoUC1 extends Comando {
 					console.print("\n Ti soddisfa il componente selezionato? Inserisci Si o No \n");
 					if (console.getYesNo()) {
 						console.print(this.handlerConfigurazione.confermaComponente());
-						/*Vengono mostrati a video eventuali messaggi di incompatibilitá previsti
+						/*Vengono mostrati a video eventuali messaggi di incompatibilitï¿½ previsti
 						 dalla clase Configuration Handler...
 						 */
 					}else console.print("Non inserisco il componente...");
