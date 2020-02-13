@@ -9,7 +9,8 @@ package interfaccia;
  */
 
 public final class ElencoComandi {
-	public static final Comando[] elenco = {new ComandoUC1(), new ComandoUC2(), new ComandoUC3(), new ComandoUC4(), new ComandoSpegniConsole()};
+	public static final Comando[] elenco = {new ComandoUC1(), new ComandoUC2(), new ComandoUC3(), new ComandoUC4(), 
+			new ComandoUC5(), new ComandoUC6(), new ComandoUC7(), new ComandoSpegniConsole()};
 	
 	public static Comando getComando(int codice) {
 		for(Comando cmd : ElencoComandi.elenco) if(cmd.getCodiceComando() == codice) return cmd;

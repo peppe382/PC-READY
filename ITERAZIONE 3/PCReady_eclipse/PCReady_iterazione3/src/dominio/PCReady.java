@@ -101,9 +101,15 @@ public class PCReady {
 	public void setHandlerAcquisto() {
 		this.handlerAcquisto = new AcquistoHandler(getHandlerComponenti().getCatalogo(), this.clienteCorrente);
 	}
+	
+	public void setHandlerAcquisto(Cliente cliente) {
+		this.handlerAcquisto = new AcquistoHandler(getHandlerComponenti().getCatalogo(), cliente);
+	}
+	
+	public AcquistoHandler getHandlerAcquisto() {
+		return this.handlerAcquisto;
+	}
     
-
-
 
     public String richiediRegistrazione(String nome,String cognome,String email, String password, String confermaPassword) {
     	boolean clienteAttuale = false;
