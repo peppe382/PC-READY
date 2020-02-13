@@ -15,6 +15,8 @@ public class AcquistoHandler {
 	private Componente componenteCorrente;
 	private Map<Integer, Componente> mappaCorrente;
 
+	
+	//Costruttori
 	public AcquistoHandler(Catalogo catalogo, Cliente cliente) {
 		this.catalogo = catalogo;
 		this.carrello = new Carrello();
@@ -24,10 +26,62 @@ public class AcquistoHandler {
 		this.componenteCorrente = null;
 	}
 	
+	//Getters e setters 
+	public Cliente getClienteCorrente() {
+		return clienteCorrente;
+	}
+
+	public Carrello getCarrello() {
+		return carrello;
+	}
+
+	public Catalogo getCatalogo() {
+		return catalogo;
+	}
+
+	public Ordine getOrdineCorrente() {
+		return ordineCorrente;
+	}
+
+	public Componente getComponenteCorrente() {
+		return componenteCorrente;
+	}
+
+	public Map<Integer, Componente> getMappaCorrente() {
+		return mappaCorrente;
+	}
+
+	public void setClienteCorrente(Cliente clienteCorrente) {
+		this.clienteCorrente = clienteCorrente;
+	}
+
+	public void setCarrello(Carrello carrello) {
+		this.carrello = carrello;
+	}
+
+	public void setCatalogo(Catalogo catalogo) {
+		this.catalogo = catalogo;
+	}
+
+	public void setOrdineCorrente(Ordine ordineCorrente) {
+		this.ordineCorrente = ordineCorrente;
+	}
+
+	public void setComponenteCorrente(Componente componenteCorrente) {
+		this.componenteCorrente = componenteCorrente;
+	}
+
+	public void setMappaCorrente(Map<Integer, Componente> mappaCorrente) {
+		this.mappaCorrente = mappaCorrente;
+	}
+	
+	
+	//Funzioni di progetto
 	public void iniziaAcquisto() {
 		this.carrello = new Carrello();
 	}
 	
+
 	public Map<Integer, Componente> selezionaCategoria(String idCategoria) {
 		try {
 			return this.mappaCorrente = this.catalogo.ottieniComponentiByCategoria(idCategoria);
@@ -47,7 +101,6 @@ public class AcquistoHandler {
 	}
 	
 	
-	//fai aggiungere String codice
 	public String aggiungiInCarrello() {
 		
 		String str = "";
@@ -76,9 +129,11 @@ public class AcquistoHandler {
 		}
 		
 		if (listaCopie.size() != 0) {
-			str = "\n---CARRELLO RIEPILOGO---\nPREZZO TOTALE: " + this.carrello.aggiungiComponente(this.componenteCorrente, listaCopie) + "\n";
+			this.carrello.aggiungiComponente(this.componenteCorrente, listaCopie);
+			str += "\nCARRELLO RIEPILOGO \nPREZZO TOTALE: " + this.carrello.getPrezzoTotale()+ "\n";
+			str += "\nNUMERO PEZZI: " + this.carrello.getNumeroPezzi() + "\n";
 		}
-		else return str = "NON CI SONO COPIE DISPONIBILI PER IL COMPONENTE SCELTO, CARRELLO INVARIATO \n" + "L'IMPORTO AMMONTA A: " + this.carrello.getPrezzoTotale();
+		else return str = "\nNON CI SONO COPIE DISPONIBILI PER IL COMPONENTE SCELTO, CARRELLO INVARIATO \n" + "L'IMPORTO AMMONTA A: " + this.carrello.getPrezzoTotale();
 		
 		
 		str += "ECCO L'ELENCO DELLE COMPONENTI PRESENTI NEL CARRELLO: \n";
@@ -105,7 +160,7 @@ public class AcquistoHandler {
 	
 	public String selezionaModalitaDiPagamento(String metodoPagamento, int numeroCarta, int cvv) {
 		String str = "";
-		str = this.ordineCorrente.selezionaModalit‡DiPagamento(metodoPagamento, numeroCarta, cvv);
+		str = this.ordineCorrente.selezionaModalitaDiPagamento(metodoPagamento, numeroCarta, cvv);
 		PCReady sistema = PCReady.getInstance();
 		sistema.salvaOrdine(this.ordineCorrente, this.clienteCorrente.getId());
 		return str;
