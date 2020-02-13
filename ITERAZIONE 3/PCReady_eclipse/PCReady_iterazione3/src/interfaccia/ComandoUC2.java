@@ -12,7 +12,7 @@ public class ComandoUC2 extends Comando {
 	private ConfigurationHandler handlerConfigurazione;
 
 	public ComandoUC2() {
-		super(2, "Crea un bundle");
+		super(2, "Crea un bundle", true);
 		int i = 1;
 		this.mappaCorrispondenzaCategorie = new HashMap<Integer, String>();
 		for (String cat : categorie) {
@@ -47,7 +47,7 @@ public class ComandoUC2 extends Comando {
 					console.print("\n Ti soddisfa il componente selezionato? Inserisci Si o No \n");
 					if (console.getYesNo() == true) {
 						console.print(this.handlerConfigurazione.confermaComponente());
-						/*Vengono mostrati a video eventuali messaggi di incompatibilitá previsti
+						/*Vengono mostrati a video eventuali messaggi di incompatibilitï¿½ previsti
 						 dalla clase Configuration Handler...
 						 */
 					}else console.print("Non inserisco il componente...");

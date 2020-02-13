@@ -18,7 +18,7 @@ public class PCReady {
     private GestisciComponentiHandler handlerComponenti;
     private AcquistoHandler handlerAcquisto;
 	private Cliente clienteCorrente;
-    private Map<Integer, List<Ordine>> mappaOrdini;
+    private Map<String, List<Ordine>> mappaOrdini;
 
     
     
@@ -170,10 +170,10 @@ public class PCReady {
     }	
 	
 	//Funzioni di progetto
-	public void salvaOrdine(Ordine ordine, int idCliente) {
+	public void salvaOrdine(Ordine ordine, String emailCliente) {
 		boolean clienteInMappaOrdini = false;
 		try {
-			 if (!this.mappaOrdini.containsKey(idCliente)) {
+			 if (!this.mappaOrdini.containsKey(emailCliente)) {
 				 clienteInMappaOrdini = true;
 			 }
 		}
@@ -183,12 +183,12 @@ public class PCReady {
 		List<Ordine> nuovaLista = new ArrayList<Ordine>();
 		nuovaLista.add(ordine);
 		if (clienteInMappaOrdini) {
-			for (Ordine elemento : this.mappaOrdini.get(idCliente)) {
+			for (Ordine elemento : this.mappaOrdini.get(emailCliente)) {
 				nuovaLista.add(elemento);
 			}
-			this.mappaOrdini.put(idCliente, nuovaLista);
+			this.mappaOrdini.put(emailCliente, nuovaLista);
 		}
-		else this.mappaOrdini.put(idCliente, nuovaLista);
+		else this.mappaOrdini.put(emailCliente, nuovaLista);
 	}
 }
     

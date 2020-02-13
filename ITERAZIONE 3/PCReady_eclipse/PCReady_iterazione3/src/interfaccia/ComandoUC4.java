@@ -8,7 +8,7 @@ import dominio.CopiaComponente;
 public class ComandoUC4 extends Comando {
 
 	public ComandoUC4() {
-		super(4, "Aggiungi una copia di un componente");
+		super(4, "Aggiungi una copia di un componente", true);
 	}
 
 	@Override
