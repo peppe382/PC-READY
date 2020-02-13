@@ -9,7 +9,7 @@ public class ComandoSpegniConsole extends Comando {
 	@Override
 	public void esegui(Console console) {
 		console.print("Grazie per aver usato PC Ready!\n");
-		console.getSistema().getHandlerComponenti().salvaCatalogo(); //Salvo tutto il catalogo prima di spegnere...
+		console.getSistema().spegniSistema();
 		console.spegni();
 	}
 

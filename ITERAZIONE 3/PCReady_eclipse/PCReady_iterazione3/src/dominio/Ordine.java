@@ -5,8 +5,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Ordine {
 	
-	private Map<Componente,List<CopiaComponente>> mappaComponenti;
 	private int id;
+	private Map<Componente,List<CopiaComponente>> mappaComponenti;
 	private Cliente cliente;
 	private String indirizzo;
 	private String citta;
