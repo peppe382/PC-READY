@@ -101,6 +101,15 @@ public class PCReady {
 	public void setHandlerAcquisto() {
 		this.handlerAcquisto = new AcquistoHandler(getHandlerComponenti().getCatalogo(), this.clienteCorrente);
 	}
+	
+	public Amministratore getAmministratore() {
+		return amministratore;
+	}
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+	
     
 
 
@@ -117,8 +126,9 @@ public class PCReady {
     	if(!clienteAttuale){
     		if(password.equals(confermaPassword)){
     			Cliente cliente = new Cliente(nome,cognome,email,password);
+    			this.cliente = cliente;
     			this.mappaClienti.put(cliente.getEmail(), cliente);
-    			return "Cliente: "+cliente.getNome()+" "+ cliente.getCognome()+" creato con successo";
+    			return "Cliente: "+cliente.getEmail()+" creato con successo";
     		}else return "Le password non coincidono";
     	}
     	else return "Email gia utilizzata";
@@ -143,7 +153,7 @@ public class PCReady {
     	    	if(amministratoreAttuale){
     	    		if(mappaAmministratori.get(email).getPassword().equals(password)) {
         				this.amministratore = mappaAmministratori.get(email);
-        				return "L'amministratore "+amministratore.getNome()+" ha effettuato il login"; 
+        				return "L'amministratore "+amministratore.getEmail()+" ha effettuato il login"; 
         			}
     	    	}
     	    	else return "Email non registrata";
@@ -161,7 +171,7 @@ public class PCReady {
     	    	if(clienteAttuale){
     	    		if(mappaClienti.get(email).getPassword().equals(password)) {
         				this.cliente = mappaClienti.get(email);
-        				return "Il cliente "+cliente.getNome()+" ha effettuato il login"; 
+        				return "Il cliente "+cliente.getEmail()+" ha effettuato il login"; 
         			}
     	    	}
     	    	else return "Email non registrata";
