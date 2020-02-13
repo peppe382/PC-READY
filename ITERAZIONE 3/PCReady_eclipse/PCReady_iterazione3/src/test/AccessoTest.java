@@ -6,6 +6,7 @@ import java.util.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 
 import dominio.Amministratore;
 import dominio.Cliente;
@@ -28,7 +29,8 @@ class AccessoTest {
     	sistema.setMappaClienti(mappaClienti);
     }
 	
-	@Test
+    @org.junit.jupiter.api.Test
+	@DisplayName("Login")
 	void effettuaLogintest() {
 		String controllo1 = sistema.effettuaLogin("Amministratore", "bartolomeo@gmail.com", "password");
 		System.out.println(controllo1);
@@ -40,7 +42,8 @@ class AccessoTest {
 		
 	}
 	
-	@Test
+	@org.junit.jupiter.api.Test
+	@DisplayName("Registrazione")
 	void richiediRegistrazionetest() {
 		System.out.println(sistema.richiediRegistrazione("Pippo", "Franco", "pippoFranco@gmail.com", "password", "password"));
 		 Map<String, Cliente> mappaClientiAttuale = sistema.getMappaClienti();

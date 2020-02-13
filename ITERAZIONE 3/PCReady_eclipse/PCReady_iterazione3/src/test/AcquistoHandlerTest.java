@@ -121,7 +121,10 @@ class AcquistoHandlerTest {
 	@DisplayName("Ordine test")
 	void ordineTest(){
 		acquistoH.terminaAcquisto("Via delle pere N4", "Ragusa", 97100);
-		acquistoH.selezionaModalitaDiPagamento("VISA", 2112435786, 456);
+		System.out.println(acquistoH.selezionaModalitaDiPagamento("VISA", 2112435786, 456));
+		acquistoH.rimuoviCopieComponente();
+		
+		assertEquals(acquistoH.getOrdineCorrente().getCitta(), "Ragusa");
 	}
 	
 

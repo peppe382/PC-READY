@@ -20,7 +20,7 @@ public class Ordine {
 	//Costruttori
 	public Ordine(Cliente cliente, Map<Componente,List<CopiaComponente>> mappaComponentiCarrello, String indirizzo, String citta, int CAP) {
 		this.cliente = cliente;
-		this.mappaComponenti = mappaComponentiCarrello;
+		setMappaComponenti(mappaComponentiCarrello);
 		this.indirizzo = indirizzo;
 		this.citta = citta;
 		this.CAP = CAP;
@@ -46,9 +46,6 @@ public class Ordine {
 	public String getIndirizzo() {
 		return indirizzo;
 	}
-
-
-
 
 
 	public String getCitta() {
@@ -138,7 +135,7 @@ public class Ordine {
 		setNumeroCarta(numeroCarta);
 		setCvv(cvv);
 		
-		String infoOrdine = "---Riepilogo ordine--- \n"+ id+"\n Cliente: "+cliente+"\n Indirizzo: "+indirizzo+"\n Città: "+citta+"\n CAP: "+CAP+"\n ---Riepilogo delle componenti--- \n";
+		String infoOrdine = "---Riepilogo ordine--- \n"+ id+"\n Nome cliente: "+cliente.getNome() +"\n Cognome cliente: "+ cliente.getCognome() +"\n Indirizzo: "+indirizzo+"\n Città: "+citta+"\n CAP: "+CAP+"\n ---Riepilogo delle componenti--- \n";
 		for(Componente key : mappaComponenti.keySet()) {
 			infoOrdine += key.toString() + "\n COPIE SELEZIONATE: "+mappaComponenti.get(key).toString();
 		}

@@ -26,4 +26,11 @@ public class CopiaComponente {
 	public void setCodice() {
 		this.codice = (int) counter.incrementAndGet();
 	}
+
+	@Override
+	public String toString() {
+		return "CODICE COPIA: " +getCodice();
+	}
+	
+	
 }

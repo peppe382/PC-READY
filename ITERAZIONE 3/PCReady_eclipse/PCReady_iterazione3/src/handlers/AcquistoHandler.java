@@ -162,7 +162,7 @@ public class AcquistoHandler {
 		String str = "";
 		str = this.ordineCorrente.selezionaModalitaDiPagamento(metodoPagamento, numeroCarta, cvv);
 		PCReady sistema = PCReady.getInstance();
-		sistema.salvaOrdine(this.ordineCorrente, this.clienteCorrente.getId());
+		sistema.salvaOrdine(this.ordineCorrente, this.clienteCorrente.getEmail());
 		return str;
 	}
 	
