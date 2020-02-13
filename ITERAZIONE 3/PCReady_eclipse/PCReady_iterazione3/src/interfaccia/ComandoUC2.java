@@ -7,7 +7,7 @@ import dominio.Componente;
 import handlers.ConfigurationHandler;
 
 public class ComandoUC2 extends Comando {
-	private static final String[] categorie = {"CPU","PSU","GPU","Storage","RAM","Motherboard","Case"};
+	private static final String[] categorie = {"CPU","PSU","GPU","Storage","RAM","Motherboard","Case", "Annulla operazione"};
 	private Map<Integer, String> mappaCorrispondenzaCategorie; 
 	private ConfigurationHandler handlerConfigurazione;
 
@@ -34,52 +34,55 @@ public class ComandoUC2 extends Comando {
 			console.print("Seleziona una categoria inserendo il suo codice intero:"); 
 			Integer selezione = console.getInt();
 			if (selezione != null) {
-				cat = this.mappaCorrispondenzaCategorie.get(selezione.intValue());
-				console.print("Seleziona una componente, tra quelle che vengono mostrate a video, inserendo il suo codice numerico:");
-				Map<Integer, Componente> mappaComponenti = this.handlerConfigurazione.selezionaCategoria(cat);
-				for (Integer key : mappaComponenti.keySet()) {
-					console.print("---Codice: "+key +"  Componente: "+ mappaComponenti.get(key) +"--- \n");
-				}
-				console.print("---INSERISCI CODICE COMPONENTE---  \n");
-				Componente componenteAttuale = this.handlerConfigurazione.selezionaComponente(console.getInt());
-				if (componenteAttuale != null) {
-					console.print("\n\n ECCO I DETTAGLI DEL COMPONENTE SELEZIONATO"+componenteAttuale.toString());
-					console.print("\n Ti soddisfa il componente selezionato? Inserisci Si o No \n");
-					if (console.getYesNo() == true) {
-						console.print(this.handlerConfigurazione.confermaComponente());
-						/*Vengono mostrati a video eventuali messaggi di incompatibilit� previsti
-						 dalla clase Configuration Handler...
-						 */
-					}else console.print("Non inserisco il componente...");
-					
-					console.print("Desideri continuare con l'inserimento componenti? \n");
-					if (console.getYesNo() == false) { //Nel caso di valore true o non valido continuo con l'inserimento delle componenti
-						console.print("---TERMINA ASSEMBLAGGIO: ESECUZIONE DEI CONTROLLI---");
-						if (this.handlerConfigurazione.terminaAssemblaggio() == true) {
-							fine = false;
-							console.print("---ASSEMBLAGGIO ANDATO A BUON FINE: RIEPILOGO---");
-							console.print(this.handlerConfigurazione.getStringaComunicazioni());
-							console.print("---INSERISCI NOME BUNDLE---");
-							String nome = console.getString();
-							console.print("---INSERISCI SCONTO BUNDLE---");
-							Double sconto = console.getDouble();
-							console.print("---INSERISCI DESCRIZIONE BUNDLE---");
-							String descrizione = console.getString();
-							this.handlerConfigurazione.infoConfigurazione(sconto, nome, descrizione);
-							this.handlerConfigurazione.confermaConfigurazione();
-							console.print("---INSERIMENTO BUNDLE COMPLETATO---");
-							console.print("---SALVATAGGIO IN CATALOGO IN CORSO--- \n");
-							console.getSistema().getHandlerComponenti().salvaCatalogo();
-						}
-						else {
-							console.print("---ASSEMBLAGGIO NON RIUSCITO---");
-							console.print(this.handlerConfigurazione.getStringaComunicazioni());
-							console.print("---RIPROVA INSERENDO UN NUOVO COMPONENTE---");
+				if (selezione != 8) {
+					cat = this.mappaCorrispondenzaCategorie.get(selezione.intValue());
+					console.print("Seleziona una componente, tra quelle che vengono mostrate a video, inserendo il suo codice numerico:");
+					Map<Integer, Componente> mappaComponenti = this.handlerConfigurazione.selezionaCategoria(cat);
+					for (Integer key : mappaComponenti.keySet()) {
+						console.print("---Codice: "+key +"  Componente: "+ mappaComponenti.get(key) +"--- \n");
+					}
+					console.print("---INSERISCI CODICE COMPONENTE---  \n");
+					Componente componenteAttuale = this.handlerConfigurazione.selezionaComponente(console.getInt());
+					if (componenteAttuale != null) {
+						console.print("\n\n ECCO I DETTAGLI DEL COMPONENTE SELEZIONATO"+componenteAttuale.toString());
+						console.print("\n Ti soddisfa il componente selezionato? Inserisci Si o No \n");
+						if (console.getYesNo() == true) {
+							console.print(this.handlerConfigurazione.confermaComponente());
+							/*Vengono mostrati a video eventuali messaggi di incompatibilit� previsti
+							 dalla clase Configuration Handler...
+							 */
+						}else console.print("Non inserisco il componente...");
+						
+						console.print("Desideri continuare con l'inserimento componenti? \n");
+						if (console.getYesNo() == false) { //Nel caso di valore true o non valido continuo con l'inserimento delle componenti
+							console.print("---TERMINA ASSEMBLAGGIO: ESECUZIONE DEI CONTROLLI---");
+							if (this.handlerConfigurazione.terminaAssemblaggio() == true) {
+								fine = false;
+								console.print("---ASSEMBLAGGIO ANDATO A BUON FINE: RIEPILOGO---");
+								console.print(this.handlerConfigurazione.getStringaComunicazioni());
+								console.print("---INSERISCI NOME BUNDLE---");
+								String nome = console.getString();
+								console.print("---INSERISCI SCONTO BUNDLE---");
+								Double sconto = console.getDouble();
+								console.print("---INSERISCI DESCRIZIONE BUNDLE---");
+								String descrizione = console.getString();
+								this.handlerConfigurazione.infoConfigurazione(sconto, nome, descrizione);
+								this.handlerConfigurazione.confermaConfigurazione();
+								console.print("---INSERIMENTO BUNDLE COMPLETATO---");
+								console.print("---SALVATAGGIO IN CATALOGO IN CORSO--- \n");
+								console.getSistema().getHandlerComponenti().salvaCatalogo();
+							}
+							else {
+								console.print("---ASSEMBLAGGIO NON RIUSCITO---");
+								console.print(this.handlerConfigurazione.getStringaComunicazioni());
+								console.print("---RIPROVA INSERENDO UN NUOVO COMPONENTE---");
+							}
+							
 						}
 						
-					}
+					}else console.print("Hai inserito un codice non valido");
 					
-				}else console.print("Hai inserito un codice non valido");
+				}else fine=false;
 				
 			}else console.print("Hai inserito un codice non valido");
 		}
@@ -89,7 +92,7 @@ public class ComandoUC2 extends Comando {
 	private String categorieList() {
 		int i=1;
 		String str = "";
-		str += "\n Elenco delle categorie disponibili:\n";
+		str += "\nElenco delle categorie e operazioni disponibili:\n";
 		str += "--------------------------------\n";
 		for(String cat : categorie) {
 			str += "Codice: "+i +" Categoria: "+cat +"\n";

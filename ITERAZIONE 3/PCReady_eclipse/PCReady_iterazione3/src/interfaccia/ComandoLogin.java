@@ -17,9 +17,9 @@ public class ComandoLogin extends Comando {
 		String password;
 		String controllo;
 		boolean successo = false;
+		console.print("Benvenuto!\nEffettua il login: \n");
 		while(successo == false) {
-			console.print("Benvenuto!\nEffettua il login: \n\n");
-			console.print("1) Effettua l'accesso come Amministratore\n2) Effettua l'accesso come Utente\n3) Registrati\n");
+			console.print("\n1) Effettua l'accesso come Amministratore\n2) Effettua l'accesso come Utente\n3) Registrati\n");
 			int tipologia = console.getInt();
 			
 			switch(tipologia) {
@@ -32,37 +32,35 @@ public class ComandoLogin extends Comando {
 					if(controllo.equals("L'amministratore "+email+" ha effettuato il login")) {
 						console.setAmministratoreCorrente(console.getSistema().getAmministratore());
 						console.setAdmin(true);
-						console.print("L'amministratore ha effettuato l'accesso");
+						console.print("L'amministratore ha effettuato l'accesso\n");
 						successo = true;
 					}else {
 						console.print("L'amministratore non è registrato\n");
-						console.setErrore(true);
 					}
-					break;
+				break;
 			case 2:
-				console.print("1Email: \n");
+				console.print("Email: \n");
 				email = console.getString();
-				console.print("1Password: \n");
+				console.print("Password: \n");
 				password = console.getString();
 				controllo = console.getSistema().effettuaLogin("Cliente", email, password);
 				if(controllo.equals("Il cliente "+ email +" ha effettuato il login")) {
 					console.setClienteCorrente(console.getSistema().getCliente());
 					console.setAdmin(false);
-					console.print("L'utente ha effettuato l'accesso");
+					console.print("L'utente ha effettuato l'accesso \n");
 					successo = true;
 				}else {
-					console.print("L'utente non è registrato");
-					console.setErrore(true);
+					console.print("L'utente non è registrato \n");
 				}
 				break;
 			case 3:
-					Comando comandoRegistrazione = new ComandoRegistrazione();
+					ComandoRegistrazione comandoRegistrazione = new ComandoRegistrazione();
 					comandoRegistrazione.esegui(console);
-					successo = true;
+					successo = comandoRegistrazione.getRisultato();
 					break;
 			default:
-				console.print("Opzione non valida");
-		}
+				console.print("Opzione non valida \n");
+			}
 
 		}
 		

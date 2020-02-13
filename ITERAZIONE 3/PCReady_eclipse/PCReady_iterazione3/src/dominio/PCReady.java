@@ -126,7 +126,9 @@ public class PCReady {
     	boolean clienteAttuale = false;
     	
     	try {
-    		clienteAttuale = this.mappaClienti.containsKey(email);
+    		if (clienteAttuale = this.mappaClienti.containsKey(email)) {
+    			clienteAttuale = true;
+    		}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

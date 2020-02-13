@@ -171,6 +171,10 @@ public class AcquistoHandler {
 		this.ordineCorrente.rimuoviCopieOrdinate();
 	}
 	
+	public boolean isEmptyCarrello() {
+		return this.carrello.getMappaComponentiCarrello().isEmpty();
+	}
+	
 	
 	
 }

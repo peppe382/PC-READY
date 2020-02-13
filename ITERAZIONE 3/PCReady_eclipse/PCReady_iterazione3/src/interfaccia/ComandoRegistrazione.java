@@ -6,8 +6,11 @@ import dominio.Componente;
 import dominio.CopiaComponente;
 
 public class ComandoRegistrazione extends Comando {
+	
+	private boolean risultato;
 
 	public ComandoRegistrazione() {
+		this.risultato = false;
 	}
 
 	@Override
@@ -25,9 +28,24 @@ public class ComandoRegistrazione extends Comando {
 		console.print("Conferma la tua password: ");
 		String c_password = console.getString();
 		
-		console.getSistema().richiediRegistrazione(nome, cognome, email, password, c_password);
-		console.setClienteCorrente(console.getSistema().getCliente());
-		console.print("L'utente ha effettuato la registrazione ed ora è loggato\n");
+		String message = console.getSistema().richiediRegistrazione(nome, cognome, email, password, c_password);
+		if (message.equals("Email gia utilizzata") || message.equals("Le password non coincidono")) {
+			console.print(message);
+			setRisultato(false);
+		}
+		else {
+			console.setClienteCorrente(console.getSistema().getCliente());
+			console.print("L'utente ha effettuato la registrazione ed ora è loggato\n");
+			setRisultato(true);
+			console.setAdmin(false);
+		}
 	}
-
+	
+	public boolean getRisultato() {
+		return this.risultato;
+	}
+	
+	public void setRisultato(boolean value) {
+		this.risultato = value;
+	}
 }

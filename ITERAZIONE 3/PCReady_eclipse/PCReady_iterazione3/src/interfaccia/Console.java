@@ -34,6 +34,7 @@ public class Console {
 		
 		Comando comandoLogin = new ComandoLogin();
 		comandoLogin.esegui(this);
+		esegui();
 				
 	}
 	
@@ -47,17 +48,17 @@ public class Console {
 						ElencoComandi.getComandoAmministratore(codice).esegui(this);
 					}catch(Exception e) {
 						e.printStackTrace();
+						this.print("Codice inserito non valido!\n\n\n");
 					}
-					this.print("Codice inserito non valido!\n\n\n");
 					} else{
-						this.print(ElencoComandi.stringAmministratore());
+						this.print(ElencoComandi.stringCliente());
 						Integer codice = this.getInt();
 						try {
-							ElencoComandi.getComandoAmministratore(codice).esegui(this);
+							ElencoComandi.getComandoCliente(codice).esegui(this);
 						}catch(Exception e) {
 							e.printStackTrace();
+							this.print("Codice inserito non valido!\n\n\n");
 					}
-						this.print("Codice inserito non valido!\n\n\n");
 				}
 			}
 		}
@@ -129,10 +130,6 @@ public class Console {
 	/********** GETTERS & SETTERS + TO-STRING **********/
 	public PCReady getSistema() {
 		return sistema;
-	}
-	
-	public void setErrore(boolean errore) {
-		this.errore = errore;
 	}
 	
 	public void setAdmin(boolean admin) {
