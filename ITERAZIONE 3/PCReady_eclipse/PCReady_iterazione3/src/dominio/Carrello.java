@@ -2,6 +2,8 @@ package dominio;
 
 import java.util.*;
 
+import dominio.componenti.*;
+
 public class Carrello {
 	
 	private double prezzoTotale;
@@ -59,8 +61,20 @@ public class Carrello {
 		int doppioni = 0;
 		
 		for(Componente key : this.mappaComponentiCarrello.keySet()) {
-			if (key.getId() == comp.getId()) {
-				doppioni += this.mappaComponentiCarrello.get(key).size();
+			if (!key.getCategoria().equals("Configurazione")) {
+				if (key.getId() == comp.getId()) {
+					doppioni += this.mappaComponentiCarrello.get(key).size();
+				}
+			}
+			else {
+				//Se ho a che fare con una configurazione devo controllare la sua lista componenti
+				Configurazione confAttuale = (Configurazione)key;
+				for (Componente elemento : confAttuale.getListaComponenti()) {
+					if (elemento.getId() == comp.getId()) {
+						doppioni ++;
+						System.out.println("----------------"+doppioni);
+					}
+				}
 			}
 		}
 		
