@@ -42,12 +42,12 @@ class AcquistoHandlerTest {
 		System.out.println("---INSERIMENTO TEST---");
 		acquistoH.iniziaAcquisto();
 		acquistoH.selezionaCategoria("CPU");
-		System.out.print(acquistoH.selezionaProdotto(1));
-		System.out.print(acquistoH.aggiungiInCarrello());
+		acquistoH.selezionaProdotto(1);
+		acquistoH.aggiungiInCarrello();
 		
 		acquistoH.selezionaCategoria("CPU");  //Controllo funzione doppione
-		System.out.print(acquistoH.selezionaProdotto(1));
-		System.out.print(acquistoH.aggiungiInCarrello());
+		acquistoH.selezionaProdotto(1);
+		acquistoH.aggiungiInCarrello();
 		
 		acquistoH.selezionaCategoria("CPU");  //Controllo terza copia componente non presente
 		acquistoH.selezionaProdotto(1);
@@ -104,8 +104,17 @@ class AcquistoHandlerTest {
 		acquistoH.selezionaProdotto(1);
 		System.out.print(acquistoH.aggiungiInCarrello());
 		
+		int verifica = 0;
+		//Controllo che vi siano un totale di due prodotti, di cui uno sia una configurazione
+		for (Componente elemento  : acquistoH.getCarrello().getMappaComponentiCarrello().keySet()){
+			if (elemento.getCategoria().equals("CPU") || elemento.getCategoria().equals("Configurazione")){
+				verifica++;
+			}
+		}
 		
-		assertTrue(acquistoH.getCarrello().getMappaComponentiCarrello().get(acquistoH.getComponenteCorrente()).size() == 1);
+		assertTrue(verifica == 2);
+		
+		
 	}
 
 }

@@ -72,7 +72,6 @@ public class Carrello {
 				for (Componente elemento : confAttuale.getListaComponenti()) {
 					if (elemento.getId() == comp.getId()) {
 						doppioni ++;
-						System.out.println("----------------"+doppioni);
 					}
 				}
 			}
