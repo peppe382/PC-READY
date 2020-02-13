@@ -100,7 +100,12 @@ public class Carrello {
 			this.mappaComponentiCarrello.put(componente, listaCopie);
 		} else this.mappaComponentiCarrello.put(componente, listaAttuale);
 		
-		this.prezzoTotale += componente.getPrezzo();
+		if (componente.getCategoria().equals("Bundle")) {
+			Bundle bundle = (Bundle) componente;
+			double prezzoScontato = componente.getPrezzo()*(bundle.getSconto()*100);
+			this.prezzoTotale += prezzoScontato;
+		}
+		else this.prezzoTotale += componente.getPrezzo();
 		this.numeroPezzi += 1;
 		return this.prezzoTotale;
 	}

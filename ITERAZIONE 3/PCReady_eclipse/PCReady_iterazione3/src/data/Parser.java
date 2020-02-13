@@ -112,7 +112,7 @@ public class Parser {
 			Iterator<String> keys = jsonCatalogo.keys();
 			while(keys.hasNext()) {
 				String cat = keys.next();
-				if(cat=="Configurazione" || cat=="Bundle") continue;
+				if(cat.equals("Configurazione") || cat.equals("Bundle")) continue;
 				ArrayList<Componente> tempList = new ArrayList<Componente>();
 				JSONArray compList = jsonCatalogo.getJSONArray(cat);
 				for(int i = 0; i < compList.length(); i++) {
