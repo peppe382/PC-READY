@@ -132,7 +132,7 @@ public class Ordine {
 
 
 	//Funzioni di progetto
-	public String selezionaModalit‡DiPagamento(String metodoPagamento, int numeroCarta, int cvv){
+	public String selezionaModalitaDiPagamento(String metodoPagamento, int numeroCarta, int cvv){
 		
 		setMetodoPagamento(metodoPagamento);
 		setNumeroCarta(numeroCarta);

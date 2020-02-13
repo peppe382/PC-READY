@@ -160,7 +160,7 @@ public class AcquistoHandler {
 	
 	public String selezionaModalitaDiPagamento(String metodoPagamento, int numeroCarta, int cvv) {
 		String str = "";
-		str = this.ordineCorrente.selezionaModalit‡DiPagamento(metodoPagamento, numeroCarta, cvv);
+		str = this.ordineCorrente.selezionaModalitaDiPagamento(metodoPagamento, numeroCarta, cvv);
 		PCReady sistema = PCReady.getInstance();
 		sistema.salvaOrdine(this.ordineCorrente, this.clienteCorrente.getId());
 		return str;

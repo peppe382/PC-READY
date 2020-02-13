@@ -39,7 +39,6 @@ class AcquistoHandlerTest {
 	@org.junit.jupiter.api.Test
 	@DisplayName("Aggiungi al carrello test")
 	void aggiuntaTest(){
-		System.out.println("---INSERIMENTO TEST---");
 		acquistoH.iniziaAcquisto();
 		acquistoH.selezionaCategoria("CPU");
 		acquistoH.selezionaProdotto(1);
@@ -98,11 +97,11 @@ class AcquistoHandlerTest {
 		
 		acquistoH.selezionaCategoria("CPU");
 		acquistoH.selezionaProdotto(1);
-		System.out.print(acquistoH.aggiungiInCarrello());
+		acquistoH.aggiungiInCarrello();
 		
 		acquistoH.selezionaCategoria("CPU");
 		acquistoH.selezionaProdotto(1);
-		System.out.print(acquistoH.aggiungiInCarrello());
+		acquistoH.aggiungiInCarrello();
 		
 		int verifica = 0;
 		//Controllo che vi siano un totale di due prodotti, di cui uno sia una configurazione
@@ -114,7 +113,16 @@ class AcquistoHandlerTest {
 		
 		assertTrue(verifica == 2);
 		
+		System.out.println(acquistoH.getCarrello().getPrezzoTotale());
 		
 	}
+	
+	@org.junit.jupiter.api.Test
+	@DisplayName("Ordine test")
+	void ordineTest(){
+		acquistoH.terminaAcquisto("Via delle pere N4", "Ragusa", 97100);
+		acquistoH.selezionaModalitaDiPagamento("VISA", 2112435786, 456);
+	}
+	
 
 }
