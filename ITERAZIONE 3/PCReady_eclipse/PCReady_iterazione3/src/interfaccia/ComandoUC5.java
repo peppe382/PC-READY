@@ -34,7 +34,7 @@ public class ComandoUC5 extends Comando {
 	public void esegui(Console console) {
 		
 		//Genero l'handler per il caso d'uso, che a sua volta genera la configurazione.
-				console.getSistema().setHandlerConfigurazioni(console.getClienteCorrente());
+				console.getSistema().setHandlerAcquisto(console.getClienteCorrente());
 				this.handlerAcquisto = console.getSistema().getHandlerAcquisto();
 				//Genero una variabile per il loop
 				Boolean fine = true;
