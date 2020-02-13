@@ -2,6 +2,7 @@ package dominio;
 
 import java.util.*;
 
+import data.Parser;
 import handlers.*;
 
 public class PCReady {
@@ -28,10 +29,10 @@ public class PCReady {
      * usando la funzione "getIstance()"  **/
     
     protected PCReady() {
-    	this.mappaClienti = new HashMap<String, Cliente>();   //Gabriele prendila dal parser
-    	this.mappaAmministratori = new HashMap<String, Amministratore>(); //Gabriele prendila dal parser
-    	this.mappaOrdini = new HashMap<String, List<Ordine>>(); //Gabriele prendila dal parser
-        this.handlerComponenti = GestisciComponentiHandler.getInstance();
+    	this.handlerComponenti = GestisciComponentiHandler.getInstance();
+    	this.mappaClienti = Parser.caricaClienti();
+    	this.mappaAmministratori = Parser.caricaAdmin();
+    	this.mappaOrdini = Parser.caricaOrdini(this.mappaClienti, this.handlerComponenti.getCatalogo());
         this.handlerConfigurazioni = null;
         this.handlerAcquisto = null;
     }
@@ -50,6 +51,8 @@ public class PCReady {
      
     public void spegniSistema() {
         this.getHandlerComponenti().salvaCatalogo();
+        Parser.salvaUtenti(this.mappaClienti, this.mappaAmministratori);
+        Parser.salvaOrdini(this.mappaOrdini);
     }
 
     
