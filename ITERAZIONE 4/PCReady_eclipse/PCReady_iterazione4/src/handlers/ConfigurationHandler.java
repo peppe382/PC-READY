@@ -178,7 +178,6 @@ public class ConfigurationHandler {
 		String comunicazione = "";
 		if (this.conf.getListaComponenti().size() > 0) {
 			Componente componenteDaEliminare = this.catalogo.getComponente(idComponente);
-			System.out.println(componenteDaEliminare);
 			if (this.conf.getListaComponenti().contains(componenteDaEliminare)) {
 				if (this.conf.getListaComponenti().remove(componenteDaEliminare)) {
 					comunicazione = "Componente rimosso \n";

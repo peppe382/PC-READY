@@ -191,4 +191,16 @@ public class AcquistoHandler {
 		
 	}
 	
+	public String eliminaComponenteAcquisto(int idComponente) {
+		String comunicazione = "";
+		if (!this.carrello.getMappaComponentiCarrello().isEmpty()) {
+			Componente componenteDaEliminare = this.catalogo.getComponente(idComponente);
+			if (this.carrello.getMappaComponentiCarrello().containsKey(componenteDaEliminare)) {
+				this.carrello.getMappaComponenti().remove(componenteDaEliminare);
+				comunicazione = "Componente rimosso \n";
+			} else comunicazione = "Componente da rimuovere non contenuto nella lista \n";
+		} else comunicazione = "Carrello vuoto \n";
+		return comunicazione;
+	}
+	
 }
