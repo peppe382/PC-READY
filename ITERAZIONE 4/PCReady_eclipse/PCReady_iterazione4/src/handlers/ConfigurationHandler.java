@@ -173,4 +173,18 @@ public class ConfigurationHandler {
 		}
 	}
 	
+	
+	public String eliminaComponenteConfigurazione(int idComponente) {
+		String comunicazione = "";
+		if (this.conf.getListaComponenti().size() > 0) {
+			Componente componenteDaEliminare = this.catalogo.getComponente(idComponente);
+			if (this.conf.getListaComponenti().contains(componenteDaEliminare)) {
+				if (this.conf.getListaComponenti().remove(componenteDaEliminare)) {
+					comunicazione = "Componente rimosso";
+				} else comunicazione = "Errore di rimozione";
+			} else comunicazione = "Componente da rimuovere non contenuto nella lista";
+		} else comunicazione = "Lista componenti vuota";
+		return comunicazione;
+	}
+	
 }
