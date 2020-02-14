@@ -160,9 +160,6 @@ public class Ordine {
 		for (Componente key : this.mappaComponenti.keySet()) {
 			componenteLoop = key;
 			List<CopiaComponente> copieLoop = new ArrayList<CopiaComponente>(this.mappaComponenti.get(key));
-			for (CopiaComponente copia : copieLoop) {
-				System.out.println("SUCCCAAAA "+copia+"\n");
-			}
 			key.rimozioneCopie(copieLoop);
 		}
 

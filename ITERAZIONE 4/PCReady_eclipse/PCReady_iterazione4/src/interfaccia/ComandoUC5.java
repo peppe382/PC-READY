@@ -9,7 +9,7 @@ import handlers.*;
 
 public class ComandoUC5 extends Comando {
 	
-	private static final String[] categorie = {"CPU","PSU","GPU","Storage","RAM","Motherboard","Case","Annulla operazione"};
+	private static final String[] categorie = {"CPU","PSU","GPU","Storage","RAM","Motherboard","Case","Configurazioni","Bundle" ,"Annulla operazione"};
 	private static final String[] pagamenti = {"Mastercard","Visa","Prepagata generica", "Pay-Pal"};
 	private Map<Integer, String> mappaCorrispondenzaCategorie; 
 	private Map<Integer, String> mappaCorrispondenzaPagamenti; 
@@ -45,7 +45,7 @@ public class ComandoUC5 extends Comando {
 					console.print("Seleziona una categoria inserendo il suo codice intero: \n"); 
 					Integer selezione = console.getInt();
 					if (selezione != null) {
-						if (selezione != 8) {
+						if (selezione != 10) {
 							cat = this.mappaCorrispondenzaCategorie.get(selezione.intValue());
 							console.print("Seleziona una componente, tra quelle che vengono mostrate a video, inserendo il suo codice numerico:\n");
 							Map<Integer, Componente> mappaComponenti = this.handlerAcquisto.selezionaCategoria(cat);

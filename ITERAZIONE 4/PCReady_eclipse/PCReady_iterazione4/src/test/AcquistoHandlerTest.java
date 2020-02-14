@@ -89,10 +89,10 @@ class AcquistoHandlerTest {
 		handlerC.confermaComponente();
 		handlerC.terminaAssemblaggio();
 		handlerC.confermaConfigurazione();
-		handlerC.getConf().getId();
+		System.out.println(handlerC.getConf().getId());
 		
 		acquistoH.selezionaCategoria("Configurazione");
-		acquistoH.selezionaProdotto(2);
+		acquistoH.selezionaProdotto(3);
 		acquistoH.aggiungiInCarrello();
 		
 		acquistoH.selezionaCategoria("CPU");
