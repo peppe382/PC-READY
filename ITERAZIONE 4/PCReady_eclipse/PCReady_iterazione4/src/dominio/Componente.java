@@ -122,8 +122,9 @@ public class Componente {
 		return promozione;
 	}
 	
-	public void setPromozione(double promozione) {
+	public String impostaPromozione(double promozione) {
 		this.promozione = promozione;
+		return "PREZZO COMPONENTE CON PROMOZIONE APPLICATA: "+(getPrezzo()-((getPromozione()*getPrezzo())/100));
 	}
 	
 

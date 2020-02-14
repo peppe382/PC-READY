@@ -131,5 +131,17 @@ public class GestisciComponentiHandler {
 		return this.catalogo.getComponente(codice, categoria);
 	}
 	
+	public Componente selezionaComponente(int idComponente) {
+		this.componenteCorrente = this.catalogo.getComponente(idComponente);	
+		return this.componenteCorrente; 
+	}
+	
+	public boolean rimuoviComponente(int idComponente){
+		return this.catalogo.rimuoviDaMappa(idComponente); 
+	}
+	
+	public String setPromozione(double promozione) {
+		return this.componenteCorrente.impostaPromozione(promozione);
+	}
 	
 }
