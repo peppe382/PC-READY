@@ -175,7 +175,6 @@ public class Componente {
 	public void rimozioneCopie(List<CopiaComponente> listaCopie) {
 		for (CopiaComponente elemento : listaCopie) {
 			if (this.listaCopie.contains(elemento)) {
-				System.out.println("RIMUOVO: "+elemento);
 				this.listaCopie.remove(elemento);
 			}
 		}

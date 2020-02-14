@@ -180,10 +180,10 @@ public class ConfigurationHandler {
 			Componente componenteDaEliminare = this.catalogo.getComponente(idComponente);
 			if (this.conf.getListaComponenti().contains(componenteDaEliminare)) {
 				if (this.conf.getListaComponenti().remove(componenteDaEliminare)) {
-					comunicazione = "Componente rimosso";
-				} else comunicazione = "Errore di rimozione";
-			} else comunicazione = "Componente da rimuovere non contenuto nella lista";
-		} else comunicazione = "Lista componenti vuota";
+					comunicazione = "Componente rimosso \n";
+				} else comunicazione = "Errore di rimozione \n";
+			} else comunicazione = "Componente da rimuovere non contenuto nella lista \n";
+		} else comunicazione = "Lista componenti vuota \n";
 		return comunicazione;
 	}
 	

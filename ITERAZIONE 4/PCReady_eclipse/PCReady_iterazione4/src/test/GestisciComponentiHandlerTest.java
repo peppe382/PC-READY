@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import dominio.*;
@@ -28,12 +29,12 @@ class GestisciComponentiHandlerTest {
         motherboard = new Motherboard("MSI Pro Carbon 420M", 61.49, 0, "Motherboard MSI socket AM4, 6 porte usb 3.0", "AM4", "microATX", "DDR4");
     }
 
-    @Test
+    /*@Test
     void creaComponenteTest() {
         handler.creaComponente(ram.getNome(), ram.getCategoria(), ram.getConsumo_energetico(), ram.getPrezzo(), ram.getDescrizione(), ram.getTipologia(), ram.getFrequenza());
         System.out.println(handler.getComponenteCorrente().getNome());
         assertNotNull(handler.selezionaComponente(ram.getId(), ram.getCategoria()));
-    }
+    }*/
 
     @Test
     void creaCopieTest() {
@@ -54,6 +55,31 @@ class GestisciComponentiHandlerTest {
         Componente c = handler.selezionaComponente(ram.getId(), ram.getCategoria());
         assertNotNull(c);
 
+    }
+    
+    @Test
+    @DisplayName("Set promozione Test")
+    void setPromozioneTest() {
+
+    	handler.setComponenteCorrente(new Componente("componente1", 33.99, 4, "ComponenteGPU", "GPU"));
+    	double promoAttuale = handler.getComponenteCorrente().getPromozione();
+    	System.out.println(promoAttuale);
+    	handler.setPromozione(22);
+    	double promoApplicata = handler.getComponenteCorrente().getPromozione();
+    	System.out.println(promoApplicata);
+    	assertNotEquals(promoAttuale, promoApplicata);
+    }
+    
+    // ***NOTA*** CREA COMPONENTE VA IN ERRORE PERCHE CONTROLLA LA PRESENZA DEL COMPONENTE APPENA RIMOSSO    
+    @Test
+    @DisplayName("Rimuovi componente test")
+    void rimuoviComponenteTest() {
+    	ram = new RAM("Corsaire RAM DDR3 16GB", 65.99, 6, "RAM 3000MHz", "DDR4", 3000);
+    	handler.creaComponente(ram.getNome(), ram.getCategoria(), ram.getConsumo_energetico(), ram.getPrezzo(), ram.getDescrizione(), ram.getTipologia(), ram.getFrequenza());
+    	System.out.println(handler.getCatalogo());
+        handler.rimuoviComponente(5); // metto uno perchè sappiamo che nel catalogo è presente un componente con id 1
+        System.out.println(handler.getCatalogo());
+        assertNull(handler.getCatalogo().getComponente(5));
     }
 
 

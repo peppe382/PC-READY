@@ -2,6 +2,8 @@ package handlers;
 
 import java.util.*;
 
+import org.junit.jupiter.api.DisplayName;
+
 import dominio.*;
 import dominio.componenti.*;
 
@@ -174,12 +176,12 @@ public class AcquistoHandler {
 		return this.carrello.getMappaComponentiCarrello().isEmpty();
 	}
 	
-	public String ottieiOrdineCliente() {
+	public String ottieniOrdineCliente() {
 		PCReady pcReady = PCReady.getInstance();
 		List<Ordine> listaOrdini = pcReady.getListaOrdiniCliente(clienteCorrente.getEmail());
-		String riepilogoOrdineCliente = "Ordini dell'utente"+ clienteCorrente.getEmail() +": \n";
+		String riepilogoOrdineCliente = "Ordini dell'utente "+ clienteCorrente.getEmail() +": \n\n";
 		for(Ordine ordine : listaOrdini) {
-			 riepilogoOrdineCliente += ordine.getId()+") "+ ordine.toString();
+			 riepilogoOrdineCliente += ordine.toString();
 		}
 		return riepilogoOrdineCliente;
 	}
@@ -189,6 +191,18 @@ public class AcquistoHandler {
 		PCReady pcReady = PCReady.getInstance();
 		return pcReady.modificaOrdine(id, indirizzo, citta, CAP, clienteCorrente.getEmail());
 		
+	}
+	
+	public String eliminaComponenteAcquisto(int idComponente) {
+		String comunicazione = "";
+		if (!this.carrello.getMappaComponentiCarrello().isEmpty()) {
+			Componente componenteDaEliminare = this.catalogo.getComponente(idComponente);
+			if (this.carrello.getMappaComponentiCarrello().containsKey(componenteDaEliminare)) {
+				this.carrello.getMappaComponenti().remove(componenteDaEliminare);
+				comunicazione = "Componente rimosso \n";
+			} else comunicazione = "Componente da rimuovere non contenuto nella lista \n";
+		} else comunicazione = "Carrello vuoto \n";
+		return comunicazione;
 	}
 	
 }

@@ -218,7 +218,7 @@ public class PCReady {
 	
 	public String modificaOrdine(int id, String indirizzo, String citta, int CAP, String email) {
 		
-		List<Ordine> listaOrdini = getListaOrdiniCliente(clienteCorrente.getEmail());
+		List<Ordine> listaOrdini = getListaOrdiniCliente(email);
 		Ordine ordineCorrente = null;
 		
 		for(Ordine ordine : listaOrdini) {
