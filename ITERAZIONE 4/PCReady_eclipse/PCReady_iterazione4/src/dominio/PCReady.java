@@ -210,6 +210,44 @@ public class PCReady {
 		}
 		else this.mappaOrdini.put(emailCliente, nuovaLista);
 	}
+	
+	public List<Ordine> getListaOrdiniCliente(String emailCliente){
+		List<Ordine> listaOrdini = mappaOrdini.get(emailCliente);
+		return listaOrdini;
+	}
+	
+	
+	public String modificaOrdine() {
+		List<Ordine> listaOrdini = getListaOrdiniCliente(clienteCorrente.getEmail());
+		String riepilogoOrdineCliente = "Ordini dell'utente"+ clienteCorrente.getEmail() +": \n";
+		for(Ordine ordine : listaOrdini) {
+			 riepilogoOrdineCliente += ordine.getId()+") "+ ordine.toString();
+		}
+		return riepilogoOrdineCliente;
+	}
+	
+	public String aggiornaInformazioni(int id, String indirizzo, String citta, int CAP) {
+		
+		List<Ordine> listaOrdini = getListaOrdiniCliente(clienteCorrente.getEmail());
+		Ordine ordineCorrente = null;
+		
+		for(Ordine ordine : listaOrdini) {
+			if(ordine.getId() == id) {
+				ordineCorrente = ordine;
+			} else {
+				return "Non sono stati trovati ordini corrispondenti al codice indicato";
+			}
+			ordineCorrente.aggiornaAttributiSpedizione(indirizzo, citta, CAP);
+			
+			listaOrdini.add(ordineCorrente);
+			mappaOrdini.put(clienteCorrente.getEmail(), listaOrdini);
+		}
+		
+		return ordineCorrente.toString();
+	}
+	
+	
+	
 }
     
 

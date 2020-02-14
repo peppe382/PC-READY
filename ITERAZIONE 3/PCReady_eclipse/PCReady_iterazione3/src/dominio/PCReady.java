@@ -211,17 +211,6 @@ public class PCReady {
 		else this.mappaOrdini.put(emailCliente, nuovaLista);
 	}
 	
-	public List<Ordine> getListaOrdiniCliente(String emailCliente){
-		List<Ordine> listaOrdini = mappaOrdini.get(emailCliente);
-		return listaOrdini;
-	}
-	
-	public String modificaOrdine(String emailCliente) {
-
-		
-	}
-	
-	
 	
 }
     
