@@ -2,6 +2,8 @@ package handlers;
 
 import java.util.*;
 
+import org.junit.jupiter.api.DisplayName;
+
 import dominio.*;
 import dominio.componenti.*;
 
@@ -174,12 +176,12 @@ public class AcquistoHandler {
 		return this.carrello.getMappaComponentiCarrello().isEmpty();
 	}
 	
-	public String ottieiOrdineCliente() {
+	public String ottieniOrdineCliente() {
 		PCReady pcReady = PCReady.getInstance();
 		List<Ordine> listaOrdini = pcReady.getListaOrdiniCliente(clienteCorrente.getEmail());
-		String riepilogoOrdineCliente = "Ordini dell'utente"+ clienteCorrente.getEmail() +": \n";
+		String riepilogoOrdineCliente = "Ordini dell'utente "+ clienteCorrente.getEmail() +": \n\n";
 		for(Ordine ordine : listaOrdini) {
-			 riepilogoOrdineCliente += ordine.getId()+") "+ ordine.toString();
+			 riepilogoOrdineCliente += ordine.toString();
 		}
 		return riepilogoOrdineCliente;
 	}

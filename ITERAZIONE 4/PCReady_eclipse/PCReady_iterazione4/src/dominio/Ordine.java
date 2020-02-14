@@ -147,7 +147,7 @@ public class Ordine {
 		setNumeroCarta(numeroCarta);
 		setCvv(cvv);
 		
-		String infoOrdine = "---Riepilogo ordine--- \n"+ id+"\n Nome cliente: "+cliente.getNome() +"\n Cognome cliente: "+ cliente.getCognome() +"\n Indirizzo: "+indirizzo+"\n Citt�: "+citta+"\n CAP: "+CAP+"\n ---Riepilogo delle componenti--- \n";
+		String infoOrdine = "---Riepilogo ordine--- \nId ordine: "+ id+"\n Nome cliente: "+cliente.getNome() +"\n Cognome cliente: "+ cliente.getCognome() +"\n Indirizzo: "+indirizzo+"\n Citta: "+citta+"\n CAP: "+CAP+"\n ---Riepilogo delle componenti--- \n";
 		for(Componente key : mappaComponenti.keySet()) {
 			infoOrdine += key.toString() + "\n COPIE SELEZIONATE: "+mappaComponenti.get(key).toString();
 		}
@@ -164,6 +164,15 @@ public class Ordine {
 		}
 
 	}
+	
+	public String toString() {
+		String infoOrdine = "---Riepilogo ordine--- \n Id ordine: "+ id+"\n Nome cliente: "+cliente.getNome() +"\n Cognome cliente: "+ cliente.getCognome() +"\n Indirizzo: "+indirizzo+"\n Citta: "+citta+"\n CAP: "+CAP+"\n ---Riepilogo delle componenti--- \n";
+		for(Componente key : mappaComponenti.keySet()) {
+			infoOrdine += key.toString() + "\n COPIE SELEZIONATE: "+ mappaComponenti.get(key).toString();
+		}
+		return infoOrdine;
+		}
+
 	
 	public void aggiornaAttributiSpedizione(String indirizzo, String citta, int CAP) {
 

@@ -9,7 +9,7 @@ import handlers.*;
 
 public class ComandoUC5 extends Comando {
 	
-	private static final String[] categorie = {"CPU","PSU","GPU","Storage","RAM","Motherboard","Case","Configurazioni","Bundle" ,"Annulla operazione"};
+	private static final String[] categorie = {"CPU","PSU","GPU","Storage","RAM","Motherboard","Case","Configurazione","Bundle" ,"Annulla operazione"};
 	private static final String[] pagamenti = {"Mastercard","Visa","Prepagata generica", "Pay-Pal"};
 	private Map<Integer, String> mappaCorrispondenzaCategorie; 
 	private Map<Integer, String> mappaCorrispondenzaPagamenti; 
