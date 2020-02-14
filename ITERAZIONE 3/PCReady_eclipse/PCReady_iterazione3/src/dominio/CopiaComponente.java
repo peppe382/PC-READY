@@ -29,7 +29,7 @@ public class CopiaComponente {
 
 	@Override
 	public String toString() {
-		return "CODICE COPIA: " +getCodice();
+		return "CODICE COPIA: " +getCodice()+"\n";
 	}
 	
 	

@@ -19,7 +19,7 @@ public class PCReady {
     private GestisciComponentiHandler handlerComponenti;
     private AcquistoHandler handlerAcquisto;
 	private Cliente clienteCorrente;
-    private Map<String, List<Ordine>> mappaOrdini;
+    private Map<String, List<Ordine>> mappaOrdini; //String è l'email di un utente
 
     
     
@@ -126,7 +126,9 @@ public class PCReady {
     	boolean clienteAttuale = false;
     	
     	try {
-    		clienteAttuale = this.mappaClienti.containsKey(email);
+    		if (clienteAttuale = this.mappaClienti.containsKey(email)) {
+    			clienteAttuale = true;
+    		}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -208,6 +210,8 @@ public class PCReady {
 		}
 		else this.mappaOrdini.put(emailCliente, nuovaLista);
 	}
+	
+	
 }
     
 

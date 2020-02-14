@@ -168,4 +168,13 @@ public class Ordine {
 
 	}
 	
+	public void aggiornaAttributiSpedizione(String indirizzo, String citta, int CAP) {
+
+		this.indirizzo = indirizzo;
+		this.citta = citta;
+		this.CAP = CAP;
+		
+	}
+	
+	
 }
