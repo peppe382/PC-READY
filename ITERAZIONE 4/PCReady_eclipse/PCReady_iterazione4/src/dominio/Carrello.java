@@ -102,10 +102,19 @@ public class Carrello {
 		
 		if (componente.getCategoria().equals("Bundle")) {
 			Bundle bundle = (Bundle) componente;
-			double prezzoScontato = componente.getPrezzo()*(bundle.getSconto()*100);
-			this.prezzoTotale += prezzoScontato;
+			if (bundle.getPromozione() != 0) {
+				double prezzoBundle = componente.getPrezzo()-((bundle.getSconto()*componente.getPrezzo())/100);
+				if(bundle.getSconto() != 0) {
+					double prezzoScontato = prezzoBundle-((bundle.getPromozione()*prezzoBundle)/100);
+					this.prezzoTotale += prezzoScontato;
+				}else this.prezzoTotale += prezzoBundle;
+			}
 		}
-		else this.prezzoTotale += componente.getPrezzo();
+		else {
+			if (componente.getPromozione() != 0) {
+				this.prezzoTotale += componente.getPrezzo()-((componente.getPromozione()*componente.getPrezzo())/100);
+			}else this.prezzoTotale += componente.getPrezzo();
+		} 
 		this.numeroPezzi += 1;
 		return this.prezzoTotale;
 	}

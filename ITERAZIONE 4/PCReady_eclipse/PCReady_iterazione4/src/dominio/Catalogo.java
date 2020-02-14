@@ -111,6 +111,27 @@ public class Catalogo {
 		}
 		return null;
 	}
+	
+	
+	public boolean rimuoviDaMappa(int id) {
+		try {
+			for(String key : this.mappaComponenti.keySet()) {
+				ArrayList<Componente> tempList = this.mappaComponenti.get(key);
+				for(Componente c : tempList) {
+					if(c.getId() == id) {
+						tempList.remove(c);
+						this.mappaComponenti.put(key, tempList);
+						return true;
+					}
+				}
+			}
+			return false;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 
 	@Override
 	public String toString() {
