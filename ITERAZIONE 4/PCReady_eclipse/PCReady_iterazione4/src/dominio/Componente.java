@@ -14,6 +14,7 @@ public class Componente {
 	private int consumo_energetico; // Consumo in Watt
 	private String descrizione; // Descrizione completa
 	private static final AtomicLong counter = new AtomicLong(0);
+	private double promozione;
 	
 	private List<CopiaComponente> listaCopie; // Elenco di tutte le copie disponibili del componente
 	
@@ -29,6 +30,7 @@ public class Componente {
 		this.setDescrizione(descrizione);
 		this.setCategoria(categoria);
 		this.setListaCopie(new LinkedList<CopiaComponente>());
+		this.promozione = 0.00;
 	}
 	
 	public Componente(int id, String nome, double prezzo, int consumo_energetico, String descrizione, String categoria) {
@@ -39,6 +41,7 @@ public class Componente {
 		this.setDescrizione(descrizione);
 		this.setCategoria(categoria);
 		this.setListaCopie(new LinkedList<CopiaComponente>());
+		this.promozione = 0.00;
 	}
 	
 	public Componente() {  //Valori di default
@@ -48,6 +51,7 @@ public class Componente {
 		this.consumo_energetico = 0;
 		this.descrizione = "default";
 		this.setListaCopie(new LinkedList<CopiaComponente>());
+		this.promozione = 0.00;
 	}
 
 
@@ -114,14 +118,24 @@ public class Componente {
 		this.categoria = categoria;
 	}
 	
+	public double getPromozione() {
+		return promozione;
+	}
+	
+	public void setPromozione(double promozione) {
+		this.promozione = promozione;
+	}
+	
+
 	//  toString
 	public String toString() {
 		String str = "";
 		str += "#"+this.getId()+" : "+this.getNome()+"\n";
 		str += "CATEGORIA: "+this.getCategoria()+"\n";
 		str += "EUR "+this.getPrezzo()+", consumo: "+this.getConsumo_energetico()+"W\n";
-		str += "DESC: "+this.getDescrizione()+"\n\n";
-		str += "Copie disponibili: "+this.getListaCopie().size();
+		str += "DESC: "+this.getDescrizione()+"\n";
+		str += "Copie disponibili: "+this.getListaCopie().size()+"\n";
+		str += "TASSO DI PROMOZIONE: "+this.getListaCopie().size()+"\n";
 		return str;
 	}
 	
