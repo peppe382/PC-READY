@@ -135,7 +135,7 @@ public class Componente {
 		str += "EUR "+this.getPrezzo()+", consumo: "+this.getConsumo_energetico()+"W\n";
 		str += "DESC: "+this.getDescrizione()+"\n";
 		str += "Copie disponibili: "+this.getListaCopie().size()+"\n";
-		str += "TASSO DI PROMOZIONE: "+this.getListaCopie().size()+"\n";
+		str += "TASSO DI PROMOZIONE: "+this.getPromozione()+"\n";
 		return str;
 	}
 	
