@@ -216,31 +216,22 @@ public class PCReady {
 		return listaOrdini;
 	}
 	
-	
-	public String modificaOrdine() {
-		List<Ordine> listaOrdini = getListaOrdiniCliente(clienteCorrente.getEmail());
-		String riepilogoOrdineCliente = "Ordini dell'utente"+ clienteCorrente.getEmail() +": \n";
-		for(Ordine ordine : listaOrdini) {
-			 riepilogoOrdineCliente += ordine.getId()+") "+ ordine.toString();
-		}
-		return riepilogoOrdineCliente;
-	}
-	
-	public String aggiornaInformazioni(int id, String indirizzo, String citta, int CAP) {
+	public String modificaOrdine(int id, String indirizzo, String citta, int CAP, String email) {
 		
 		List<Ordine> listaOrdini = getListaOrdiniCliente(clienteCorrente.getEmail());
 		Ordine ordineCorrente = null;
 		
 		for(Ordine ordine : listaOrdini) {
-			if(ordine.getId() == id) {
+			if(ordine.getId() == id){
 				ordineCorrente = ordine;
+				listaOrdini.remove(ordine);
 			} else {
 				return "Non sono stati trovati ordini corrispondenti al codice indicato";
 			}
 			ordineCorrente.aggiornaAttributiSpedizione(indirizzo, citta, CAP);
 			
 			listaOrdini.add(ordineCorrente);
-			mappaOrdini.put(clienteCorrente.getEmail(), listaOrdini);
+			mappaOrdini.put(email, listaOrdini);
 		}
 		
 		return ordineCorrente.toString();

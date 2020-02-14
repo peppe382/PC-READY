@@ -14,7 +14,6 @@ public class AcquistoHandler {
 	private Ordine ordineCorrente;
 	private Componente componenteCorrente;
 	private Map<Integer, Componente> mappaCorrente;
-
 	
 	//Costruttori
 	public AcquistoHandler(Catalogo catalogo, Cliente cliente) {
@@ -175,6 +174,21 @@ public class AcquistoHandler {
 		return this.carrello.getMappaComponentiCarrello().isEmpty();
 	}
 	
+	public String ottieiOrdineCliente() {
+		PCReady pcReady = PCReady.getInstance();
+		List<Ordine> listaOrdini = pcReady.getListaOrdiniCliente(clienteCorrente.getEmail());
+		String riepilogoOrdineCliente = "Ordini dell'utente"+ clienteCorrente.getEmail() +": \n";
+		for(Ordine ordine : listaOrdini) {
+			 riepilogoOrdineCliente += ordine.getId()+") "+ ordine.toString();
+		}
+		return riepilogoOrdineCliente;
+	}
 	
+	public String aggiornaInformazioni(int id, String indirizzo, String citta, int CAP) {
+		
+		PCReady pcReady = PCReady.getInstance();
+		return pcReady.modificaOrdine(id, indirizzo, citta, CAP, clienteCorrente.getEmail());
+		
+	}
 	
 }
