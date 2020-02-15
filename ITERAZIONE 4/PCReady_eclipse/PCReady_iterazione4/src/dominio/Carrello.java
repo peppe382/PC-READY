@@ -82,41 +82,39 @@ public class Carrello {
 	
 	
 	public double aggiungiComponente(Componente componente, List<CopiaComponente> listaCopie) {
-		List<CopiaComponente> listaAttuale = new ArrayList<CopiaComponente>();
+		List<CopiaComponente> listaAttuale;
 		try {
-			if (this.mappaComponentiCarrello.containsKey(componente)) {
-				for (CopiaComponente elemento : this.mappaComponentiCarrello.get(componente)){
-					listaAttuale.add(elemento);
-				}
-				for (CopiaComponente elemento : listaCopie) {
-					listaAttuale.add(elemento);
+			
+			if (this.mappaComponentiCarrello.containsKey(componente)) listaAttuale = new ArrayList<CopiaComponente>(this.mappaComponentiCarrello.get(componente));
+			else listaAttuale = new ArrayList<CopiaComponente>();
+			
+			listaAttuale.addAll(listaCopie);
+			
+			this.mappaComponentiCarrello.put(componente, listaAttuale);
+			
+			if (componente.getCategoria().equals("Bundle")) {
+				Bundle bundle = (Bundle) componente;
+				if (bundle.getPromozione() != 0) {
+					double prezzoBundle = componente.getPrezzo()-((bundle.getSconto()*componente.getPrezzo())/100);
+					if(bundle.getSconto() != 0) {
+						double prezzoScontato = prezzoBundle-((bundle.getPromozione()*prezzoBundle)/100);
+						this.prezzoTotale += prezzoScontato;
+					}else this.prezzoTotale += prezzoBundle;
 				}
 			}
+			else {
+				if (componente.getPromozione() != 0) {
+					this.prezzoTotale += componente.getPrezzo()-((componente.getPromozione()*componente.getPrezzo())/100);
+				}else this.prezzoTotale += componente.getPrezzo();
+			} 
+			this.numeroPezzi += 1;
+			return this.prezzoTotale;
 		}
 		catch(Exception e) {
 			e.printStackTrace();
+			return -1;
 		}
-		if (listaAttuale.size() == 0) { //Ovvero se non é presente almeno un elemento di quel tipo
-			this.mappaComponentiCarrello.put(componente, listaCopie);
-		} else this.mappaComponentiCarrello.put(componente, listaAttuale);
 		
-		if (componente.getCategoria().equals("Bundle")) {
-			Bundle bundle = (Bundle) componente;
-			if (bundle.getPromozione() != 0) {
-				double prezzoBundle = componente.getPrezzo()-((bundle.getSconto()*componente.getPrezzo())/100);
-				if(bundle.getSconto() != 0) {
-					double prezzoScontato = prezzoBundle-((bundle.getPromozione()*prezzoBundle)/100);
-					this.prezzoTotale += prezzoScontato;
-				}else this.prezzoTotale += prezzoBundle;
-			}
-		}
-		else {
-			if (componente.getPromozione() != 0) {
-				this.prezzoTotale += componente.getPrezzo()-((componente.getPromozione()*componente.getPrezzo())/100);
-			}else this.prezzoTotale += componente.getPrezzo();
-		} 
-		this.numeroPezzi += 1;
-		return this.prezzoTotale;
 	}
 	
 	

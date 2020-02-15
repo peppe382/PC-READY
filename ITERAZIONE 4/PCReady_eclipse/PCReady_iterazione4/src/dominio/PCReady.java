@@ -193,22 +193,20 @@ public class PCReady {
 	public void salvaOrdine(Ordine ordine, String emailCliente) {
 		boolean clienteInMappaOrdini = false;
 		try {
-			 if (this.mappaOrdini.containsKey(emailCliente)) {
-				 clienteInMappaOrdini = true;
-			 }
+			clienteInMappaOrdini = this.mappaOrdini.containsKey(emailCliente);
+			List<Ordine> nuovaLista;
+			
+			if (clienteInMappaOrdini) nuovaLista = new ArrayList<Ordine>(this.mappaOrdini.get(emailCliente));
+			else nuovaLista = new ArrayList<Ordine>();
+			
+			nuovaLista.add(ordine);
+			
+			this.mappaOrdini.put(emailCliente, nuovaLista);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		List<Ordine> nuovaLista = new ArrayList<Ordine>();
-		nuovaLista.add(ordine);
-		if (clienteInMappaOrdini) {
-			for (Ordine elemento : this.mappaOrdini.get(emailCliente)) {
-				nuovaLista.add(elemento);
-			}
-			this.mappaOrdini.put(emailCliente, nuovaLista);
-		}
-		else this.mappaOrdini.put(emailCliente, nuovaLista);
+		
 	}
 	
 	public List<Ordine> getListaOrdiniCliente(String emailCliente){

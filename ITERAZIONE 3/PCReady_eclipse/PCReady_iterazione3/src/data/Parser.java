@@ -42,7 +42,7 @@ public class Parser {
 			}
 			jsonString.put(categoria, tempArray);
 		}
-		Parser.writeToFile(Parser.file_catalogo, jsonString.toString());
+		Parser.writeToFile(Parser.file_catalogo, jsonString.toString(4));
 	}
 	
 	// - - - - - - - - - - - - - - - - - -
@@ -85,7 +85,7 @@ public class Parser {
 		}
 		core.put("Amministratori", arAdmin);
 		
-		Parser.writeToFile(Parser.file_utenti, core.toString());
+		Parser.writeToFile(Parser.file_utenti, core.toString(4));
 	}
 	
 	// - - - - - - - - - - - - - - - - - -
@@ -118,7 +118,7 @@ public class Parser {
 			}
 		}
 		
-		Parser.writeToFile(Parser.file_ordini, array.toString());
+		Parser.writeToFile(Parser.file_ordini, array.toString(4));
 	}
 	
 	// -------------------------------------------------------------------

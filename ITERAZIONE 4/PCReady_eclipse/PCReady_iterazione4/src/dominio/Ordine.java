@@ -156,9 +156,7 @@ public class Ordine {
 	
 	
 	public void rimuoviCopieOrdinate() {
-		Componente componenteLoop = null;
 		for (Componente key : this.mappaComponenti.keySet()) {
-			componenteLoop = key;
 			List<CopiaComponente> copieLoop = new ArrayList<CopiaComponente>(this.mappaComponenti.get(key));
 			key.rimozioneCopie(copieLoop);
 		}
