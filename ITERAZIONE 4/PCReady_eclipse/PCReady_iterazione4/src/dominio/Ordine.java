@@ -144,10 +144,13 @@ public class Ordine {
 	public String selezionaModalitaDiPagamento(String metodoPagamento, int numeroCarta, int cvv){
 		
 		setMetodoPagamento(metodoPagamento);
+		System.out.println("SALVO: "+metodoPagamento);
 		setNumeroCarta(numeroCarta);
 		setCvv(cvv);
 		
-		String infoOrdine = "---Riepilogo ordine--- \nId ordine: "+ id+"\n Nome cliente: "+cliente.getNome() +"\n Cognome cliente: "+ cliente.getCognome() +"\n Indirizzo: "+indirizzo+"\n Citta: "+citta+"\n CAP: "+CAP+"\n ---Riepilogo delle componenti--- \n";
+		String infoOrdine = "---Riepilogo ordine--- \nId ordine: "+ id+"\n Nome cliente: "+cliente.getNome()
+		+"\n Cognome cliente: "+ cliente.getCognome() +"\n Indirizzo: "+indirizzo+"\n Citta: "+citta+
+		"\n CAP: "+CAP+"\n Metodo di pagamento:"+ metodoPagamento+"\n ---Riepilogo delle componenti--- \n";
 		for(Componente key : mappaComponenti.keySet()) {
 			infoOrdine += key.toString() + "\n COPIE SELEZIONATE: "+mappaComponenti.get(key).toString();
 		}
@@ -166,7 +169,7 @@ public class Ordine {
 	}
 	
 	public String toString() {
-		String infoOrdine = "---Riepilogo ordine--- \n Id ordine: "+ id+"\n Nome cliente: "+cliente.getNome() +"\n Cognome cliente: "+ cliente.getCognome() +"\n Indirizzo: "+indirizzo+"\n Citta: "+citta+"\n CAP: "+CAP+"\n ---Riepilogo delle componenti--- \n";
+		String infoOrdine = "---Riepilogo ordine--- \n Id ordine: "+ id+"\n Nome cliente: "+cliente.getNome() +"\n Cognome cliente: "+ cliente.getCognome() +"\n Indirizzo: "+indirizzo+"\n Citta: "+citta+"\n CAP: "+CAP+"\n Metodo di pagamento: "+metodoPagamento+ "\n---Riepilogo delle componenti--- \n";
 		for(Componente key : mappaComponenti.keySet()) {
 			infoOrdine += key.toString() + "\n COPIE SELEZIONATE: "+ mappaComponenti.get(key).toString();
 		}
