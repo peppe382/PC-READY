@@ -212,8 +212,14 @@ public class PCReady {
 	}
 	
 	public List<Ordine> getListaOrdiniCliente(String emailCliente){
-		List<Ordine> listaOrdini = mappaOrdini.get(emailCliente);
-		return listaOrdini;
+		if (this.mappaOrdini.containsKey(emailCliente)) {
+			List<Ordine> listaOrdini = mappaOrdini.get(emailCliente);
+			return listaOrdini;
+		 }
+		else {
+			List<Ordine> listaOrdini = new ArrayList<Ordine>();
+			return listaOrdini;
+		}
 	}
 	
 	public String modificaOrdine(int id, String indirizzo, String citta, int CAP, String email) {
