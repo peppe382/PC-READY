@@ -4,14 +4,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
 
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.MethodSorters;
 
 import dominio.*;
 import dominio.componenti.*;
 import handlers.ConfigurationHandler;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class CompatibilityCheckerTest {
 
 	private static Catalogo catalogo;
@@ -48,8 +51,8 @@ class CompatibilityCheckerTest {
 	
 	
 	@org.junit.jupiter.api.Test
-	@DisplayName("CPU INCOMPATIBILE TEST")
-	void testCPU() {
+	@DisplayName("CPU Incompatibile Test")
+	void testA() {
 		handler.selezionaCategoria("Motherboard");
 		handler.selezionaComponente(6);
 		handler.confermaComponente();
@@ -70,8 +73,8 @@ class CompatibilityCheckerTest {
 	}
 	
 	@org.junit.jupiter.api.Test
-	@DisplayName("MOTHERBOARD INCOMPATIBILE TEST")
-	void testMotherboard() {
+	@DisplayName("MOTHERBOARD Incompatibile Test")
+	void testB() {
 		handler.selezionaCategoria("Motherboard");
 		handler.getConf().rimuoviComponenteInConfigurazione(handler.selezionaComponente(6));
 		
@@ -85,14 +88,14 @@ class CompatibilityCheckerTest {
 		Componente componente = handler.selezionaComponente(6);
 		handler.confermaComponente();
 		
-		Componente componenteConfronto = handler.getConf().getListaComponenti().get(3);
+		Componente componenteConfronto = handler.getConf().getListaComponenti().get(1);
 		
 		assertEquals(componente, componenteConfronto);
 	}
 	
 	@org.junit.jupiter.api.Test
-	@DisplayName("GPU INCOMPATIBILE TEST")
-	void testGPU(){
+	@DisplayName("Gpu Incompatibile Test")
+	void testC(){
 		
 		handler.selezionaCategoria("Case");
 		handler.selezionaComponente(4);
