@@ -226,7 +226,7 @@ public class PCReady {
 				ordineCorrente = ordine;
 				listaOrdini.remove(ordine);
 			} else {
-				return "Non sono stati trovati ordini corrispondenti al codice indicato";
+				return "Non sono stati trovati ordini corrispondenti al codice indicato \n";
 			}
 			ordineCorrente.aggiornaAttributiSpedizione(indirizzo, citta, CAP);
 			

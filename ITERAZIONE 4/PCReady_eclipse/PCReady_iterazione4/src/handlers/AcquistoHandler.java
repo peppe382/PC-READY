@@ -182,6 +182,7 @@ public class AcquistoHandler {
 		String riepilogoOrdineCliente = "Ordini dell'utente "+ clienteCorrente.getEmail() +": \n\n";
 		for(Ordine ordine : listaOrdini) {
 			 riepilogoOrdineCliente += ordine.toString();
+			 riepilogoOrdineCliente += "\n";
 		}
 		return riepilogoOrdineCliente;
 	}

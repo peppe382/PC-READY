@@ -141,7 +141,6 @@ public class GestisciComponentiHandler {
 	}
 	
 	public String setPromozione(double promozione) {
-		System.out.println("SCONTO!!!: "+promozione);
 		return this.componenteCorrente.impostaPromozione(promozione);
 	}
 	
