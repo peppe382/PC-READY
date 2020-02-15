@@ -54,10 +54,11 @@ public class ComandoUC2 extends Comando {
 							console.print("\n\n ECCO I DETTAGLI DEL COMPONENTE SELEZIONATO"+componenteAttuale.toString());
 							console.print("\n Ti soddisfa il componente selezionato? Inserisci Si o No \n");
 							if (console.getYesNo() == true) {
-								console.print(this.handlerConfigurazione.confermaComponente());
-								/*Vengono mostrati a video eventuali messaggi di incompatibilit� previsti
-								 dalla clase Configuration Handler...
-								 */
+								String messaggioH = this.handlerConfigurazione.confermaComponente();
+								if (messaggioH != null) {
+									console.print(messaggioH);
+								}
+								else console.print("Errore di inserimento \n");
 							}else console.print("Non inserisco il componente...");
 							
 							console.print("Desideri continuare con l'inserimento componenti? \n");
