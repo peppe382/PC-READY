@@ -137,7 +137,10 @@ public class GestisciComponentiHandler {
 	}
 	
 	public boolean rimuoviComponente(int idComponente){
-		return this.catalogo.rimuoviDaMappa(idComponente); 
+		if (this.catalogo.rimuoviDaMappa(idComponente)){
+			this.catalogo.rimuoviConfigurazioni(idComponente);
+			return true;
+		}else return false; 
 	}
 	
 	public String setPromozione(double promozione) {
