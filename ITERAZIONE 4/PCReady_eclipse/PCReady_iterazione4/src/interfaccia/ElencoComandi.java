@@ -9,8 +9,8 @@ package interfaccia;
  */
 
 public final class ElencoComandi {
-	public static final Comando[] elencoCliente = {new ComandoUC1(), new ComandoUC5() ,new ComandoSpegniConsole()};
-	public static final Comando[] elencoAmministratore = {new ComandoUC2(), new ComandoUC3(), new ComandoUC4(), new ComandoUC8() ,new ComandoSpegniConsole()};
+	public static final Comando[] elencoCliente = {new ComandoUC1(), new ComandoUC5(), new ComandoUC10() ,new ComandoSpegniConsole()};
+	public static final Comando[] elencoAmministratore = {new ComandoUC2(), new ComandoUC3(), new ComandoUC4(), new ComandoUC8(), new ComandoUC9(), new ComandoSpegniConsole()};
 	
 	public static Comando getComandoCliente(int codice) {
 		for(Comando cmd : ElencoComandi.elencoCliente) if(cmd.getCodiceComando() == codice) return cmd;

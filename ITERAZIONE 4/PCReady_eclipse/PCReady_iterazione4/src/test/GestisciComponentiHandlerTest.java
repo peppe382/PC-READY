@@ -2,17 +2,17 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.Map;
-
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.MethodSorters;
 
 import dominio.*;
 import dominio.componenti.*;
 import handlers.GestisciComponentiHandler;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class GestisciComponentiHandlerTest {
     private static GestisciComponentiHandler handler;
     private static Componente componenteCorrente;
@@ -29,15 +29,18 @@ class GestisciComponentiHandlerTest {
         motherboard = new Motherboard("MSI Pro Carbon 420M", 61.49, 0, "Motherboard MSI socket AM4, 6 porte usb 3.0", "AM4", "microATX", "DDR4");
     }
 
-    /*@Test
-    void creaComponenteTest() {
+    
+    @Test
+    @DisplayName("Crea Componente Test")
+    void testA() {
         handler.creaComponente(ram.getNome(), ram.getCategoria(), ram.getConsumo_energetico(), ram.getPrezzo(), ram.getDescrizione(), ram.getTipologia(), ram.getFrequenza());
         System.out.println(handler.getComponenteCorrente().getNome());
         assertNotNull(handler.selezionaComponente(ram.getId(), ram.getCategoria()));
-    }*/
+    }
 
     @Test
-    void creaCopieTest() {
+    @DisplayName("Crea Copie Test")
+    void testB() {
         int num_copie = 3;
         handler.setComponenteCorrente(ram);
         int dim_lista = ram.getListaCopie().size();
@@ -47,7 +50,8 @@ class GestisciComponentiHandlerTest {
     }
 
     @Test
-    void selezionaComponenteTest() {
+    @DisplayName("Seleziona Componente Test")
+    void testC() {
 
         Catalogo catalogo1 = new Catalogo();
         catalogo1.aggiungiInCatalogo(ram);
@@ -58,8 +62,8 @@ class GestisciComponentiHandlerTest {
     }
     
     @Test
-    @DisplayName("Set promozione Test")
-    void setPromozioneTest() {
+    @DisplayName("Set Promozione Test")
+    void testD() {
 
     	handler.setComponenteCorrente(new Componente("componente1", 33.99, 4, "ComponenteGPU", "GPU"));
     	double promoAttuale = handler.getComponenteCorrente().getPromozione();
@@ -72,10 +76,10 @@ class GestisciComponentiHandlerTest {
     
     // ***NOTA*** CREA COMPONENTE VA IN ERRORE PERCHE CONTROLLA LA PRESENZA DEL COMPONENTE APPENA RIMOSSO    
     @Test
-    @DisplayName("Rimuovi componente test")
-    void rimuoviComponenteTest() {
-    	ram = new RAM("Corsaire RAM DDR3 16GB", 65.99, 6, "RAM 3000MHz", "DDR4", 3000);
-    	handler.creaComponente(ram.getNome(), ram.getCategoria(), ram.getConsumo_energetico(), ram.getPrezzo(), ram.getDescrizione(), ram.getTipologia(), ram.getFrequenza());
+    @DisplayName("Rimuovi Componente Test")
+    void testE() {
+    	RAM ram1 = new RAM("Corsaire RAM DDR3 16GB", 65.99, 6, "RAM 3000MHz", "DDR4", 3000);
+    	handler.creaComponente(ram1.getNome(), ram1.getCategoria(), ram1.getConsumo_energetico(), ram1.getPrezzo(), ram1.getDescrizione(), ram1.getTipologia(), ram1.getFrequenza());
     	System.out.println(handler.getCatalogo());
         handler.rimuoviComponente(5); // metto uno perchè sappiamo che nel catalogo è presente un componente con id 1
         System.out.println(handler.getCatalogo());

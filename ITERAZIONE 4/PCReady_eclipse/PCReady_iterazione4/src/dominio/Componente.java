@@ -123,8 +123,10 @@ public class Componente {
 	}
 	
 	public String impostaPromozione(double promozione) {
-		this.promozione = promozione;
-		return "PREZZO COMPONENTE CON PROMOZIONE APPLICATA: "+(getPrezzo()-((getPromozione()*getPrezzo())/100));
+		if (promozione > 0) {
+			this.promozione = promozione;
+			return "PREZZO COMPONENTE CON PROMOZIONE APPLICATA: "+(getPrezzo()-((getPromozione()*getPrezzo())/100))+"\n";
+		}return "TASSO DI PROMOZIONE NON MODIFICATO \n";
 	}
 	
 

@@ -5,14 +5,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.MethodSorters;
 
 import dominio.*;
 import dominio.componenti.*;
 import handlers.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class AcquistoHandlerTest {
 
 	/*AVVISO
@@ -39,7 +42,7 @@ class AcquistoHandlerTest {
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Aggiungi al carrello test")
-	void aggiuntaTest(){
+	void testA(){
 		acquistoH.iniziaAcquisto();
 		acquistoH.selezionaCategoria("CPU");
 		acquistoH.selezionaProdotto(1);
@@ -59,7 +62,7 @@ class AcquistoHandlerTest {
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Aggiungi configurazione test")
-	void aggiuntaConfigurazioneTest(){
+	void testB(){
 		//Aggiungo una configurazione al catalogo
 		handlerC.selezionaCategoria("CPU");
 		handlerC.selezionaComponente(1);
@@ -120,7 +123,7 @@ class AcquistoHandlerTest {
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Ordine test")
-	void ordineTest(){
+	void testC(){
 		acquistoH.terminaAcquisto("Via delle pere N4", "Ragusa", 97100);
 		//System.out.println(acquistoH.selezionaModalitaDiPagamento("VISA", 2112435786, 456));
 		acquistoH.rimuoviCopieComponente();
@@ -131,7 +134,7 @@ class AcquistoHandlerTest {
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Ottieni Ordine test")
-	void ottieniOrdineClienteTest(){
+	void testD(){
 		acquistoH.setClienteCorrente(new Cliente("pippo","franco","pippo@franco.it","francopippo"));
 		String ordineCorrente = acquistoH.ottieniOrdineCliente();
 		//Prendo la stessa lista dell' utente pippo@franco.it direttamente dal PCReady essendo sicuro che vada a buon fine e paragono le due
@@ -140,13 +143,14 @@ class AcquistoHandlerTest {
 		for(Ordine ordine : lista) {
 			 riepilogoOrdineCliente += ordine.toString();
 		}
+		riepilogoOrdineCliente += "\n";
 		assertEquals(ordineCorrente, riepilogoOrdineCliente);
 	}
 
 	
 	@org.junit.jupiter.api.Test
-	@DisplayName("Aggiorna ordine Ordine test")
-	void aggiornaInformazioniTest(){
+	@DisplayName("Aggiorna Ordine test")
+	void testE(){
 		String ordineAttuale = "";
 		String ordineModificato = "";
 		List<Ordine> lista1 = sistema.getListaOrdiniCliente("pippo@franco.it");

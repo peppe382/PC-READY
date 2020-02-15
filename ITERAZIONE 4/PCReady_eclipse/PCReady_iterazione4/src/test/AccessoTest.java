@@ -4,14 +4,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.*;
 
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.MethodSorters;
 import org.junit.jupiter.api.DisplayName;
 
 import dominio.Amministratore;
 import dominio.Cliente;
 import dominio.PCReady;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class AccessoTest {
 	
 	private static PCReady sistema;
@@ -31,7 +34,7 @@ class AccessoTest {
 	
     @org.junit.jupiter.api.Test
 	@DisplayName("Login")
-	void effettuaLogintest() {
+	void testA() {
 		String controllo1 = sistema.effettuaLogin("Amministratore", "bartolomeo@gmail.com", "password");
 		System.out.println(controllo1);
 		assertNotEquals("Email non registrata", controllo1);
@@ -44,7 +47,7 @@ class AccessoTest {
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Registrazione")
-	void richiediRegistrazionetest() {
+	void testB() {
 		System.out.println(sistema.richiediRegistrazione("Pippo", "Franco", "pippoFranco@gmail.com", "password", "password"));
 		 Map<String, Cliente> mappaClientiAttuale = sistema.getMappaClienti();
 		 assertNotNull(mappaClientiAttuale.get("pippoFranco@gmail.com"));

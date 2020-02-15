@@ -4,11 +4,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
 
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.*;
+import org.junit.runners.MethodSorters;
+
 import dominio.*;
 import dominio.componenti.*;
 import handlers.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class ConfigurationHandlerTest {
 	
 	private static Catalogo catalogo;
@@ -41,14 +45,14 @@ class ConfigurationHandlerTest {
 
 	@org.junit.jupiter.api.Test
 	@DisplayName("Seleziona Categoria Test")
-	void testSelezionaCategoria() {
+	void testA() {
 		mappa = handler.selezionaCategoria("RAM");
 		assertNotNull(mappa);
 	}
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Seleziona Componente Test")
-	void testSelezionaComponente() {
+	void testB() {
 		Componente componente = handler.selezionaComponente(3);
 		System.out.println(componente);
 		assertNotNull(componente);
@@ -56,14 +60,14 @@ class ConfigurationHandlerTest {
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Conferma Componente Test")
-	void testConfermaComponente() {
+	void testC() {
 		System.out.println(handler.confermaComponente());
 		assertTrue(handler.getConf().getListaComponenti().get(0).getCategoria() == "RAM" );
 	}
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Conferma Termine Assemblaggio Test")
-	void testTerminaAssemblaggio() {
+	void testD() {
 		//Eseguo piú volte un codice simile ai test precedenti per generare tutto il necessario per la configurazione
 		//Non inserisco la CPU per osservare il comportamento in caso di configurazione incompleta
 		
@@ -102,7 +106,7 @@ class ConfigurationHandlerTest {
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Crea Bundle Test")
-	void testBundle() {
+	void testE() {
 		System.out.println("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
 		
 		handler2.selezionaCategoria("CPU");
@@ -152,7 +156,7 @@ class ConfigurationHandlerTest {
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Doppia Motherboard Test")
-	void testDoppiaMotherboard() {
+	void testF() {
 		System.out.println("---------------------------------------------");
 		
 		handler.selezionaCategoria("Motherboard");
@@ -175,7 +179,7 @@ class ConfigurationHandlerTest {
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Componente Incompatibile Test")
-	void testIncompatibile() {
+	void testG() {
 		handler.selezionaCategoria("PSU");
 		handler.getConf().rimuoviComponenteInConfigurazione(handler.selezionaComponente(5));
 		handler.selezionaComponente(8);

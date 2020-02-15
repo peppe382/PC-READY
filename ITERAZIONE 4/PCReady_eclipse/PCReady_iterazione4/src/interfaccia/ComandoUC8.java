@@ -14,10 +14,18 @@ public class ComandoUC8 extends Comando {
 	@Override
 	public void esegui(Console console) {
 		
-		console.print("Inserisci l'id del componente che desideri eliminare dal catalogo : ");
-		if (console.getSistema().getHandlerComponenti().rimuoviComponente(console.getInt())) {
-			console.print("Rimozione avvenuta con successo \n");
-		}else console.print("Operazione non riuscita \n");
+		boolean continua = true;
+		
+		while (continua) {
+			console.print("Inserisci l'id del componente che desideri eliminare dal catalogo : ");
+			if (console.getSistema().getHandlerComponenti().rimuoviComponente(console.getInt())) {
+				console.print("Rimozione avvenuta con successo \n");
+			}else console.print("Operazione non riuscita \n");
+			console.print("Continuare con una nuova rimozione? Inserisci Si o No \n");
+			if (!console.getYesNo()) {
+				continua = false;
+			}
+		}
 	}
 	
 }
