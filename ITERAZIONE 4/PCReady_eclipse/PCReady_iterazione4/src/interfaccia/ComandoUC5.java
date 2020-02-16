@@ -82,7 +82,7 @@ public class ComandoUC5 extends Comando {
 												do {
 													console.print(pagamentiList());
 													selezionePagamento = console.getInt("Seleziona il metodo di pagamento inserendo il suo codice: ");
-												}while (this.mappaCorrispondenzaPagamenti.containsKey(selezionePagamento));
+												}while (!this.mappaCorrispondenzaPagamenti.containsKey(selezionePagamento));
 												
 												Integer numeroCarta = console.getInt("Inserisci il numero della tua carta: ");
 												

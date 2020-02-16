@@ -1,1 +1,100 @@
-{"Storage":[{"dimensioni":2.5,"descrizione":"Seagate Barracuda, HDD Storage, 2TB, 2.5'","velocita":6144,"memoria":"2 TB","copie":[{"codice":277}],"prezzo":59.99,"nome":"SeagateBarracuda2TPRO","id":3,"consumo_energetico":5,"tipologia":"HDD"}],"PSU":[{"descrizione":"Corsair PSU, 450W, dimensioni 15 x 14 x 8,6 cm","potenzaErogata":450,"formFactor":"Slim","copie":[{"codice":498}],"prezzo":45,"nome":"CorsairPSUBronze450W","id":5,"consumo_energetico":0,"tipologia":"Bronze"}],"Configurazione":[],"Motherboard":[{"descrizione":"Motherboard MSI Pro Carbon, 4 USB 3.0, Micro ATX","tipologiaRAM":"DDR4","formFactor":"Micro ATX","copie":[{"codice":777}],"prezzo":71.99,"nome":"MSIProCarbonM2V2","id":6,"socket":"AM4","consumo_energetico":0}],"Bundle":[],"CPU":[],"GPU":[{"descrizione":"AMD Sapphyre 580, 8Gb DDR5 dedicati","copie":[{"codice":200}],"prezzo":160.99,"nome":"AMD Sapphyre 580","id":7,"slot":2,"consumo_energetico":100}],"RAM":[{"descrizione":"Corsaire Select Value RAM DDR4, 3000HZ, 8GB","copie":[{"codice":185},{"codice":186}],"prezzo":44.99,"nome":"CorsairSelectValue3000Hz","id":2,"consumo_energetico":5,"frequenza":3000,"tipologia":"DDR4"}],"Case":[{"descrizione":"PC Case AeroCool Flat, compatibile con tutti i format motherboard, con Led RGB","formFactorPSU":"Slim","copie":[{"codice":311}],"prezzo":32.99,"nome":"AeroCoolFlat","id":4,"slot":2,"consumo_energetico":10,"formFactorMotherboard":"Micro ATX"}]}
+{
+	"CPU":
+		[
+			{	"id": 1,
+				"nome": "AMDRyzen3V1300X",
+				"prezzo": 95.99,
+				"consumo_energetico": 75,
+				"descrizione": "AMD Ryzen 3 1300X, socket AM4",
+				"socket": "AM4",
+				"copie": [ {"codice": 125},  {"codice": 365} ]		}
+		],
+		
+	"GPU":
+		[{
+				"id": 7,
+				"nome": "AMD Sapphyre 580",
+				"prezzo": 160.99,
+				"consumo_energetico": 100,
+				"descrizione": "AMD Sapphyre 580, 8Gb DDR5 dedicati",
+				"socket": "AM4",
+				"slot" : 2,
+				"copie": [ {"codice": 200} ]	}
+		],
+	
+	"RAM":
+		[
+			{	"id": 2,
+				"nome": "CorsairSelectValue3000Hz",
+				"prezzo": 44.99,
+				"consumo_energetico": 5,
+				"descrizione": "Corsaire Select Value RAM DDR4, 3000HZ, 8GB",
+				"tipologia": "DDR4",
+				"frequenza": 3000,
+				"copie": [ {"codice": 185}, {"codice": 186} ]		}
+		],
+		
+	"Storage":
+		[
+			{	"id": 3,
+				"nome": "SeagateBarracuda2TPRO",
+				"prezzo": 59.99,
+				"consumo_energetico": 5,
+				"descrizione": "Seagate Barracuda, HDD Storage, 2TB, 2.5'",
+				"memoria": "2 TB",
+				"dimensioni": 2.5,
+				"velocita": 6144,
+				"tipologia": "HDD",
+				"copie": [ {"codice": 277} ]		}
+		],
+		
+	"PSU":
+		[
+			{	"id": 5,
+				"nome": "CorsairPSUBronze450W",
+				"prezzo": 45.00,
+				"consumo_energetico": 0,
+				"descrizione": "Corsair PSU, 450W, dimensioni 15 x 14 x 8,6 cm",
+				"potenzaErogata": 450,
+				"tipologia": "Bronze",
+				"formFactor": "Slim",
+				"copie": [ {"codice": 498} ]		}
+		],
+		
+	"Motherboard":
+		[
+			{	"id": 6,
+				"nome": "MSIProCarbonM2V2",
+				"prezzo": 71.99,
+				"consumo_energetico": 0,
+				"descrizione": "Motherboard MSI Pro Carbon, 4 USB 3.0, Micro ATX",
+				"socket": "AM4",
+				"formFactor": "Micro ATX",
+				"tipologiaRAM": "DDR4",
+				"copie": [ {"codice": 777} ]		}
+		],
+		
+	"Case":
+		[
+			{	"id": 4,
+				"nome": "AeroCoolFlat",
+				"prezzo": 32.99,
+				"consumo_energetico": 10,
+				"descrizione": "PC Case AeroCool Flat, compatibile con tutti i format motherboard, con Led RGB",
+				"formFactorMotherboard": "Micro ATX",
+				"formFactorPSU": "Slim",
+				"slot": 2,
+				"copie": [ {"codice": 311} ]		}
+		],
+		
+	"Configurazione":
+		[
+			{
+				"id": 11,
+				"componenti": [1, 2, 2, 3, 4, 5, 6]
+			}
+		],
+	
+	"Bundle":
+		[]
+}
