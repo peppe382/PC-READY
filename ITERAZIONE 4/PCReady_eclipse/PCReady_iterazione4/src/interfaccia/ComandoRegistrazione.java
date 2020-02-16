@@ -17,16 +17,11 @@ public class ComandoRegistrazione extends Comando {
 	public void esegui(Console console) {
 		
 		console.print("Benvenuto!\nEffettua la registrazione: \n\n");
-		console.print("Dimmi il tuo nome: ");
-		String nome = console.getString();
-		console.print("Dimmi il tuo cognome: ");
-		String cognome = console.getString();
-		console.print("Dimmi la tua email: ");
-		String email = console.getString();
-		console.print("Dimmi la tua password: ");
-		String password = console.getString();
-		console.print("Conferma la tua password: ");
-		String c_password = console.getString();
+		String nome = console.getString("Dimmi il tuo nome: ");
+		String cognome = console.getString("Dimmi il tuo cognome: ");
+		String email = console.getString("Dimmi la tua email: ");
+		String password = console.getString("Dimmi la tua password: ");
+		String c_password = console.getString("Conferma la tua password: ");
 		
 		String message = console.getSistema().richiediRegistrazione(nome, cognome, email, password, c_password);
 		if (message.equals("Email gia utilizzata") || message.equals("Le password non coincidono")) {
@@ -35,7 +30,7 @@ public class ComandoRegistrazione extends Comando {
 		}
 		else {
 			console.setClienteCorrente(console.getSistema().getCliente());
-			console.print("L'utente ha effettuato la registrazione ed ora è loggato\n");
+			console.print("L'utente ha effettuato la registrazione ed ora Ã¨ loggato\n");
 			setRisultato(true);
 			console.setAdmin(false);
 		}

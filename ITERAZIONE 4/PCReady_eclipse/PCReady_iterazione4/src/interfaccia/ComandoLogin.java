@@ -20,14 +20,12 @@ public class ComandoLogin extends Comando {
 		console.print("Benvenuto!\nEffettua il login: \n");
 		while(successo == false) {
 			console.print("\n1) Effettua l'accesso come Amministratore\n2) Effettua l'accesso come Utente\n3) Registrati\n");
-			int tipologia = console.getInt();
+			int tipologia = console.getInt("\nScegli un'opzione: ");
 			
 			switch(tipologia) {
 			case 1:
-				console.print("Email: \n");
-				email = console.getString();
-				console.print("Password: \n");
-				password = console.getString();
+				email = console.getString("Email: ");
+				password = console.getString("Password: ");
 				controllo = console.getSistema().effettuaLogin("Amministratore", email, password);
 					if(controllo.equals("L'amministratore "+email+" ha effettuato il login")) {
 						console.setAmministratoreCorrente(console.getSistema().getAmministratore());
@@ -35,14 +33,12 @@ public class ComandoLogin extends Comando {
 						console.print("L'amministratore ha effettuato l'accesso\n");
 						successo = true;
 					}else {
-						console.print("L'amministratore non è registrato\n");
+						console.print("L'amministratore non Ã¨ registrato\n");
 					}
 				break;
 			case 2:
-				console.print("Email: \n");
-				email = console.getString();
-				console.print("Password: \n");
-				password = console.getString();
+				email = console.getString("Email: ");
+				password = console.getString("Password: ");
 				controllo = console.getSistema().effettuaLogin("Cliente", email, password);
 				if(controllo.equals("Il cliente "+ email +" ha effettuato il login")) {
 					console.setClienteCorrente(console.getSistema().getCliente());
@@ -50,7 +46,7 @@ public class ComandoLogin extends Comando {
 					console.print("L'utente ha effettuato l'accesso \n");
 					successo = true;
 				}else {
-					console.print("L'utente non è registrato \n");
+					console.print("L'utente non Ã¨ registrato \n");
 				}
 				break;
 			case 3:
