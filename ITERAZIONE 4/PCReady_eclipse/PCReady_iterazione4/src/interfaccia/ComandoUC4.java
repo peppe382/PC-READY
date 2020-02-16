@@ -14,15 +14,12 @@ public class ComandoUC4 extends Comando {
 	@Override
 	public void esegui(Console console) {
 		
-		console.print("Adesso dimmi la categoria a cui appartiene: ");
-		String categoria = console.getString();
-		console.print("Benvenuto! Dimmi il codice del componente di cui vuoi aggiungere una copia: ");
-		int codice = console.getInt();
+		String categoria = console.getString("Benvenuto! Dimmi la categoria del componente di cui vuoi aggiungere una copia: ");
+		int codice = console.getInt("Adesso dimmi il suo codice: ");
 		
 		Componente comp = console.getSistema().getHandlerComponenti().selezionaComponente(codice, categoria);
 		
-		console.print("Quante copie vuoi inserire: ");
-		int num_copie = console.getInt();
+		int num_copie = console.getInt("Quante copie vuoi inserire? ");
 		
 		console.getSistema().getHandlerComponenti().setComponenteCorrente(comp);
 		console.getSistema().getHandlerComponenti().creaCopie(num_copie);

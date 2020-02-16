@@ -61,19 +61,15 @@ public class Catalogo {
 	
 	public void aggiungiInCatalogo(Componente componente) {
 		try {
+			
 			ArrayList <Componente> arrayComponenti = new ArrayList<Componente>();
+			
+			if(this.mappaComponenti.containsKey(componente.getCategoria())) arrayComponenti = new ArrayList<Componente>(this.mappaComponenti.get(componente.getCategoria()));
+			else arrayComponenti = new ArrayList<Componente>();
 			arrayComponenti.add(componente);
-			ArrayList <Componente> arrayMappa = this.mappaComponenti.get(componente.getCategoria());
-			if (arrayMappa == null) {
-				aggiungiCategoria(componente.getCategoria());
-				this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
-			}
-			else {
-				for (Componente elemento : arrayMappa) {
-					arrayComponenti.add(elemento);
-				}
-				this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
-			}
+			
+			this.mappaComponenti.put(componente.getCategoria(), arrayComponenti);
+			
 		}catch(Exception e){
 	        e.printStackTrace();
 	    }

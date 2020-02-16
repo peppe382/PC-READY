@@ -53,8 +53,7 @@ public class ComandoUC1 extends Comando {
 						Componente componenteAttuale = this.handlerConfigurazione.selezionaComponente(console.getInt());
 						if (componenteAttuale != null) {
 							console.print("\n\n ECCO I DETTAGLI DEL COMPONENTE SELEZIONATO"+componenteAttuale.toString());
-							console.print("\n Ti soddisfa il componente selezionato? Inserisci Si o No \n");
-							if (console.getYesNo()) {
+							if (console.getYesNo("\n Ti soddisfa il componente selezionato? Inserisci Si o No: ")) {
 								String messaggioH = this.handlerConfigurazione.confermaComponente();
 								if (messaggioH != null) {
 									console.print(messaggioH);
@@ -65,8 +64,7 @@ public class ComandoUC1 extends Comando {
 								 */
 							}else console.print("Non inserisco il componente... \n");
 							
-							console.print("Desideri continuare con l'inserimento componenti? \n");
-							if (!console.getYesNo()) { //Nel caso di valore true o non valido continuo con l'inserimento delle componenti
+							if (!console.getYesNo("\nDesideri continuare con l'inserimento componenti? ")) { //Nel caso di valore true o non valido continuo con l'inserimento delle componenti
 								console.print("---TERMINA ASSEMBLAGGIO: ESECUZIONE DEI CONTROLLI--- \n");
 								if (this.handlerConfigurazione.terminaAssemblaggio() == true) {
 									fine = false;
