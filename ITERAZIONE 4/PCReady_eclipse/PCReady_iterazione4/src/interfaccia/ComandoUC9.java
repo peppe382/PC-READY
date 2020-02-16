@@ -17,14 +17,11 @@ public class ComandoUC9 extends Comando {
 		boolean continua = true;
 		
 		while (continua) {
-			console.print("Inserisci l'id del componente che desideri mettere in promozione : ");
-			Componente comp = console.getSistema().getHandlerComponenti().selezionaComponente(console.getInt());
+			Componente comp = console.getSistema().getHandlerComponenti().selezionaComponente(console.getInt("Inserisci l'id del componente che desideri mettere in promozione: "));
 			if (comp != null) {
-				console.print("Inserisci il tasso di sconto della promozione : ");
-				console.print(console.getSistema().getHandlerComponenti().setPromozione(console.getDouble()));
+				console.print(console.getSistema().getHandlerComponenti().setPromozione(console.getDouble("Inserisci il tasso di sconto della promozione: ")));
 			}else console.print("Il componente non esiste in catalogo: non eseguo l'operazione \n");
-			console.print("Vuoi inserire una nuova promozione? Inserisci Si o No \n");
-			if (!console.getYesNo()) {
+			if (!console.getYesNo("Vuoi inserire una nuova promozione? Inserisci Si o No: ")) {
 				continua = false;
 			}
 		}

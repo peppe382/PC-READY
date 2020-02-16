@@ -43,8 +43,7 @@ public class ComandoUC5 extends Comando {
 				String cat = null;
 				while (fine) {
 					console.print(categorieList());
-					console.print("Seleziona una categoria inserendo il suo codice intero: \n"); 
-					Integer selezione = console.getInt();
+					Integer selezione = console.getInt("Seleziona una categoria inserendo il suo codice intero: ");
 					if (selezione != null) {
 						if (selezione == 11) { //Eliminazione di un componente esistente
 							console.print("Ecco i componenti della configurazione attuale: \n");
@@ -64,39 +63,30 @@ public class ComandoUC5 extends Comando {
 								Componente componenteAttuale = this.handlerAcquisto.selezionaProdotto(console.getInt());
 								if (componenteAttuale != null) {
 									console.print("\n\n ECCO I DETTAGLI DEL COMPONENTE SELEZIONATO"+componenteAttuale.toString());
-									console.print("\n Ti soddisfa il componente selezionato? Inserisci Si o No \n");
-									if (console.getYesNo()) {
+									if (console.getYesNo("\n Ti soddisfa il componente selezionato? Inserisci Si o No:")) {
 										console.print(this.handlerAcquisto.aggiungiInCarrello());
 										/*Vengono mostrati a video eventuali messaggi di incompatibilita previsti
 										 dalla clase Configuration Handler...
 										 */
 									}else console.print("Non inserisco il componente... \n");
-									console.print("\nDesideri continuare con l'inserimento componenti? \n");
-									if (!console.getYesNo()) { //Nel caso di valore true o non valido continuo con l'inserimento delle componenti
+									if (!console.getYesNo("\nDesideri continuare con l'inserimento componenti? ")) { //Nel caso di valore true o non valido continuo con l'inserimento delle componenti
 										if (!this.handlerAcquisto.isEmptyCarrello()) {
 											console.print("---TERMINA ACQUISTO: INIZIALIZZAZIONE ORDINE--- \n");
-											console.print("Inserisci l'indirizzo di spedizione \n");
-											String indirizzo = console.getString();
-											console.print("Inserisci la citta' \n");
-											String citta = console.getString();
-											console.print("Inserisci il CAP \n");
-											int CAP = 0;
-											CAP = console.getInt();
+											String indirizzo = console.getString("Inserisci l'indirizzo di spedizione:\n");
+											String citta = console.getString("Inserisci la citta':\n");
+											int CAP = console.getInt("Inserisci il CAP:\n");
 											if (indirizzo!=null && citta!=null && CAP!=0) {
 												handlerAcquisto.terminaAcquisto(indirizzo, citta, CAP);
 												
-												console.print(pagamentiList());
-												console.print("Seleziona il metodo di pagamento inserendo il suo codice \n");
-												Integer selezionePagamento = 0;
+												Integer selezionePagamento = -1;
 												do {
-													selezionePagamento = console.getInt();
+													console.print(pagamentiList());
+													selezionePagamento = console.getInt("Seleziona il metodo di pagamento inserendo il suo codice: ");
 												}while (this.mappaCorrispondenzaPagamenti.containsKey(selezionePagamento));
 												
-												console.print("Inserisci il numero della tua carta \n");
-												Integer numeroCarta = console.getInt();
+												Integer numeroCarta = console.getInt("Inserisci il numero della tua carta: ");
 												
-												console.print("Inserisci il cvv \n");
-												Integer cvv = console.getInt();
+												Integer cvv = console.getInt("Inserisci il CVV: ");
 												
 												console.print(handlerAcquisto.selezionaModalitaDiPagamento(this.mappaCorrispondenzaPagamenti.get(selezionePagamento), numeroCarta, cvv));
 												handlerAcquisto.rimuoviCopieComponente();

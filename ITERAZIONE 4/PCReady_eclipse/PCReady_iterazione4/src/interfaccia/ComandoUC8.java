@@ -17,12 +17,10 @@ public class ComandoUC8 extends Comando {
 		boolean continua = true;
 		
 		while (continua) {
-			console.print("Inserisci l'id del componente che desideri eliminare dal catalogo : ");
-			if (console.getSistema().getHandlerComponenti().rimuoviComponente(console.getInt())) {
+			if (console.getSistema().getHandlerComponenti().rimuoviComponente(console.getInt("Inserisci l'id del componente che desideri eliminare dal catalogo: "))) {
 				console.print("Rimozione avvenuta con successo \n");
 			}else console.print("Operazione non riuscita \n");
-			console.print("Continuare con una nuova rimozione? Inserisci Si o No \n");
-			if (!console.getYesNo()) {
+			if (!console.getYesNo("Continuare con una nuova rimozione? Inserisci Si o No: ")) {
 				continua = false;
 			}
 		}

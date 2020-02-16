@@ -31,8 +31,7 @@ public class ComandoUC2 extends Comando {
 		String cat = null;
 		while (fine) {
 			console.print(categorieList());
-			console.print("Seleziona una categoria inserendo il suo codice intero:"); 
-			Integer selezione = console.getInt();
+			Integer selezione = console.getInt("Seleziona una categoria inserendo il suo codice intero: ");
 			if (selezione != null) {
 				if (selezione == 9) { //Eliminazione di un componente esistente
 					console.print("Ecco i componenti della configurazione attuale: \n");
@@ -52,27 +51,22 @@ public class ComandoUC2 extends Comando {
 						Componente componenteAttuale = this.handlerConfigurazione.selezionaComponente(console.getInt());
 						if (componenteAttuale != null) {
 							console.print("\n\n ECCO I DETTAGLI DEL COMPONENTE SELEZIONATO"+componenteAttuale.toString());
-							console.print("\n Ti soddisfa il componente selezionato? Inserisci Si o No \n");
-							if (console.getYesNo() == true) {
+							if (console.getYesNo("\n Ti soddisfa il componente selezionato? Inserisci Si o No: ") == true) {
 								console.print(this.handlerConfigurazione.confermaComponente());
 								/*Vengono mostrati a video eventuali messaggi di incompatibilit� previsti
 								 dalla clase Configuration Handler...
 								 */
 							}else console.print("Non inserisco il componente...");
 							
-							console.print("Desideri continuare con l'inserimento componenti? \n");
-							if (console.getYesNo() == false) { //Nel caso di valore true o non valido continuo con l'inserimento delle componenti
+							if (console.getYesNo("Desideri continuare con l'inserimento componenti? ") == false) { //Nel caso di valore true o non valido continuo con l'inserimento delle componenti
 								console.print("---TERMINA ASSEMBLAGGIO: ESECUZIONE DEI CONTROLLI---");
 								if (this.handlerConfigurazione.terminaAssemblaggio() == true) {
 									fine = false;
 									console.print("---ASSEMBLAGGIO ANDATO A BUON FINE: RIEPILOGO---");
 									console.print(this.handlerConfigurazione.getStringaComunicazioni());
-									console.print("---INSERISCI NOME BUNDLE---");
-									String nome = console.getString();
-									console.print("---INSERISCI SCONTO BUNDLE---");
-									Double sconto = console.getDouble();
-									console.print("---INSERISCI DESCRIZIONE BUNDLE---");
-									String descrizione = console.getString();
+									String nome = console.getString("---INSERISCI NOME BUNDLE---: ");
+									Double sconto = console.getDouble("---INSERISCI SCONTO BUNDLE---: ");
+									String descrizione = console.getString("---INSERISCI DESCRIZIONE BUNDLE---: ");
 									this.handlerConfigurazione.infoConfigurazione(sconto, nome, descrizione);
 									this.handlerConfigurazione.confermaConfigurazione();
 									console.print("---INSERIMENTO BUNDLE COMPLETATO---");
