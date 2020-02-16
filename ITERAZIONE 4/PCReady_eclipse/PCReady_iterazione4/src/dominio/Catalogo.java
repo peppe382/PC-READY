@@ -2,7 +2,8 @@ package dominio;
 
 import java.util.*;
 
-import dominio.componenti.Configurazione;
+import dominio.componenti.*;
+
 
 public class Catalogo {
 
@@ -126,6 +127,35 @@ public class Catalogo {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public void rimuoviConfigurazioni(int id) {
+		for (Componente comp : this.mappaComponenti.get("Configurazione")) {
+			Configurazione conf = (Configurazione) comp;
+			boolean contiene = false;
+			for (Componente elemento : conf.getListaComponenti()){
+				if (elemento.getId() == id) {
+					contiene = true;
+				}
+			}
+			if (contiene = true) {
+				ArrayList<Componente> lista = new ArrayList<Componente>(this.mappaComponenti.get("Configurazione"));
+				lista.remove(comp);
+				this.mappaComponenti.put("Configurazione", lista);
+			}
+		}
+		for (Componente comp : this.mappaComponenti.get("Bundle")) {
+			Bundle bund = (Bundle) comp;
+			boolean contiene = false;
+			for (Componente elemento : bund.getListaComponenti()){
+				if (elemento.getId() == id) contiene = true;
+			}
+			if (contiene = true) {
+				ArrayList<Componente> lista = new ArrayList<Componente>(this.mappaComponenti.get("Bundle"));
+				lista.remove(comp);
+				this.mappaComponenti.put("Bundle", lista);
+			}
+		}
 	}
 	
 

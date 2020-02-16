@@ -27,7 +27,7 @@ public class ComandoUC5 extends Comando {
 			i++;
 		}
 		for (String cat : pagamenti) {
-			this.mappaCorrispondenzaCategorie.put(i,cat);
+			this.mappaCorrispondenzaPagamenti.put(j,cat);
 			j++;
 		}
 	}

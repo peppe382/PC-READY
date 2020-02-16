@@ -54,11 +54,15 @@ public class ComandoUC1 extends Comando {
 						if (componenteAttuale != null) {
 							console.print("\n\n ECCO I DETTAGLI DEL COMPONENTE SELEZIONATO"+componenteAttuale.toString());
 							if (console.getYesNo("\n Ti soddisfa il componente selezionato? Inserisci Si o No: ")) {
-								console.print(this.handlerConfigurazione.confermaComponente());
+								String messaggioH = this.handlerConfigurazione.confermaComponente();
+								if (messaggioH != null) {
+									console.print(messaggioH);
+								}
+								else console.print("Errore di inserimento \n");
 								/*Vengono mostrati a video eventuali messaggi di incompatibilit� previsti
 								 dalla clase Configuration Handler...
 								 */
-							}else console.print("Non inserisco il componente...");
+							}else console.print("Non inserisco il componente... \n");
 							
 							if (!console.getYesNo("\nDesideri continuare con l'inserimento componenti? ")) { //Nel caso di valore true o non valido continuo con l'inserimento delle componenti
 								console.print("---TERMINA ASSEMBLAGGIO: ESECUZIONE DEI CONTROLLI--- \n");

@@ -179,12 +179,15 @@ public class AcquistoHandler {
 	public String ottieniOrdineCliente() {
 		PCReady pcReady = PCReady.getInstance();
 		List<Ordine> listaOrdini = pcReady.getListaOrdiniCliente(clienteCorrente.getEmail());
+		if (!listaOrdini.isEmpty()) {
 		String riepilogoOrdineCliente = "Ordini dell'utente "+ clienteCorrente.getEmail() +": \n\n";
-		for(Ordine ordine : listaOrdini) {
-			 riepilogoOrdineCliente += ordine.toString();
-			 riepilogoOrdineCliente += "\n";
+			for(Ordine ordine : listaOrdini) {
+				 riepilogoOrdineCliente += ordine.toString();
+				 riepilogoOrdineCliente += "\n";
+			}
+			return riepilogoOrdineCliente;
 		}
-		return riepilogoOrdineCliente;
+		else return "Non vi sono ordini da modificare \n";
 	}
 	
 	public String aggiornaInformazioni(int id, String indirizzo, String citta, int CAP) {
