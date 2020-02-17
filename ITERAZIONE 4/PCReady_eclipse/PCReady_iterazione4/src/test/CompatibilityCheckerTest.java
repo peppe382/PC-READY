@@ -33,7 +33,7 @@ class CompatibilityCheckerTest {
 		PSU componente8 = new PSU("Fake PSU 50W", 1345.99, "Il PSU che ti cambia la vita", 50, "Bronze", "Slim");
 		CPU componente9 = new CPU("Intel Core i7500H", 300.90, 80, "Processore intel quad-core 3.7GHz"," FCLGA1151");
 		Motherboard componente10 = new Motherboard("ASUS ROG X2M", 61.49, 0, "Motherboard ASUS socket FCLGA1151 , 8 porte usb 3.0", "FCLGA1151", "ATX", "DDR3");
-		GPU componente11 = new GPU("Fake GPU", 970.99, 200, "Meglio di Fake Taxi", 6);
+		GPU componente11 = new GPU("Fake GPU", 970.99, 200, "Il meglio del meglio", 6);
 		catalogo = new Catalogo();
 		catalogo.aggiungiInCatalogo(componente1);
 		catalogo.aggiungiInCatalogo(componente2);
