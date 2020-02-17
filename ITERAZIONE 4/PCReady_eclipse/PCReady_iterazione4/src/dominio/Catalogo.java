@@ -138,7 +138,7 @@ public class Catalogo {
 					contiene = true;
 				}
 			}
-			if (contiene = true) {
+			if (contiene == true) {
 				ArrayList<Componente> lista = new ArrayList<Componente>(this.mappaComponenti.get("Configurazione"));
 				lista.remove(comp);
 				this.mappaComponenti.put("Configurazione", lista);
@@ -150,7 +150,7 @@ public class Catalogo {
 			for (Componente elemento : bund.getListaComponenti()){
 				if (elemento.getId() == id) contiene = true;
 			}
-			if (contiene = true) {
+			if (contiene == true) {
 				ArrayList<Componente> lista = new ArrayList<Componente>(this.mappaComponenti.get("Bundle"));
 				lista.remove(comp);
 				this.mappaComponenti.put("Bundle", lista);

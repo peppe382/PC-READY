@@ -136,7 +136,7 @@ public class ConfigurationHandler {
 			Componente alternativa = this.checker.trovaAlternativa(this.mappaCorrente);
 			String consiglio = null;
 			if ( alternativa != null) {
-				consiglio =  "COMPONENTE SOSTITUTIVO CONSIGLIATO:"+alternativa.toString() ;
+				consiglio =  "COMPONENTE INCOMPATIBILE: COMPONENTE SOSTITUTIVO CONSIGLIATO: \n"+alternativa.toString() ;
 			}
 			return consiglio;
 			//Se consiglio é null, non é presente nessun componente sostitutivo...
@@ -152,7 +152,7 @@ public class ConfigurationHandler {
 				return true;
 			}
 			else {
-				String stringa = "CONSUMO ENERGETICO ECCESSIVO, PROVA CON QUESTO ALIMENTATORE COMPATIBILE: ";
+				String stringa = "CONSUMO ENERGETICO ECCESSIVO, PROVA CON QUESTO ALIMENTATORE COMPATIBILE: \n";
 				setStringaComunicazioni (stringa+this.checker.trovaAlimentatore(selezionaCategoria("PSU")).toString());
 				return false;
 			}

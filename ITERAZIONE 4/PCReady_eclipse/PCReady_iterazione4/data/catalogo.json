@@ -7,7 +7,15 @@
 				"consumo_energetico": 75,
 				"descrizione": "AMD Ryzen 3 1300X, socket AM4",
 				"socket": "AM4",
-				"copie": [ {"codice": 125},  {"codice": 365} ]		}
+				"copie": [ {"codice": 125},  {"codice": 365} ]		},
+			{	
+				"id": 12,
+				"nome": "IntelAtomx5",
+				"prezzo": 65.99,
+				"consumo_energetico": 95,
+				"descrizione": "IntelAtomx5 DualCore socket UTFCBGA592",
+				"socket": "UTFCBGA592",
+				"copie": [ {"codice": 126},  {"codice": 366} ]		}
 		],
 		
 	"GPU":
@@ -58,7 +66,17 @@
 				"potenzaErogata": 450,
 				"tipologia": "Bronze",
 				"formFactor": "Slim",
-				"copie": [ {"codice": 498} ]		}
+				"copie": [ {"codice": 498} ]		},
+			{	
+				"id": 17,
+				"nome": "FakePSU150W",
+				"prezzo": 999.00,
+				"consumo_energetico": 0,
+				"descrizione": "Fake PSU, 150W, dimensioni 15 x 14 x 8,6 cm",
+				"potenzaErogata": 150,
+				"tipologia": "Bronze",
+				"formFactor": "Flat",
+				"copie": [ {"codice": 987} ]		}
 		],
 		
 	"Motherboard":
@@ -71,7 +89,18 @@
 				"socket": "AM4",
 				"formFactor": "Micro ATX",
 				"tipologiaRAM": "DDR4",
-				"copie": [ {"codice": 777} ]		}
+				"copie": [ {"codice": 777} ]		},
+			{
+				"id": 17,
+				"nome": "AsusProMaximX5",
+				"prezzo": 71.99,
+				"consumo_energetico": 0,
+				"descrizione": "Motherboard AsusProMaximX5, 4 USB 3.0, Micro ATX",
+				"socket": "UTFCBGA592",
+				"formFactor": "Micro ATX",
+				"tipologiaRAM": "DDR4",
+				"copie": [ {"codice": 1777} ]		}
+				
 		],
 		
 	"Case":
