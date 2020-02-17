@@ -95,11 +95,9 @@ class ConfigurationHandlerTest {
 		handler.selezionaComponente(7);
 		handler.confermaComponente();
 		System.out.println(handler.terminaAssemblaggio());
-		Boolean condizione = true;
-		for (Componente elemento : handler.getConf().getListaComponenti()) {
-			if (elemento.getCategoria() == "CPU") {
-				condizione = false;
-			}
+		Boolean condizione = false;
+		if (handler.getConf().getListaComponenti().size() == 7) {
+		condizione = true;
 		}
 		assertTrue(condizione);
 	}
