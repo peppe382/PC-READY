@@ -69,7 +69,6 @@ public class Console {
 	
 	public void spegni() {
 		this.on = false;
-		//Salva su sistema PC Ready prima di sfanculare.
 	}
 	
 	// -------------------------------------------------------------------
