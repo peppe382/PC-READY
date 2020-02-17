@@ -32,7 +32,7 @@ class GestisciComponentiHandlerTest {
     
     @Test
     @DisplayName("Crea Componente Test")
-    void testA() {
+    void testB() {
         handler.creaComponente(ram.getNome(), ram.getCategoria(), ram.getConsumo_energetico(), ram.getPrezzo(), ram.getDescrizione(), ram.getTipologia(), ram.getFrequenza());
         System.out.println(handler.getComponenteCorrente().getNome());
         assertNotNull(handler.selezionaComponente(ram.getId(), ram.getCategoria()));
@@ -40,7 +40,7 @@ class GestisciComponentiHandlerTest {
 
     @Test
     @DisplayName("Crea Copie Test")
-    void testB() {
+    void testC() {
         int num_copie = 3;
         handler.setComponenteCorrente(ram);
         int dim_lista = ram.getListaCopie().size();
@@ -51,7 +51,7 @@ class GestisciComponentiHandlerTest {
 
     @Test
     @DisplayName("Seleziona Componente Test")
-    void testC() {
+    void testA() {
 
         Catalogo catalogo1 = new Catalogo();
         catalogo1.aggiungiInCatalogo(ram);

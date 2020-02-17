@@ -54,22 +54,23 @@ class ConfigurationHandlerTest {
 	@DisplayName("Seleziona Componente Test")
 	void testB() {
 		Componente componente = handler.selezionaComponente(3);
-		System.out.println(componente);
 		assertNotNull(componente);
 	}
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Conferma Componente Test")
 	void testC() {
-		System.out.println(handler.confermaComponente());
+		handler.confermaComponente();
 		assertTrue(handler.getConf().getListaComponenti().get(0).getCategoria() == "RAM" );
 	}
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Conferma Termine Assemblaggio Test")
 	void testD() {
-		//Eseguo piú volte un codice simile ai test precedenti per generare tutto il necessario per la configurazione
-		//Non inserisco la CPU per osservare il comportamento in caso di configurazione incompleta
+		
+		handler.selezionaCategoria("CPU");
+		handler.selezionaComponente(1);
+		handler.confermaComponente();
 		
 		handler.selezionaCategoria("GPU");
 		handler.selezionaComponente(2);
@@ -94,9 +95,15 @@ class ConfigurationHandlerTest {
 		handler.selezionaCategoria("Storage");
 		handler.selezionaComponente(7);
 		handler.confermaComponente();
-		System.out.println(handler.terminaAssemblaggio());
+		handler.terminaAssemblaggio();
+		handler.confermaConfigurazione();
+		
+		Configurazione conf = (Configurazione) handler.selezionaCategoria("Configurazione").get(9);
+		
+		System.out.println(conf.getId());
+		
 		Boolean condizione = false;
-		if (handler.getConf().getListaComponenti().size() == 7) {
+		if (conf.getListaComponenti().equals(handler.getConf().getListaComponenti())) {
 		condizione = true;
 		}
 		assertTrue(condizione);
