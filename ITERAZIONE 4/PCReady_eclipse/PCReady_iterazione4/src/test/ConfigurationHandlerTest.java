@@ -99,14 +99,7 @@ class ConfigurationHandlerTest {
 		handler.confermaConfigurazione();
 		
 		Configurazione conf = (Configurazione) handler.selezionaCategoria("Configurazione").get(9);
-		
-		System.out.println(conf.getId());
-		
-		Boolean condizione = false;
-		if (conf.getListaComponenti().equals(handler.getConf().getListaComponenti())) {
-		condizione = true;
-		}
-		assertTrue(condizione);
+		assertEquals(conf.getListaComponenti(), handler.getConf().getListaComponenti());
 	}
 	
 	@org.junit.jupiter.api.Test
