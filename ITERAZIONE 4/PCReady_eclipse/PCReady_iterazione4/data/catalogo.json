@@ -89,7 +89,18 @@
 				"socket": "AM4",
 				"formFactor": "Micro ATX",
 				"tipologiaRAM": "DDR4",
-				"copie": [ {"codice": 777} ]		}
+				"copie": [ {"codice": 777} ]		},
+			{
+				"id": 17,
+				"nome": "AsusProMaximX5",
+				"prezzo": 71.99,
+				"consumo_energetico": 0,
+				"descrizione": "Motherboard AsusProMaximX5, 4 USB 3.0, Micro ATX",
+				"socket": "UTFCBGA592",
+				"formFactor": "Micro ATX",
+				"tipologiaRAM": "DDR4",
+				"copie": [ {"codice": 1777} ]		}
+				
 		],
 		
 	"Case":
