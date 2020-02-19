@@ -30,7 +30,7 @@
             "copie": [{"codice": 987}],
             "prezzo": 999,
             "nome": "FakePSU150W",
-            "id": 17,
+            "id": 23,
             "consumo_energetico": 0,
             "tipologia": "Bronze"
         }
@@ -92,7 +92,13 @@
             "descrizione": "AMD Ryzen 3 1300X, socket AM4",
             "copie": [
                 {"codice": 125},
-                {"codice": 365}
+                {"codice": 365},
+                {"codice": 1778},
+                {"codice": 1779},
+                {"codice": 1780},
+                {"codice": 1781},
+                {"codice": 1782},
+                {"codice": 1783}
             ],
             "prezzo": 95.99,
             "nome": "AMDRyzen3V1300X",

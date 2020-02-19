@@ -1,15 +1,14 @@
-[
-	{
-		"id": 0,
-		"cliente": "pippo@franco.it",
-		"carrello": [
-			{"componente": 2, "copia": 185}
-		],
-		"indirizzo": "Via Funky, 123",
-		"citta": "Sanremo",
-		"CAP": 12345,
-		"metodoPagamento": "Contante",
-		"numeroCarta": 1234567890,
-		"cvv": 123
-	}
-]
+[{
+    "cliente": "pippo@franco.it",
+    "cvv": 123,
+    "CAP": 12345,
+    "metodoPagamento": "Contante",
+    "carrello": [{
+        "copia": 185,
+        "componente": 2
+    }],
+    "indirizzo": "Via Funky, 123",
+    "numeroCarta": 1234567890,
+    "id": 0,
+    "citta": "Sanremo"
+}]
