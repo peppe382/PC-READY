@@ -68,7 +68,7 @@
 				"formFactor": "Slim",
 				"copie": [ {"codice": 498} ]		},
 			{	
-				"id": 17,
+				"id": 23,
 				"nome": "FakePSU150W",
 				"prezzo": 999.00,
 				"consumo_energetico": 0,

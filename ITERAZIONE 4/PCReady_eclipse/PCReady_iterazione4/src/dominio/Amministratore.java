@@ -64,4 +64,8 @@ public class Amministratore {
 		return password;
 	}	
 
+	public static void setCounter(long id) {
+		Amministratore.counter.set(id);
+	}
+	
 }

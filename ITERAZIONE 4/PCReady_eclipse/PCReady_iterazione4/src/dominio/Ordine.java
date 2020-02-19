@@ -138,7 +138,10 @@ public class Ordine {
 	public void setCvv(int cvv) {
 		this.cvv = cvv;
 	}
-
+	
+	public static void setCounter(long id) {
+		Ordine.counter.set(id);
+	}
 
 	//Funzioni di progetto
 	public String selezionaModalitaDiPagamento(String metodoPagamento, int numeroCarta, int cvv){
