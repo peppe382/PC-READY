@@ -48,24 +48,40 @@ public class Parser {
 	// - - - - - - - - - - - - - - - - - -
 	
 	public static Map<String, Amministratore> caricaAdmin() {
+		int maxId = 0;
+		
 		Map<String, Amministratore> mappa = new HashMap<String, Amministratore>();
 		JSONArray amministratori = Parser.getObjectFromFile(Parser.file_utenti).getJSONArray("Amministratori");
 		for(int i = 0; i < amministratori.length(); i++) {
 			JSONObject adminJson = amministratori.getJSONObject(i);
 			Amministratore ad = Parser.processAdmin(adminJson);
+			
+			if(ad.getId() > maxId) maxId = ad.getId();
+			
 			mappa.put(ad.getEmail(), ad);
 		}
+		
+		Amministratore.setCounter((long)maxId);
+		
 		return mappa;
 	}
 	
 	public static Map<String, Cliente> caricaClienti() {
+		int maxId = 0;
+		
 		Map<String, Cliente> mappa = new HashMap<String, Cliente>();
 		JSONArray clienti = Parser.getObjectFromFile(Parser.file_utenti).getJSONArray("Clienti");
 		for(int i = 0; i < clienti.length(); i++) {
 			JSONObject clienteJson = clienti.getJSONObject(i);
 			Cliente cl = Parser.processCliente(clienteJson);
+			
+			if(cl.getId() > maxId) maxId = cl.getId();
+			
 			mappa.put(cl.getEmail(), cl);
 		}
+		
+		Cliente.setCounter((long)maxId);
+		
 		return mappa;
 	}
 	
@@ -91,6 +107,8 @@ public class Parser {
 	// - - - - - - - - - - - - - - - - - -
 	
 	public static Map<String, List<Ordine>> caricaOrdini(Map<String, Cliente> mappaClienti, Catalogo catalogo){
+		int maxId = 0;
+		
 		Map<String, List<Ordine>> mappa = new HashMap<String, List<Ordine>>();
 		JSONArray ordiniJson = Parser.getArrayFromFile(Parser.file_ordini);
 		for(int i = 0; i < ordiniJson.length(); i++) {
@@ -102,9 +120,15 @@ public class Parser {
 				if(mappa.containsKey(email)) tempList = new ArrayList<Ordine>(mappa.get(email));
 				else tempList = new ArrayList<Ordine>();
 				tempList.add(ord);
+				
+				if(ord.getId() > maxId) maxId = ord.getId();
+				
 				mappa.put(email, tempList);
 			}
 		}
+		
+		Ordine.setCounter((long)maxId);
+		
 		return mappa;
 	}
 	
@@ -131,6 +155,8 @@ public class Parser {
 		public static Catalogo parseCatalogo(JSONObject jsonCatalogo) {
 			Map<String, ArrayList<Componente>> catalogo = new HashMap<String, ArrayList<Componente>>();
 			
+			int maxId = 0;
+			
 			Iterator<String> keys = jsonCatalogo.keys();
 			while(keys.hasNext()) {
 				String cat = keys.next();
@@ -140,6 +166,9 @@ public class Parser {
 				for(int i = 0; i < compList.length(); i++) {
 					JSONObject comp = compList.getJSONObject(i);
 					Componente c = Parser.processComponente(comp, cat);
+					
+					if(c.getId() > maxId) maxId = c.getId();
+					
 					Componente temp;
 					switch(cat) {
 						case "CPU":
@@ -221,6 +250,8 @@ public class Parser {
 				Componente temp = (Componente) bund;
 				objCatalogo.aggiungiInCatalogo(temp);
 			}
+			
+			Componente.setCounter((long)maxId);
 			
 			return objCatalogo;
 		}

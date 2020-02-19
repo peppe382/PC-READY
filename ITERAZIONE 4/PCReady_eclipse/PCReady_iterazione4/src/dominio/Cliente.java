@@ -65,5 +65,8 @@ public class Cliente {
 		return password;
 	}
 	
+	public static void setCounter(long id) {
+		Cliente.counter.set(id);
+	}
 	
 }

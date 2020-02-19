@@ -142,6 +142,10 @@ public class Componente {
 		return str;
 	}
 	
+	public static void setCounter(long id) {
+		Componente.counter.set(id);
+	}
+	
 	
 	//  Funzioni di progetto
 	
