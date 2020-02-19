@@ -156,6 +156,7 @@ public class Parser {
 			Map<String, ArrayList<Componente>> catalogo = new HashMap<String, ArrayList<Componente>>();
 			
 			int maxId = 0;
+			int maxIdCopia = 0;
 			
 			Iterator<String> keys = jsonCatalogo.keys();
 			while(keys.hasNext()) {
@@ -222,6 +223,9 @@ public class Parser {
 					JSONArray listaCopie = comp.getJSONArray("copie");
 					for(int num = 0; num < listaCopie.length(); num++) {
 						CopiaComponente copia = Parser.processCopia(listaCopie.getJSONObject(num));
+						
+						if(copia.getCodice() > maxIdCopia) maxIdCopia = copia.getCodice();
+						
 						temp.aggiungiCopia(copia);
 					}
 					tempList.add(temp);
@@ -237,6 +241,9 @@ public class Parser {
 			for(int j = 0; j < configurazioni.length(); j++) {
 				JSONObject config = configurazioni.getJSONObject(j);
 				Configurazione conf = Parser.processConfigurazione(config, objCatalogo);
+				
+				if(conf.getId() > maxId) maxId = conf.getId();
+				
 				Componente temp = (Componente) conf;
 				objCatalogo.aggiungiInCatalogo(temp);
 			}
@@ -247,11 +254,15 @@ public class Parser {
 			for(int j = 0; j < bundle.length(); j++) {
 				JSONObject jsonB = bundle.getJSONObject(j);
 				Bundle bund = Parser.processBundle(jsonB, objCatalogo);
+				
+				if(bund.getId() > maxId) maxId = bund.getId();
+				
 				Componente temp = (Componente) bund;
 				objCatalogo.aggiungiInCatalogo(temp);
 			}
 			
 			Componente.setCounter((long)maxId);
+			CopiaComponente.setCounter((long)maxIdCopia);
 			
 			return objCatalogo;
 		}

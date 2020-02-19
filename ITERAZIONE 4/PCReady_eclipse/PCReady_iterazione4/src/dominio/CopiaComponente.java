@@ -32,5 +32,8 @@ public class CopiaComponente {
 		return "CODICE COPIA: " +getCodice()+"\n";
 	}
 	
+	public static void setCounter(long id) {
+		CopiaComponente.counter.set(id);
+	}
 	
 }
