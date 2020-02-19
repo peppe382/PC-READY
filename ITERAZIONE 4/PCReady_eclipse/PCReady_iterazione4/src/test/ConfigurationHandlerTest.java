@@ -54,22 +54,23 @@ class ConfigurationHandlerTest {
 	@DisplayName("Seleziona Componente Test")
 	void testB() {
 		Componente componente = handler.selezionaComponente(3);
-		System.out.println(componente);
 		assertNotNull(componente);
 	}
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Conferma Componente Test")
 	void testC() {
-		System.out.println(handler.confermaComponente());
+		handler.confermaComponente();
 		assertTrue(handler.getConf().getListaComponenti().get(0).getCategoria() == "RAM" );
 	}
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Conferma Termine Assemblaggio Test")
 	void testD() {
-		//Eseguo piú volte un codice simile ai test precedenti per generare tutto il necessario per la configurazione
-		//Non inserisco la CPU per osservare il comportamento in caso di configurazione incompleta
+		
+		handler.selezionaCategoria("CPU");
+		handler.selezionaComponente(1);
+		handler.confermaComponente();
 		
 		handler.selezionaCategoria("GPU");
 		handler.selezionaComponente(2);
@@ -94,21 +95,16 @@ class ConfigurationHandlerTest {
 		handler.selezionaCategoria("Storage");
 		handler.selezionaComponente(7);
 		handler.confermaComponente();
-		System.out.println(handler.terminaAssemblaggio());
-		Boolean condizione = true;
-		for (Componente elemento : handler.getConf().getListaComponenti()) {
-			if (elemento.getCategoria() == "CPU") {
-				condizione = false;
-			}
-		}
-		assertTrue(condizione);
+		handler.terminaAssemblaggio();
+		handler.confermaConfigurazione();
+		
+		Configurazione conf = (Configurazione) handler.selezionaCategoria("Configurazione").get(9);
+		assertEquals(conf.getListaComponenti(), handler.getConf().getListaComponenti());
 	}
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Crea Bundle Test")
 	void testE() {
-		System.out.println("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-		
 		handler2.selezionaCategoria("CPU");
 		handler2.selezionaComponente(1);
 		handler2.confermaComponente();
@@ -137,35 +133,21 @@ class ConfigurationHandlerTest {
 		handler2.selezionaComponente(7);
 		handler2.confermaComponente();
 		
+		handler2.terminaAssemblaggio();
+		
 		
 		handler2.infoConfigurazione(20.00, "WOW", "Bomba atomica");
 		handler2.confermaConfigurazione();
-		Boolean condizione = false;
-		for (String key : handler2.getCatalogo().getMappaComponenti().keySet()) {
-			for (Componente elemento : handler2.getCatalogo().getMappaComponenti().get(key)) {
-				if (elemento.getCategoria().equals("Bundle")) {
-					condizione = true;
-					System.out.println(elemento);
-				}
-			}
-		}
-		System.out.println("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-		assertTrue(condizione);
+		assertTrue(handler2.getCatalogo().getMappaComponenti().get("Bundle").size() == 1);
 	}
 	
 	
 	@org.junit.jupiter.api.Test
 	@DisplayName("Doppia Motherboard Test")
 	void testF() {
-		System.out.println("---------------------------------------------");
-		
 		handler.selezionaCategoria("Motherboard");
 		handler.selezionaComponente(6);
 		System.out.println(handler.confermaComponente());
-		
-		handler.selezionaCategoria("CPU");
-		handler.selezionaComponente(1);
-		handler.confermaComponente();
 		
 		System.out.println(handler.terminaAssemblaggio());
 		int condizione = 0;
@@ -185,13 +167,8 @@ class ConfigurationHandlerTest {
 		handler.selezionaComponente(8);
 		System.out.println(handler.confermaComponente());
 		System.out.println(handler.terminaAssemblaggio());
-		Boolean condizione = true;
-		for (Componente elemento : handler.getConf().getListaComponenti()) {
-			if (elemento.getCategoria() == "PSU") {
-				condizione = false;
-			}
-		}
-		assertTrue(condizione);
+		assertFalse(handler.terminaAssemblaggio());
+		
 		
 	}
 	
