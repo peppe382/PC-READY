@@ -1,15 +1,35 @@
 package dominio;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 public class Amministratore {
 
 	private int id;
 	private String nome, cognome, email, password;
+	private static final AtomicLong counter = new AtomicLong(0);
+	
+	public Amministratore(int id, String nome, String cognome, String email, String password) {
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.email = email;
+		this.password = password;
+	}
+	
+	public Amministratore(String nome, String cognome, String email, String password) {
+		setId();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.email = email;
+		this.password = password;
+	}
 	
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	
+	public void setId() {
+		this.id = (int) counter.incrementAndGet();
 	}
 	
 	public String getCognome() {

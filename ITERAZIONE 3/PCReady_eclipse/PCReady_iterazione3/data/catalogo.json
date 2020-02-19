@@ -7,7 +7,7 @@
 				"consumo_energetico": 75,
 				"descrizione": "AMD Ryzen 3 1300X, socket AM4",
 				"socket": "AM4",
-				"copie": [ {"codice": 125} ]		}
+				"copie": [ {"codice": 125},  {"codice": 365} ]		}
 		],
 		
 	"GPU":
@@ -88,7 +88,12 @@
 		],
 		
 	"Configurazione":
-		[],
+		[
+			{
+				"id": 1,
+				"componenti": [1, 2, 2, 3, 4, 5, 6]
+			}
+		],
 	
 	"Bundle":
 		[]

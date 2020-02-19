@@ -17,6 +17,9 @@ public class Console {
 	private PCReady sistema; // il sistema su cui deve operare la Console
 	private static Scanner in = new Scanner(System.in);
 	private boolean on = true;
+	private boolean admin = true;
+	private Amministratore amministratoreCorrente;
+	private Cliente clienteCorrente;
 	
 	/********** COSTRUTTORI e FUNZ. SINGLETON *********/
 	
@@ -27,21 +30,38 @@ public class Console {
 		this.setSistema();
 	}
 	
+	public void accesso() {
+		
+		Comando comandoLogin = new ComandoLogin();
+		comandoLogin.esegui(this);
+		esegui();
+				
+	}
+	
 	public void esegui() {
 		if(this.isOn()) {
-			while(on) {
-				this.print(ElencoComandi.string());
-				Integer codice = this.getInt();
-				try {
-					ElencoComandi.getComando(codice).esegui(this);
-				}catch(Exception e) {
-					e.printStackTrace();
-					
-					this.print("Codice inserito non valido!\n\n\n");
+			while(on)
+				if(admin == true) {
+					this.print(ElencoComandi.stringAmministratore());
+					Integer codice = this.getInt();
+					try {
+						ElencoComandi.getComandoAmministratore(codice).esegui(this);
+					}catch(Exception e) {
+						e.printStackTrace();
+						this.print("Codice inserito non valido!\n\n\n");
+					}
+					} else{
+						this.print(ElencoComandi.stringCliente());
+						Integer codice = this.getInt();
+						try {
+							ElencoComandi.getComandoCliente(codice).esegui(this);
+						}catch(Exception e) {
+							e.printStackTrace();
+							this.print("Codice inserito non valido!\n\n\n");
+					}
 				}
 			}
 		}
-	}
 	
 	public boolean isOn() {
 		return this.on;
@@ -111,8 +131,28 @@ public class Console {
 	public PCReady getSistema() {
 		return sistema;
 	}
+	
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 
 	public void setSistema() {
 		this.sistema = PCReady.getInstance();
+	}
+	
+	public void setAmministratoreCorrente(Amministratore amministratoreCorrente) {
+		this.amministratoreCorrente = amministratoreCorrente;
+	}
+	
+	public void setClienteCorrente(Cliente clienteCorrente) {
+		this.clienteCorrente = clienteCorrente;
+	}
+	
+	public Amministratore getAmministratoreCorrente() {
+		return amministratoreCorrente;
+	}
+	
+	public Cliente getClienteCorrente() {
+		return clienteCorrente;
 	}
 }

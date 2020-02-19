@@ -19,11 +19,13 @@ import dominio.componenti.*;
 
 public class Parser {
 	
-	public static final String database = "data/catalogo.json";
+	public static final String file_catalogo = "data/catalogo.json";
+	public static final String file_utenti = "data/utenti.json";
+	public static final String file_ordini = "data/ordini.json";
 	
 	// Funzioni handler
 	public static Catalogo createCatalogo() {
-		JSONObject catalogo = Parser.getObjectFromFile(Parser.database);
+		JSONObject catalogo = Parser.getObjectFromFile(Parser.file_catalogo);
 		return Parser.parseCatalogo(catalogo);
 	}
 	
@@ -40,7 +42,83 @@ public class Parser {
 			}
 			jsonString.put(categoria, tempArray);
 		}
-		Parser.writeToFile(Parser.database, jsonString.toString());
+		Parser.writeToFile(Parser.file_catalogo, jsonString.toString(4));
+	}
+	
+	// - - - - - - - - - - - - - - - - - -
+	
+	public static Map<String, Amministratore> caricaAdmin() {
+		Map<String, Amministratore> mappa = new HashMap<String, Amministratore>();
+		JSONArray amministratori = Parser.getObjectFromFile(Parser.file_utenti).getJSONArray("Amministratori");
+		for(int i = 0; i < amministratori.length(); i++) {
+			JSONObject adminJson = amministratori.getJSONObject(i);
+			Amministratore ad = Parser.processAdmin(adminJson);
+			mappa.put(ad.getEmail(), ad);
+		}
+		return mappa;
+	}
+	
+	public static Map<String, Cliente> caricaClienti() {
+		Map<String, Cliente> mappa = new HashMap<String, Cliente>();
+		JSONArray clienti = Parser.getObjectFromFile(Parser.file_utenti).getJSONArray("Clienti");
+		for(int i = 0; i < clienti.length(); i++) {
+			JSONObject clienteJson = clienti.getJSONObject(i);
+			Cliente cl = Parser.processCliente(clienteJson);
+			mappa.put(cl.getEmail(), cl);
+		}
+		return mappa;
+	}
+	
+	public static void salvaUtenti(Map<String, Cliente> clienti, Map<String, Amministratore> amministratori) {
+		JSONObject core = new JSONObject();
+		
+		JSONArray arClienti = new JSONArray();
+		for(Map.Entry<String, Cliente> entry: clienti.entrySet()) {
+			Cliente cl = entry.getValue();
+			arClienti.put(Parser.jsonUtente(cl));
+		}
+		core.put("Clienti", arClienti);
+		JSONArray arAdmin = new JSONArray();
+		for(Map.Entry<String, Amministratore> entry: amministratori.entrySet()) {
+			Amministratore ad = entry.getValue();
+			arAdmin.put(Parser.jsonUtente(ad));
+		}
+		core.put("Amministratori", arAdmin);
+		
+		Parser.writeToFile(Parser.file_utenti, core.toString(4));
+	}
+	
+	// - - - - - - - - - - - - - - - - - -
+	
+	public static Map<String, List<Ordine>> caricaOrdini(Map<String, Cliente> mappaClienti, Catalogo catalogo){
+		Map<String, List<Ordine>> mappa = new HashMap<String, List<Ordine>>();
+		JSONArray ordiniJson = Parser.getArrayFromFile(Parser.file_ordini);
+		for(int i = 0; i < ordiniJson.length(); i++) {
+			JSONObject ordineJson = ordiniJson.getJSONObject(i);
+			Ordine ord = Parser.processOrdine(ordineJson, mappaClienti, catalogo);
+			if(ord != null) {
+				String email = ord.getCliente().getEmail();
+				ArrayList<Ordine> tempList;
+				if(mappa.containsKey(email)) tempList = new ArrayList<Ordine>(mappa.get(email));
+				else tempList = new ArrayList<Ordine>();
+				tempList.add(ord);
+				mappa.put(email, tempList);
+			}
+		}
+		return mappa;
+	}
+	
+	public static void salvaOrdini(Map<String, List<Ordine>> mappaOrdini) {
+		JSONArray array = new JSONArray();
+		for(Map.Entry<String, List<Ordine>> entry: mappaOrdini.entrySet()) {
+			List<Ordine> ordini = entry.getValue();
+			for(Ordine ord : ordini) {
+				JSONObject ordJson = Parser.jsonOrdine(ord);
+				array.put(ordJson);
+			}
+		}
+		
+		Parser.writeToFile(Parser.file_ordini, array.toString(4));
 	}
 	
 	// -------------------------------------------------------------------
@@ -56,7 +134,7 @@ public class Parser {
 			Iterator<String> keys = jsonCatalogo.keys();
 			while(keys.hasNext()) {
 				String cat = keys.next();
-				if(cat=="Configurazione" || cat=="Bundle") continue;
+				if(cat.equals("Configurazione") || cat.equals("Bundle")) continue;
 				ArrayList<Componente> tempList = new ArrayList<Componente>();
 				JSONArray compList = jsonCatalogo.getJSONArray(cat);
 				for(int i = 0; i < compList.length(); i++) {
@@ -192,6 +270,59 @@ public class Parser {
 			return b;
 		}
 		
+		public static Amministratore processAdmin(JSONObject adminJson) {
+			
+			int id = adminJson.getInt("id");
+			String nome = adminJson.getString("nome");
+			String cognome = adminJson.getString("cognome");
+			String email = adminJson.getString("email");
+			String password = adminJson.getString("password");
+			
+			return new Amministratore(id, nome, cognome, email, password);
+		}
+		
+		public static Cliente processCliente(JSONObject clienteJson) {
+			
+			int id = clienteJson.getInt("id");
+			String nome = clienteJson.getString("nome");
+			String cognome = clienteJson.getString("cognome");
+			String email = clienteJson.getString("email");
+			String password = clienteJson.getString("password");
+			
+			return new Cliente(id, nome, cognome, email, password);
+		}
+		
+		public static Ordine processOrdine(JSONObject json, Map<String, Cliente> mappaClienti, Catalogo catalogo) {
+			String email = json.getString("cliente");
+			Cliente cl;
+			if(mappaClienti.containsKey(email)) cl = mappaClienti.get(email);
+			else return null;
+			JSONArray carrello = json.getJSONArray("carrello");
+			Map<Componente, List<CopiaComponente>> mappaCarrello = new HashMap<Componente, List<CopiaComponente>>();
+			for(int i = 0; i < carrello.length(); i++) {
+				JSONObject compJson = carrello.getJSONObject(i);
+				int idComp = compJson.getInt("componente");
+				int codiceCopia = compJson.getInt("copia");
+				Componente comp = catalogo.getComponente(idComp);
+				if(comp == null) return null;
+				CopiaComponente cp = new CopiaComponente(codiceCopia);
+				ArrayList<CopiaComponente> tempList;
+				if(mappaCarrello.containsKey(comp)) tempList = new ArrayList<CopiaComponente>(mappaCarrello.get(comp));
+				else tempList = new ArrayList<CopiaComponente>();
+				tempList.add(cp);
+				mappaCarrello.put(comp, tempList);
+			}
+			int id = json.getInt("id");
+			String indirizzo = json.getString("indirizzo");
+			String citta = json.getString("citta");
+			int CAP = json.getInt("CAP");
+			String metodoPagamento = json.getString("metodoPagamento");
+			int numeroCarta = json.getInt("numeroCarta");
+			int cvv = json.getInt("cvv");
+			Ordine ord = new Ordine(id, cl, mappaCarrello, indirizzo, citta, CAP, metodoPagamento, numeroCarta, cvv);
+			return ord;
+		}
+		
 		// -------------------------------------------------------------------
 		
 		// Scrittura singoli Componenti
@@ -236,8 +367,8 @@ public class Parser {
 				case "Case":
 					Case cs = (Case) c;
 					tempJson.put("slot", cs.getSlot());
-					tempJson.put("formatFactorPSU", cs.getFormFactorPSU());
-					tempJson.put("formatFactorMotherboard", cs.getFormFactorMotherboard());
+					tempJson.put("formFactorPSU", cs.getFormFactorPSU());
+					tempJson.put("formFactorMotherboard", cs.getFormFactorMotherboard());
 					break;
 				default:
 					break;
@@ -280,6 +411,51 @@ public class Parser {
 			JSONObject core = jsonConfigurazione((Configurazione)b);
 			core.put("sconto", b.getSconto());
 			return core;
+		}
+		
+		public static JSONObject jsonUtente(Cliente u) {
+			JSONObject json = new JSONObject();
+			json.put("id", u.getId());
+			json.put("nome", u.getNome());
+			json.put("cognome", u.getCognome());
+			json.put("email", u.getEmail());
+			json.put("password", u.getPassword());
+			return json;
+		}
+		
+		public static JSONObject jsonUtente(Amministratore u) {
+			JSONObject json = new JSONObject();
+			json.put("id", u.getId());
+			json.put("nome", u.getNome());
+			json.put("cognome", u.getCognome());
+			json.put("email", u.getEmail());
+			json.put("password", u.getPassword());
+			return json;
+		}
+		
+		public static JSONObject jsonOrdine(Ordine ord) {
+			JSONObject json = new JSONObject();
+			json.put("id", ord.getId());
+			json.put("cliente", ord.getCliente().getEmail());
+			JSONArray carrello = new JSONArray();
+			for(Map.Entry<Componente, List<CopiaComponente>> entry : ord.getMappaComponenti().entrySet()) {
+				Componente comp = entry.getKey();
+				for(CopiaComponente cp : entry.getValue()) {
+					JSONObject elemCarrello = new JSONObject();
+					elemCarrello.put("componente", comp.getId());
+					elemCarrello.put("copia", cp.getCodice());
+					carrello.put(elemCarrello);
+				}
+			}
+			json.put("carrello", carrello);
+			json.put("indirizzo", ord.getIndirizzo());
+			json.put("citta", ord.getCitta());
+			json.put("CAP", ord.getCAP());
+			json.put("metodoPagamento", ord.getMetodoPagamento());
+			json.put("numeroCarta", ord.getNumeroCarta());
+			json.put("cvv", ord.getCvv());
+			
+			return json;
 		}
 		
 	// -------------------------------------------------------------------

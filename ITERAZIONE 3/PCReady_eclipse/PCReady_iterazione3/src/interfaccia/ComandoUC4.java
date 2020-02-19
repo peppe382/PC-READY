@@ -8,16 +8,16 @@ import dominio.CopiaComponente;
 public class ComandoUC4 extends Comando {
 
 	public ComandoUC4() {
-		super(4, "Aggiungi una copia di un componente");
+		super(4, "Aggiungi una copia di un componente", true);
 	}
 
 	@Override
 	public void esegui(Console console) {
 		
-		console.print("Benvenuto! Dimmi il codice del componente di cui vuoi aggiungere una copia: ");
-		int codice = console.getInt();
 		console.print("Adesso dimmi la categoria a cui appartiene: ");
 		String categoria = console.getString();
+		console.print("Benvenuto! Dimmi il codice del componente di cui vuoi aggiungere una copia: ");
+		int codice = console.getInt();
 		
 		Componente comp = console.getSistema().getHandlerComponenti().selezionaComponente(codice, categoria);
 		
