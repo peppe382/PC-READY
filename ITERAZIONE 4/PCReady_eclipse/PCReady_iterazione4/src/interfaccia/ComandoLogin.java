@@ -33,7 +33,7 @@ public class ComandoLogin extends Comando {
 						console.print("L'amministratore ha effettuato l'accesso\n");
 						successo = true;
 					}else {
-						console.print("L'amministratore non è registrato\n");
+						console.print("L'amministratore non risulta registrato\n");
 					}
 				break;
 			case 2:
@@ -46,7 +46,7 @@ public class ComandoLogin extends Comando {
 					console.print("L'utente ha effettuato l'accesso \n");
 					successo = true;
 				}else {
-					console.print("L'utente non è registrato \n");
+					console.print("L'utente non risulta registrato \n");
 				}
 				break;
 			case 3:

@@ -138,7 +138,7 @@ public class PCReady {
     			Cliente cliente = new Cliente(nome,cognome,email,password);
     			this.cliente = cliente;
     			this.mappaClienti.put(cliente.getEmail(), cliente);
-    			return "Cliente: "+cliente.getEmail()+" creato con successo";
+    			return "Nome: "+cliente.getNome()+"\nCognome: "+cliente.getCognome()+"\nE-mail: "+cliente.getEmail();
     		}else return "Le password non coincidono";
     	}
     	else return "Email gia utilizzata";

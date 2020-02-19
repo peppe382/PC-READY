@@ -30,7 +30,8 @@ public class ComandoRegistrazione extends Comando {
 		}
 		else {
 			console.setClienteCorrente(console.getSistema().getCliente());
-			console.print("L'utente ha effettuato la registrazione ed ora è loggato\n");
+			console.print("L'utente ha effettuato la registrazione ed ora risulta loggato\n");
+			console.print(message + "\n");
 			setRisultato(true);
 			console.setAdmin(false);
 		}
