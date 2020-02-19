@@ -1,0 +1,44 @@
+{
+	"Amministratori":
+		[
+			{
+				"id": 0,
+				"nome": "Bartolomeo",
+				"cognome": "Caruso",
+				"email": "bartolomeo@caruso.it",
+				"password": "password"
+			},
+			{
+				"id": 1,
+				"nome": "Gabriele",
+				"cognome": "Costanzo",
+				"email": "gabriele@costanzo.it",
+				"password": "123456"
+			},
+			{
+				"id": 2,
+				"nome": "Giuseppe",
+				"cognome": "Fallica",
+				"email": "giuseppe@fallica.it",
+				"password": "pass123"
+			}
+		],
+		
+	"Clienti":
+		[
+			{
+				"id": 0,
+				"nome": "Mario",
+				"cognome": "Rossi",
+				"email": "mario@rossi.it",
+				"password": "mariorossi99"
+			},
+			{
+				"id": 1,
+				"nome": "Pippo",
+				"cognome": "Franco",
+				"email": "pippo@franco.it",
+				"password": "francopippo"
+			}
+		]
+}
