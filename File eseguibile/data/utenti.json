@@ -13,6 +13,13 @@
             "nome": "Mario",
             "id": 0,
             "email": "mario@rossi.it"
+        },
+        {
+            "password": "puma",
+            "cognome": "Puma",
+            "nome": "Saro",
+            "id": 2,
+            "email": "saro@gmail.com"
         }
     ],
     "Amministratori": [

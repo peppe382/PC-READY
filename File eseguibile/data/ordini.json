@@ -1,14 +1,30 @@
-[{
-    "cliente": "pippo@franco.it",
-    "cvv": 123,
-    "CAP": 12345,
-    "metodoPagamento": "Contante",
-    "carrello": [{
-        "copia": 185,
-        "componente": 2
-    }],
-    "indirizzo": "Via Funky, 123",
-    "numeroCarta": 1234567890,
-    "id": 0,
-    "citta": "Sanremo"
-}]
+[
+    {
+        "cliente": "pippo@franco.it",
+        "cvv": 123,
+        "CAP": 12345,
+        "metodoPagamento": "Contante",
+        "carrello": [{
+            "copia": 185,
+            "componente": 2
+        }],
+        "indirizzo": "Via Funky, 123",
+        "numeroCarta": 1234567890,
+        "id": 0,
+        "citta": "Sanremo"
+    },
+    {
+        "cliente": "saro@gmail.com",
+        "cvv": 123,
+        "CAP": 123456,
+        "metodoPagamento": "Visa",
+        "carrello": [{
+            "copia": 126,
+            "componente": 12
+        }],
+        "indirizzo": "Via Roma 56",
+        "numeroCarta": 123155153,
+        "id": 1,
+        "citta": "Palermo"
+    }
+]

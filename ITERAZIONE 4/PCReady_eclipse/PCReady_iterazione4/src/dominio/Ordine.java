@@ -172,7 +172,7 @@ public class Ordine {
 	public String toString() {
 		String infoOrdine = "---Riepilogo ordine--- \n Id ordine: "+ id+"\n Nome cliente: "+cliente.getNome() +"\n Cognome cliente: "+ cliente.getCognome() +"\n Indirizzo: "+indirizzo+"\n Citta: "+citta+"\n CAP: "+CAP+"\n Metodo di pagamento: "+metodoPagamento+ "\n---Riepilogo delle componenti--- \n";
 		for(Componente key : mappaComponenti.keySet()) {
-			infoOrdine += key.toString() + "\n COPIE SELEZIONATE: "+ mappaComponenti.get(key).toString();
+			infoOrdine += key.toString() + "\nCOPIE SELEZIONATE: "+ mappaComponenti.get(key).toString();
 		}
 		return infoOrdine;
 		}

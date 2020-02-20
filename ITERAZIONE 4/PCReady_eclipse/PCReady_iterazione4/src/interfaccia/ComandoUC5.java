@@ -125,7 +125,7 @@ public class ComandoUC5 extends Comando {
 	private String pagamentiList() {
 		int i=1;
 		String str = "";
-		str += "\n Elenco delle modalit� di pagamento disponibili:\n";
+		str += "\n Elenco dei metodi di pagamento disponibili:\n";
 		str += "--------------------------------\n";
 		for(String pag : pagamenti) {
 			str += "Codice: "+i +" Metodo di pagamento: "+pag +"\n";
