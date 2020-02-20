@@ -203,6 +203,7 @@ public class PCReady {
 			nuovaLista.add(ordine);
 			
 			this.mappaOrdini.put(emailCliente, nuovaLista);
+			Parser.salvaOrdini(this.mappaOrdini);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -237,6 +238,7 @@ public class PCReady {
 			
 			listaOrdini.add(ordineCorrente);
 			mappaOrdini.put(email, listaOrdini);
+			Parser.salvaOrdini(this.mappaOrdini);
 		}
 		
 		return ordineCorrente.toString();
