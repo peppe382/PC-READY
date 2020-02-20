@@ -90,7 +90,7 @@ public class Console {
 			    if(val < 0) this.print("Il numero inserito deve essere positivo!\n");
 			    else reading = false;
 			} catch (Exception e) {
-			    this.print("Il numero inserito non è valido!\n");
+			    this.print("Il numero inserito non risulta valido!\n");
 			}
 		}
 		return val;
@@ -106,7 +106,7 @@ public class Console {
 			    if(val < 0) this.print("Il numero inserito deve essere positivo!\n");
 			    else reading = false;
 			} catch (Exception e) {
-			    this.print("Il numero inserito non è valido!\n");
+			    this.print("Il numero inserito non risulta valido!\n");
 			}
 		}
 		return val;
@@ -122,7 +122,7 @@ public class Console {
 			    if(val < 0) this.print("Il numero inserito deve essere positivo!\n");
 			    else reading = false;
 			} catch (Exception e) {
-			    this.print("Il numero inserito non è valido!\n");
+			    this.print("Il numero inserito non risulta valido!\n");
 			}
 		}
 		return val;
@@ -138,7 +138,7 @@ public class Console {
 			    if(val < 0) this.print("Il numero inserito deve essere positivo!\n");
 			    else reading = false;
 			} catch (Exception e) {
-			    this.print("Il numero inserito non è valido!\n");
+			    this.print("Il numero inserito non risulta valido!\n");
 			}
 		}
 		return val;
@@ -154,7 +154,7 @@ public class Console {
 				if(val.length()<1) this.print("La stringa non ha lunghezza valida!\n");
 				else reading = false;
 			}catch(Exception e) {
-				this.print("La stringa immessa non è valida!\n");
+				this.print("La stringa immessa non risulta valida!\n");
 			}
 		}
 		return val;
@@ -170,7 +170,7 @@ public class Console {
 				if(val.length()<1) this.print("La stringa non ha lunghezza valida!\n");
 				else reading = false;
 			}catch(Exception e) {
-				this.print("La stringa immessa non è valida!\n");
+				this.print("La stringa immessa non risulta valida!\n");
 			}
 		}
 		return val;
@@ -182,11 +182,11 @@ public class Console {
 		boolean reading = true;
 		while(reading) {
 			reading = false;
-			val = this.getString("Rispondere alla domanda con Sì o No: ").toLowerCase();
+			val = this.getString("Rispondere alla domanda con Si o No: ").toLowerCase();
 			if(val.equals("si")||val.equals("sì")||val.equals("s")||val.equals("yes")||val.contentEquals("y")) returnValue = true;
 			else if(val.equals("no")||val.equals("n")) returnValue = false;
 			else {
-				this.print("Per favore, rispondere solo con Sì o No!\n");
+				this.print("Per favore, rispondere solo con Si o No!\n");
 				reading = true;
 			}
 		}
@@ -203,7 +203,7 @@ public class Console {
 			if(val.equals("si")||val.equals("sì")||val.equals("s")||val.equals("yes")||val.contentEquals("y")) returnValue = true;
 			else if(val.equals("no")||val.equals("n")) returnValue = false;
 			else {
-				this.print("Per favore, rispondere solo con Sì o No!\n");
+				this.print("Per favore, rispondere solo con Si o No!\n");
 				reading = true;
 			}
 		}

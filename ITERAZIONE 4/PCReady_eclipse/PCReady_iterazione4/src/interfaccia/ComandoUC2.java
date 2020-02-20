@@ -50,7 +50,7 @@ public class ComandoUC2 extends Comando {
 						console.print("---INSERISCI CODICE COMPONENTE---  \n");
 						Componente componenteAttuale = this.handlerConfigurazione.selezionaComponente(console.getInt());
 						if (componenteAttuale != null) {
-							console.print("\n\n ECCO I DETTAGLI DEL COMPONENTE SELEZIONATO"+componenteAttuale.toString());
+							console.print("\n\nECCO I DETTAGLI DEL COMPONENTE SELEZIONATO \n"+componenteAttuale.toString());
 							if (console.getYesNo("\n Ti soddisfa il componente selezionato? Inserisci Si o No: ") == true) {
 								String messaggioH = this.handlerConfigurazione.confermaComponente();
 								if (messaggioH != null) {

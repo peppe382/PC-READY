@@ -1,44 +1,41 @@
 {
-	"Amministratori":
-		[
-			{
-				"id": 0,
-				"nome": "Bartolomeo",
-				"cognome": "Caruso",
-				"email": "bartolomeo@caruso.it",
-				"password": "password"
-			},
-			{
-				"id": 1,
-				"nome": "Gabriele",
-				"cognome": "Costanzo",
-				"email": "gabriele@costanzo.it",
-				"password": "123456"
-			},
-			{
-				"id": 2,
-				"nome": "Giuseppe",
-				"cognome": "Fallica",
-				"email": "giuseppe@fallica.it",
-				"password": "pass123"
-			}
-		],
-		
-	"Clienti":
-		[
-			{
-				"id": 0,
-				"nome": "Mario",
-				"cognome": "Rossi",
-				"email": "mario@rossi.it",
-				"password": "mariorossi99"
-			},
-			{
-				"id": 1,
-				"nome": "Pippo",
-				"cognome": "Franco",
-				"email": "pippo@franco.it",
-				"password": "francopippo"
-			}
-		]
+    "Clienti": [
+        {
+            "password": "francopippo",
+            "cognome": "Franco",
+            "nome": "Pippo",
+            "id": 1,
+            "email": "pippo@franco.it"
+        },
+        {
+            "password": "mariorossi99",
+            "cognome": "Rossi",
+            "nome": "Mario",
+            "id": 0,
+            "email": "mario@rossi.it"
+        }
+    ],
+    "Amministratori": [
+        {
+            "password": "password",
+            "cognome": "Caruso",
+            "nome": "Bartolomeo",
+            "id": 0,
+            "email": "bartolomeo@caruso.it"
+        },
+        {
+            "password": "pass123",
+            "cognome": "Fallica",
+            "nome": "Giuseppe",
+            "id": 2,
+            "email": "giuseppe@fallica.it"
+        },
+        {
+            "password": "123456",
+            "cognome": "Costanzo",
+            "nome": "Gabriele",
+            "id": 1,
+            "email": "gabriele@costanzo.it"
+        }
+    ]
 }

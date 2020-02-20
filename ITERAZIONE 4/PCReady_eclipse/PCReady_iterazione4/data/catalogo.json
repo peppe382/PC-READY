@@ -102,15 +102,30 @@
             "consumo_energetico": 95
         }
     ],
-    "GPU": [{
-        "descrizione": "AMD Sapphyre 580, 8Gb DDR5 dedicati",
-        "copie": [{"codice": 200}],
-        "prezzo": 160.99,
-        "nome": "AMD Sapphyre 580",
-        "id": 7,
-        "slot": 2,
-        "consumo_energetico": 100
-    }],
+    "GPU": [
+        {
+            "descrizione": "AMD Sapphyre 580, 8Gb DDR5 dedicati",
+            "copie": [{"codice": 200}],
+            "prezzo": 160.99,
+            "nome": "AMD Sapphyre 580",
+            "id": 7,
+            "slot": 2,
+            "consumo_energetico": 100
+        },
+        {
+            "descrizione": "NVidia GeForce 1050Ti 4Gb dedicati, mono-slot",
+            "copie": [
+                {"codice": 1782},
+                {"codice": 1783},
+                {"codice": 1784}
+            ],
+            "prezzo": 137,
+            "nome": "NVidia GeForce 1050Ti",
+            "id": 24,
+            "slot": 1,
+            "consumo_energetico": 250
+        }
+    ],
     "RAM": [{
         "descrizione": "Corsaire Select Value RAM DDR4, 3000HZ, 8GB",
         "copie": [
