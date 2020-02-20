@@ -47,7 +47,7 @@ public class ComandoUC1 extends Comando {
 						console.print("Seleziona una componente, tra quelle che vengono mostrate a video, inserendo il suo codice numerico:\n");
 						Map<Integer, Componente> mappaComponenti = this.handlerConfigurazione.selezionaCategoria(cat);
 						for (Integer key : mappaComponenti.keySet()) {
-							console.print("\n ---Codice: "+key +"  Componente: "+ mappaComponenti.get(key) +"--- \n");
+							console.print("\n---Codice: "+key +"\nComponente: "+ mappaComponenti.get(key) +"--- \n");
 						}
 						console.print("---INSERISCI CODICE COMPONENTE--- \n");
 						Componente componenteAttuale = this.handlerConfigurazione.selezionaComponente(console.getInt());

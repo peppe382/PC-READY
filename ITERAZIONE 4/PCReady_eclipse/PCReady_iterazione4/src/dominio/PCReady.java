@@ -138,6 +138,7 @@ public class PCReady {
     			Cliente cliente = new Cliente(nome,cognome,email,password);
     			this.cliente = cliente;
     			this.mappaClienti.put(cliente.getEmail(), cliente);
+    			Parser.salvaUtenti(this.mappaClienti, this.mappaAmministratori);
     			return "Nome: "+cliente.getNome()+"\nCognome: "+cliente.getCognome()+"\nE-mail: "+cliente.getEmail();
     		}else return "Le password non coincidono";
     	}
