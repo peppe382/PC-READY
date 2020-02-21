@@ -9,9 +9,9 @@ public class Catalogo {
 
 	private Map<String,ArrayList<Componente>> mappaComponenti;
 	
+	//------------------------------------------------------------------------------------------
 	
-	
-	//  Costruttori
+	//COSTRUTTORI
 	
 	public Catalogo(Map<String, ArrayList<Componente>> mappaComponenti) {
 		this.mappaComponenti = mappaComponenti;
@@ -23,9 +23,9 @@ public class Catalogo {
 		//Tutte le chiavi della mappa devono essere inizializzate...
 	}
 	
+	//------------------------------------------------------------------------------------------
 	
-	
-	//  Getters e setters
+	// GETTERS e SETTERS
 
 	public Map<String, ArrayList<Componente>> getMappaComponenti() {
 		return mappaComponenti;
@@ -35,10 +35,23 @@ public class Catalogo {
 		this.mappaComponenti = mappaComponenti;
 	}
 	
+	public void aggiungiCategoria(String cat) {
+	      try{
+	        this.mappaComponenti.put(cat, new ArrayList<Componente>());
+	      }catch(Exception e){
+	        e.printStackTrace();
+	      }
+	}
 	
+	//------------------------------------------------------------------------------------------
 	
-	//  Funzioni di progetto
+	//FUNZIONI di PROGETTO
 	
+	/**
+	 * Ottieni tutti i Componenti di una stessa Categoria, con il relativo id di Componente
+	 * @param idCategoria: il nome della Categoria richiesta
+	 * @return una Mappa IdNumerico-Componente per mostrare tutti i Componenti di una stessa Categoria
+	 */
 	public Map<Integer, Componente> ottieniComponentiByCategoria(String idCategoria){
 		Map<Integer, Componente> mappa = new HashMap<Integer, Componente>();
 		try { //Evito eventuali errori per l'identificativo della categoria
@@ -51,14 +64,10 @@ public class Catalogo {
 		return mappa;
 	}
 	
-	public void aggiungiCategoria(String cat) {
-	      try{
-	        this.mappaComponenti.put(cat, new ArrayList<Componente>());
-	      }catch(Exception e){
-	        e.printStackTrace();
-	      }
-	}
-	
+	/**
+	 * Aggiungi un nuovo Componente al Catalogo
+	 * @param componente: il Componente da aggiungere
+	 */
 	public void aggiungiInCatalogo(Componente componente) {
 		try {
 			
@@ -75,12 +84,17 @@ public class Catalogo {
 	    }
 	}
 	
-	
+	/**
+	 * Conferma la Configurazione in corso aggiungendola al Catalogo
+	 * @param conf: la Configurazione da aggiungere
+	 */
 	public void salvaConfigurazione(Configurazione conf) {
 		this.aggiungiInCatalogo((Componente) conf);
 	}
 	
-	
+	/**
+	 * Ottieni il Componente, dati id e Categoria
+	 */
 	public Componente getComponente(int id, String categoria) {
 		try {
 			for (Componente elemento : this.mappaComponenti.get(categoria)) {
@@ -94,6 +108,9 @@ public class Catalogo {
 		return null;
 	}
 	
+	/**
+	 * Ottieni il Componente, dato solo l'id
+	 */
 	public Componente getComponente(int id) {
 		try {
 			for(Map.Entry<String, ArrayList<Componente>> entry : this.mappaComponenti.entrySet()) {
@@ -109,7 +126,9 @@ public class Catalogo {
 		return null;
 	}
 	
-	
+	/**
+	 * Rimuovi un Componente, dato il suo id
+	 */
 	public boolean rimuoviDaMappa(int id) {
 		try {
 			for(String key : this.mappaComponenti.keySet()) {
@@ -129,6 +148,9 @@ public class Catalogo {
 		return false;
 	}
 	
+	/**
+	 * Rimuove una Configurazione dal Catalogo
+	 */
 	public void rimuoviConfigurazioni(int id) {
 		for (Componente comp : this.mappaComponenti.get("Configurazione")) {
 			Configurazione conf = (Configurazione) comp;

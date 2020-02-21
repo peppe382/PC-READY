@@ -10,53 +10,57 @@ public class Carrello {
 	private int numeroPezzi;
 	private Map<Componente,List<CopiaComponente>> mappaComponentiCarrello;
 	
+	//------------------------------------------------------------------------------------------
 	
-	//Costruttori
+	// COSTRUTTORI
+	
 	public Carrello() {
-		// TODO Auto-generated constructor stub
 		this.numeroPezzi = 0;
 		this.prezzoTotale = 0;
 		this.mappaComponentiCarrello = new HashMap<Componente,List<CopiaComponente>>();
 	}
 	
+	//------------------------------------------------------------------------------------------
 	
-	//Getters e setters
+	// GETTERS e SETTERS
+	
 	public Map<Componente,List<CopiaComponente>> getMappaComponenti(){
 		return mappaComponentiCarrello;
 	}
-	
 	
 	public double getPrezzoTotale() {
 		return prezzoTotale;
 	}
 
-
 	public int getNumeroPezzi() {
 		return numeroPezzi;
 	}
-
 
 	public Map<Componente, List<CopiaComponente>> getMappaComponentiCarrello() {
 		return mappaComponentiCarrello;
 	}
 
-
 	public void setPrezzoTotale(double prezzoTotale) {
 		this.prezzoTotale = prezzoTotale;
 	}
-
 
 	public void setNumeroPezzi(int numeroPezzi) {
 		this.numeroPezzi = numeroPezzi;
 	}
 
-
 	public void setMappaComponentiCarrello(Map<Componente, List<CopiaComponente>> mappaComponentiCarrello) {
 		this.mappaComponentiCarrello = mappaComponentiCarrello;
 	}
 
+	//------------------------------------------------------------------------------------------
 
-	//Funzioni di progetto
+	// FUNZIONI di PROGETTO
+	
+	/**
+	 * Calcola il numero di Componenti doppioni nel carrello
+	 * @param comp: il Componente sotto esame
+	 * @return il numero di Copie dello stesso Componente
+	 */
 	public int controllaDoppioni(Componente comp) {
 		int doppioni = 0;
 		
@@ -80,7 +84,12 @@ public class Carrello {
 		return doppioni;
 	}
 	
-	
+	/**
+	 * Aggiunge una o più copie di un Componente al Carrello
+	 * @param componente: il Componente da aggiungere
+	 * @param listaCopie: la lista delle Copie del Componente da aggiungere
+	 * @return il prezzo aggiornato del Carello
+	 */
 	public double aggiungiComponente(Componente componente, List<CopiaComponente> listaCopie) {
 		List<CopiaComponente> listaAttuale;
 		try {

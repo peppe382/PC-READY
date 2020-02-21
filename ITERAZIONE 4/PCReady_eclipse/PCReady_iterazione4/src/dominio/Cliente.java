@@ -8,6 +8,9 @@ public class Cliente {
 	private String nome, cognome, email, password;
 	private static final AtomicLong counter = new AtomicLong(0);
 	
+	//------------------------------------------------------------------------------------------
+	// COSTRUTTORI
+	
 	public Cliente(int id, String nome, String cognome, String email, String password) {
 		this.id = id;
 		this.nome = nome;
@@ -24,6 +27,8 @@ public class Cliente {
 		this.password = password;
 	}
 	
+	//------------------------------------------------------------------------------------------
+	// GETTERS e SETTERS
 
 	public int getId() {
 		return id;

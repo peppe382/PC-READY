@@ -13,8 +13,9 @@ public class ConfigurationHandler {
 	private Catalogo catalogo;
 	private String stringaComunicazioni;
 	
+	//------------------------------------------------------------------------------------------
+	// COSTRUTTORI
 	
-	//  Costruttori
 	public ConfigurationHandler(Catalogo catalogo) {
 		this.creaConfigurazione();
 		this.mappaCorrente = new HashMap<Integer, Componente>();
@@ -31,59 +32,48 @@ public class ConfigurationHandler {
 		this.stringaComunicazioni = null;
 	}
 
-
-
-
-	//  Getters e Setters
+	//------------------------------------------------------------------------------------------
+	// GETTERS e SETTERS
+	
 	public Map<Integer, Componente> getMappaCorrente() {
 		return mappaCorrente;
 	}
-
 
 	public Componente getComponenteCorrente() {
 		return componenteCorrente;
 	}
 
-
 	public Configurazione getConf() {
 		return conf;
 	}
-
 
 	public CompatibilityChecker getChecker() {
 		return checker;
 	}
 
-
 	public void setMappaCorrente(Map<Integer, Componente> mappaCorrente) {
 		this.mappaCorrente = mappaCorrente;
 	}
-
 
 	public void setComponenteCorrente(Componente componenteCorrente) {
 		this.componenteCorrente = componenteCorrente;
 	}
 
-
 	public void setConf(Configurazione conf) {
 		this.conf = conf;
 	}
-
 
 	public void setChecker(CompatibilityChecker checker) {
 		this.checker = checker;
 	}
 	
-	
 	public String getStringaComunicazioni() {
 		return stringaComunicazioni;
 	}
 
-
 	public void setStringaComunicazioni(String stringaComunicazioni) {
 		this.stringaComunicazioni = stringaComunicazioni;
 	}
-
 	
 	public Catalogo getCatalogo() {
 		return catalogo;
@@ -93,20 +83,22 @@ public class ConfigurationHandler {
 		this.catalogo = catalogo;
 	}
 	
-
-	//  Funzioni di progetto
+	//------------------------------------------------------------------------------------------
+	// FUNZIONI di PROGETTO
 	
+	// Crea una nuova Configurazione corrente
 	public void creaConfigurazione() {
 		this.conf = new Configurazione();
 		/* Una funzione console dopo tale operazione deve ritornare all'utente/amministratore
 		   tutte le categorie presenti nel sistema da cui scegliere le componenti */
 	}
 	
+	// Crea un nuovo Bundle corrente
 	public void creaBundle(String comando_bundle) {
 		if (comando_bundle.equals("Bundle")) this.conf = new Bundle();
 	}
 	
-	
+	// Seleziona un Componente corrente
 	public Componente selezionaComponente(int idComponente) {
 		try {
 			this.componenteCorrente  = this.mappaCorrente.get(idComponente);
@@ -116,7 +108,7 @@ public class ConfigurationHandler {
 		return this.componenteCorrente ;
 	}
 	
-	
+	// Seleziona una Categoria per ottenere la mappa di Componenti da cui scegliere
 	public Map<Integer, Componente> selezionaCategoria(String idCategoria) {
 		try {
 			return this.mappaCorrente = this.catalogo.ottieniComponentiByCategoria(idCategoria);
@@ -126,7 +118,7 @@ public class ConfigurationHandler {
 		return null;
 	}
 	
-	
+	// Conferma la scelta del Componente da aggiungere alla Configurazione
 	public String confermaComponente() {
 		if (this.checker.controlloComponente(this.componenteCorrente)) {
 			return this.conf.aggiungiComponenteInConfigurazione(this.componenteCorrente);
@@ -139,11 +131,11 @@ public class ConfigurationHandler {
 				consiglio =  "COMPONENTE INCOMPATIBILE: COMPONENTE SOSTITUTIVO CONSIGLIATO: \n"+alternativa.toString() ;
 			}
 			return consiglio;
-			//Se consiglio é null, non é presente nessun componente sostitutivo...
+			//Se consiglio e' null, non e' presente nessun componente sostitutivo...
 		}
 	}
 	
-	
+	// Controlla che sia possibile l'assemblaggio della Configurazione
 	public Boolean terminaAssemblaggio() {
 		String componenteMancante = this.checker.controllaPresenzaComponenti();
 		if (componenteMancante == null){
@@ -163,17 +155,19 @@ public class ConfigurationHandler {
 		}
 	}
 	
+	// Conferma la Configurazione giÃ  convalidata
 	public void confermaConfigurazione() {
 		this.catalogo.salvaConfigurazione(this.conf);
 	}
 	
+	// Aggiungi le info necessarie per il Bundle
 	public void infoConfigurazione(Double sconto, String nome, String descrizione) {
 		if (this.conf.getCategoria().contentEquals("Bundle")) {
 			((Bundle) this.conf).infoBundle(nome,descrizione,sconto);
 		}
 	}
 	
-	
+	// Elimina un Componente dalla Configurazione
 	public String eliminaComponenteConfigurazione(int idComponente) {
 		String comunicazione = "";
 		if (this.conf.getListaComponenti().size() > 0) {

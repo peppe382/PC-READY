@@ -17,7 +17,9 @@ public class AcquistoHandler {
 	private Componente componenteCorrente;
 	private Map<Integer, Componente> mappaCorrente;
 	
-	//Costruttori
+	//------------------------------------------------------------------------------------------
+	// COSTRUTTORI
+	
 	public AcquistoHandler(Catalogo catalogo, Cliente cliente) {
 		this.catalogo = catalogo;
 		this.carrello = new Carrello();
@@ -27,7 +29,9 @@ public class AcquistoHandler {
 		this.componenteCorrente = null;
 	}
 	
-	//Getters e setters 
+	//------------------------------------------------------------------------------------------
+	// GETTERS e SETTERS
+	
 	public Cliente getClienteCorrente() {
 		return clienteCorrente;
 	}
@@ -76,13 +80,15 @@ public class AcquistoHandler {
 		this.mappaCorrente = mappaCorrente;
 	}
 	
+	//------------------------------------------------------------------------------------------
+	// FUNZIONI di PROGETTO
 	
-	//Funzioni di progetto
+	// Inizializza il Carrello
 	public void iniziaAcquisto() {
 		this.carrello = new Carrello();
 	}
 	
-
+	// Usa come listino corrente una lista di Componenti di una sola Categoria
 	public Map<Integer, Componente> selezionaCategoria(String idCategoria) {
 		try {
 			return this.mappaCorrente = this.catalogo.ottieniComponentiByCategoria(idCategoria);
@@ -92,6 +98,7 @@ public class AcquistoHandler {
 		return null;
 	}
 	
+	// Seleziona un singolo Componente dal listino corrente
 	public Componente selezionaProdotto(int idProdotto) {
 		try {
 			this.componenteCorrente  = this.mappaCorrente.get(idProdotto);
@@ -101,7 +108,7 @@ public class AcquistoHandler {
 		return this.componenteCorrente ;
 	}
 	
-	
+	// Aggiungi un Componente al Carrello
 	public String aggiungiInCarrello() {
 		
 		String str = "";
@@ -149,7 +156,7 @@ public class AcquistoHandler {
 		
 	}
 	
-	
+	// Termina l'aggiunta di Componenti, chiudendo l'Ordine
 	public Ordine terminaAcquisto(String indirizzo, String citta, int CAP) {
 		if (!this.carrello.getMappaComponenti().isEmpty()) {
 			this.ordineCorrente = new Ordine(this.clienteCorrente, this.carrello.getMappaComponentiCarrello() ,indirizzo, citta, CAP);
@@ -158,7 +165,7 @@ public class AcquistoHandler {
 		else return null;
 	}
 	
-	
+	// Seleziona una modalita' di pagamento per l'Ordine
 	public String selezionaModalitaDiPagamento(String metodoPagamento, int numeroCarta, int cvv) {
 		String str = "";
 		str = this.ordineCorrente.selezionaModalitaDiPagamento(metodoPagamento, numeroCarta, cvv);
@@ -167,15 +174,17 @@ public class AcquistoHandler {
 		return str;
 	}
 	
-	
+	// Rimuove ogni CopiaComponente dal Carrello
 	public void rimuoviCopieComponente() {
 		this.ordineCorrente.rimuoviCopieOrdinate();
 	}
 	
+	// Controlla se il Carrello è vuoto
 	public boolean isEmptyCarrello() {
 		return this.carrello.getMappaComponentiCarrello().isEmpty();
 	}
 	
+	// Ricerca Ordini del Cliente corrente
 	public String ottieniOrdineCliente() {
 		PCReady pcReady = PCReady.getInstance();
 		List<Ordine> listaOrdini = pcReady.getListaOrdiniCliente(clienteCorrente.getEmail());
@@ -190,6 +199,7 @@ public class AcquistoHandler {
 		else return "Non vi sono ordini da modificare \n";
 	}
 	
+	// Modifica l'Ordine con nuove informazioni
 	public String aggiornaInformazioni(int id, String indirizzo, String citta, int CAP) {
 		
 		PCReady pcReady = PCReady.getInstance();
@@ -197,6 +207,7 @@ public class AcquistoHandler {
 		
 	}
 	
+	// Elimina uno specifico Componente dal Carrello
 	public String eliminaComponenteAcquisto(int idComponente) {
 		String comunicazione = "";
 		if (!this.carrello.getMappaComponentiCarrello().isEmpty()) {

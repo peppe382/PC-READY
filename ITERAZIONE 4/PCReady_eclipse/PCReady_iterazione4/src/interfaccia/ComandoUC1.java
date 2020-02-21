@@ -47,13 +47,13 @@ public class ComandoUC1 extends Comando {
 						console.print("Seleziona una componente, tra quelle che vengono mostrate a video, inserendo il suo codice numerico:\n");
 						Map<Integer, Componente> mappaComponenti = this.handlerConfigurazione.selezionaCategoria(cat);
 						for (Integer key : mappaComponenti.keySet()) {
-							console.print("\n ---Codice: "+key +"  Componente: "+ mappaComponenti.get(key) +"--- \n");
+							console.print("\n---Codice: "+key +"\nComponente: "+ mappaComponenti.get(key) +"--- \n");
 						}
 						console.print("---INSERISCI CODICE COMPONENTE--- \n");
 						Componente componenteAttuale = this.handlerConfigurazione.selezionaComponente(console.getInt());
 						if (componenteAttuale != null) {
-							console.print("\n\n ECCO I DETTAGLI DEL COMPONENTE SELEZIONATO"+componenteAttuale.toString());
-							if (console.getYesNo("\n Ti soddisfa il componente selezionato? Inserisci Si o No: ")) {
+							console.print("\n\nECCO I DETTAGLI DEL COMPONENTE SELEZIONATO: \n"+componenteAttuale.toString());
+							if (console.getYesNo("\nTi soddisfa il componente selezionato? Inserisci Si o No: ")) {
 								String messaggioH = this.handlerConfigurazione.confermaComponente();
 								if (messaggioH != null) {
 									console.print(messaggioH);
@@ -96,7 +96,7 @@ public class ComandoUC1 extends Comando {
 	private String categorieList() {
 		int i=1;
 		String str = "";
-		str += "\n Elenco delle categorie e operazioni disponibili:\n";
+		str += "\nElenco delle categorie e operazioni disponibili:\n";
 		str += "--------------------------------\n";
 		for(String cat : categorie) {
 			str += "Codice: "+i +" Categoria: "+cat +"\n";

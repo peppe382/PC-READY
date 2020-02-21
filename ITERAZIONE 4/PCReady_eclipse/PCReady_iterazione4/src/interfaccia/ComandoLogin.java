@@ -59,10 +59,6 @@ public class ComandoLogin extends Comando {
 			}
 
 		}
-		
-		
-		
-		
 
 	}
 

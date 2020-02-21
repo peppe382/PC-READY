@@ -19,16 +19,28 @@ import dominio.componenti.*;
 
 public class Parser {
 	
+	// URL dei file del database d'esempio
 	public static final String file_catalogo = "data/catalogo.json";
 	public static final String file_utenti = "data/utenti.json";
 	public static final String file_ordini = "data/ordini.json";
 	
-	// Funzioni handler
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	
+	// ENDPOINT PRINCIPALI per il Sistema:
+	
+	/**
+	 * Legge il file JSON rappresentante il Catalogo ed effettua il parsing
+	 * @return l'istanza di Catalogo corrispondente
+	 */
 	public static Catalogo createCatalogo() {
 		JSONObject catalogo = Parser.getObjectFromFile(Parser.file_catalogo);
 		return Parser.parseCatalogo(catalogo);
 	}
 	
+	/**
+	 * Salva su file in formato JSON il contenuto aggiornato del catalogo
+	 * @param catalogo: l'istanza di Catalogo presente nel Sistema
+	 */
 	public static void salvaCatalogo(Catalogo catalogo) {
 		JSONObject jsonString = new JSONObject();
 		for(Map.Entry<String, ArrayList<Componente>> entry: catalogo.getMappaComponenti().entrySet()) {
@@ -47,6 +59,10 @@ public class Parser {
 	
 	// - - - - - - - - - - - - - - - - - -
 	
+	/**
+	 * Legge il file JSON rappresentante gli Utenti ed effettua il parsing della lista degli Amministratori
+	 * @return una mappa del tipo email (stringa) - Amministratore
+	 */
 	public static Map<String, Amministratore> caricaAdmin() {
 		int maxId = 0;
 		
@@ -66,6 +82,10 @@ public class Parser {
 		return mappa;
 	}
 	
+	/**
+	 * Legge il file JSON rappresentante gli Utenti ed effettua il parsing della lista dei Clienti
+	 * @return una mappa del tipo email (stringa) - Cliente
+	 */
 	public static Map<String, Cliente> caricaClienti() {
 		int maxId = 0;
 		
@@ -85,6 +105,11 @@ public class Parser {
 		return mappa;
 	}
 	
+	/**
+	 * Salva su file in formato JSON sia i Clienti che gli Amministratori
+	 * @param clienti: la mappa dei Clienti di Sistema
+	 * @param amministratori: la mappa degli Amministratori di Sistema
+	 */
 	public static void salvaUtenti(Map<String, Cliente> clienti, Map<String, Amministratore> amministratori) {
 		JSONObject core = new JSONObject();
 		
@@ -106,6 +131,12 @@ public class Parser {
 	
 	// - - - - - - - - - - - - - - - - - -
 	
+	/**
+	 * Leggi da file JSON gli Ordini dei Clienti e effettua il parsing conoscendo le istanze di Componenti e Clienti
+	 * @param mappaClienti: la mappa dei Clienti di Sistema
+	 * @param catalogo: il Catalogo dei Componenti di Sistema
+	 * @return la mappa degli ordini, del tipo Email-cliente (stringa) - Lista-ordini
+	 */
 	public static Map<String, List<Ordine>> caricaOrdini(Map<String, Cliente> mappaClienti, Catalogo catalogo){
 		int maxId = 0;
 		
@@ -132,6 +163,10 @@ public class Parser {
 		return mappa;
 	}
 	
+	/**
+	 * Salva su file in formato JSON la mappa degli Ordini dei Clienti
+	 * @param mappaOrdini: la mappa degli Ordini di Sistema
+	 */
 	public static void salvaOrdini(Map<String, List<Ordine>> mappaOrdini) {
 		JSONArray array = new JSONArray();
 		for(Map.Entry<String, List<Ordine>> entry: mappaOrdini.entrySet()) {
@@ -146,11 +181,10 @@ public class Parser {
 	}
 	
 	// -------------------------------------------------------------------
-		// Funzioni interne
+		// FUNZIONI INTERNE
 		
 		/**
-		 * Caricamento del Catalogo da Database
-		 * 
+		 * LOGICA completa della creazione del Catalogo, partendo da file JSON
 		 */
 		public static Catalogo parseCatalogo(JSONObject jsonCatalogo) {
 			Map<String, ArrayList<Componente>> catalogo = new HashMap<String, ArrayList<Componente>>();
@@ -158,6 +192,7 @@ public class Parser {
 			int maxId = 0;
 			int maxIdCopia = 0;
 			
+			// COMPONENTE GENERICO
 			Iterator<String> keys = jsonCatalogo.keys();
 			while(keys.hasNext()) {
 				String cat = keys.next();
@@ -235,7 +270,8 @@ public class Parser {
 			
 			Catalogo objCatalogo = new Catalogo(catalogo);
 			
-			// Configurazioni
+			
+			// CONFIGURAZIONI
 			JSONArray configurazioni = jsonCatalogo.getJSONArray("Configurazione");
 			objCatalogo.aggiungiCategoria("Configurazione");
 			for(int j = 0; j < configurazioni.length(); j++) {
@@ -248,7 +284,8 @@ public class Parser {
 				objCatalogo.aggiungiInCatalogo(temp);
 			}
 			
-			// Configurazioni
+			
+			// BUNDLE
 			JSONArray bundle = jsonCatalogo.getJSONArray("Bundle");
 			objCatalogo.aggiungiCategoria("Bundle");
 			for(int j = 0; j < bundle.length(); j++) {
@@ -269,7 +306,7 @@ public class Parser {
 	
 	// -------------------------------------------------------------------
 
-		// Lettura singoli Componenti
+		// Lettura di un Componente
 		public static Componente processComponente(JSONObject comp, String categoria) {
 			int id = comp.getInt("id");
 			String nome = comp.getString("nome");
@@ -279,31 +316,28 @@ public class Parser {
 			return new Componente(id, nome, prezzo, consumo_energetico, descrizione, categoria);
 		}
 		
+		// Lettura di una CopiaComponente
 		public static CopiaComponente processCopia(JSONObject copia) {
 			int codice = copia.getInt("codice");
 			return new CopiaComponente(codice);
 		}
 		
+		// Lettura di una Configurazione
 		public static Configurazione processConfigurazione(JSONObject conf, Catalogo cat) {
 			int id = conf.getInt("id");
 			Configurazione c = new Configurazione(id);
 			JSONArray listaComponenti = conf.getJSONArray("componenti");
 			
-			double prezzo = 0;
-			int consumo = 0;
-			
 			for(int i = 0; i < listaComponenti.length(); i++) {
 				int idComp = listaComponenti.getInt(i);
 				Componente comp = cat.getComponente(idComp);
-				
-				prezzo += comp.getPrezzo();
-				consumo += comp.getConsumo_energetico();
-				
+
 				c.aggiungiComponenteInConfigurazione(comp);
 			}
 			return c;
 		}
 		
+		// Lettura di un Bundle
 		public static Bundle processBundle(JSONObject bund, Catalogo cat) {
 			Configurazione c = Parser.processConfigurazione(bund, cat);
 			double sconto = bund.getDouble("sconto");	
@@ -312,6 +346,7 @@ public class Parser {
 			return b;
 		}
 		
+		// Lettura di un Amministratore
 		public static Amministratore processAdmin(JSONObject adminJson) {
 			
 			int id = adminJson.getInt("id");
@@ -323,6 +358,7 @@ public class Parser {
 			return new Amministratore(id, nome, cognome, email, password);
 		}
 		
+		// Lettura di un Cliente
 		public static Cliente processCliente(JSONObject clienteJson) {
 			
 			int id = clienteJson.getInt("id");
@@ -334,6 +370,7 @@ public class Parser {
 			return new Cliente(id, nome, cognome, email, password);
 		}
 		
+		// Lettura di un Ordine
 		public static Ordine processOrdine(JSONObject json, Map<String, Cliente> mappaClienti, Catalogo catalogo) {
 			String email = json.getString("cliente");
 			Cliente cl;
@@ -367,7 +404,7 @@ public class Parser {
 		
 		// -------------------------------------------------------------------
 		
-		// Scrittura singoli Componenti
+		// Scrittura del Componente specializzato
 		public static JSONObject generalJson(Componente c) {
 			String cat = c.getCategoria();
 			if(cat=="Configurazione") return jsonConfigurazione((Configurazione)c);
@@ -418,6 +455,7 @@ public class Parser {
 			return tempJson;
 		}
 		
+		// Scrittura del Componente non-specializzato
 		public static JSONObject jsonComponente(Componente c) {
 			JSONObject core = new JSONObject();
 			core.put("id", c.getId());
@@ -432,12 +470,14 @@ public class Parser {
 			return core;
 		}
 				
+		// Scrittura di una CopiaComponente
 		public static JSONObject jsonCopia(CopiaComponente c) {
 			JSONObject core = new JSONObject();
 			core.put("codice", c.getCodice());
 			return core;
 		}
 				
+		// Scrittura di una Configurazione
 		public static JSONObject jsonConfigurazione(Configurazione c) {
 			JSONObject core = new JSONObject();
 			core.put("id", c.getId());
@@ -449,12 +489,14 @@ public class Parser {
 			return core;
 		}
 		
+		// Scrittura di un Bundle
 		public static JSONObject jsonBundle(Bundle b) {
 			JSONObject core = jsonConfigurazione((Configurazione)b);
 			core.put("sconto", b.getSconto());
 			return core;
 		}
 		
+		// Scrittura di un Utente (Cliente)
 		public static JSONObject jsonUtente(Cliente u) {
 			JSONObject json = new JSONObject();
 			json.put("id", u.getId());
@@ -465,6 +507,7 @@ public class Parser {
 			return json;
 		}
 		
+		// Scrittura di un Utente (Amministratore)
 		public static JSONObject jsonUtente(Amministratore u) {
 			JSONObject json = new JSONObject();
 			json.put("id", u.getId());
@@ -475,6 +518,7 @@ public class Parser {
 			return json;
 		}
 		
+		// Scrittura di un Ordine
 		public static JSONObject jsonOrdine(Ordine ord) {
 			JSONObject json = new JSONObject();
 			json.put("id", ord.getId());
@@ -502,7 +546,7 @@ public class Parser {
 		
 	// -------------------------------------------------------------------
 			
-		// Utility scrittura su file
+			// Lettura di una Stringa da file
 			public static String getFileContent(String filename) {
 				String content;
 				try {
@@ -515,14 +559,17 @@ public class Parser {
 				return content;
 			}
 			
+			// Parsing di un Array da Stringa JSON, da file
 			public static JSONArray getArrayFromFile(String filename) {
 				return new JSONArray(getFileContent(filename));
 			}
 			
+			// Parsing di un Oggetto da Stringa JSON, da file
 			public static JSONObject getObjectFromFile(String filename) {
 				return new JSONObject(getFileContent(filename));
 			}
 			
+			// Scrittura di una stringa su file
 			public static void writeToFile(String filename, String content) {
 				try {
 					FileWriter file = new FileWriter(filename);

@@ -45,12 +45,12 @@ public class ComandoUC2 extends Comando {
 						console.print("Seleziona una componente, tra quelle che vengono mostrate a video, inserendo il suo codice numerico:");
 						Map<Integer, Componente> mappaComponenti = this.handlerConfigurazione.selezionaCategoria(cat);
 						for (Integer key : mappaComponenti.keySet()) {
-							console.print("---Codice: "+key +"  Componente: "+ mappaComponenti.get(key) +"--- \n");
+							console.print("\n---Codice: "+key +"\nComponente: "+ mappaComponenti.get(key) +"--- \n");
 						}
 						console.print("---INSERISCI CODICE COMPONENTE---  \n");
 						Componente componenteAttuale = this.handlerConfigurazione.selezionaComponente(console.getInt());
 						if (componenteAttuale != null) {
-							console.print("\n\n ECCO I DETTAGLI DEL COMPONENTE SELEZIONATO"+componenteAttuale.toString());
+							console.print("\n\nECCO I DETTAGLI DEL COMPONENTE SELEZIONATO \n"+componenteAttuale.toString());
 							if (console.getYesNo("\n Ti soddisfa il componente selezionato? Inserisci Si o No: ") == true) {
 								String messaggioH = this.handlerConfigurazione.confermaComponente();
 								if (messaggioH != null) {

@@ -8,6 +8,10 @@ public class Amministratore {
 	private String nome, cognome, email, password;
 	private static final AtomicLong counter = new AtomicLong(0);
 	
+	//------------------------------------------------------------------------------------------
+	
+	// COSTRUTTORI
+	
 	public Amministratore(int id, String nome, String cognome, String email, String password) {
 		this.id = id;
 		this.nome = nome;
@@ -23,6 +27,10 @@ public class Amministratore {
 		this.email = email;
 		this.password = password;
 	}
+	
+	//------------------------------------------------------------------------------------------
+	
+	// GETTERS e SETTERS
 	
 	public int getId() {
 		return id;

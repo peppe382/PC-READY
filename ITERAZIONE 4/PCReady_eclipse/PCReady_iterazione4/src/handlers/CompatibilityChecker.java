@@ -9,13 +9,27 @@ public class CompatibilityChecker {
 	
 	private Configurazione conf;
 	
+	//------------------------------------------------------------------------------------------
+	// COSTRUTTORI
+	
 	public CompatibilityChecker(Configurazione conf) {
 		this.setConf(conf);
 	}
 
+	//------------------------------------------------------------------------------------------
+	// GETTER & SETTER
+	public Configurazione getConf() {
+		return conf;
+	}
+
+	public void setConf(Configurazione conf) {
+		this.conf = conf;
+	}
 	
+	//------------------------------------------------------------------------------------------
 	// FUNZIONI di PROGETTO
 	
+	// Trova un'alternativa al Componente incompatibile che si stava cercando di aggiungere
 	public Componente trovaAlternativa(Map<Integer, Componente> mappaRicerca){
 		//Questa funzione ha lo scopo di trovare il primo componente compatibile per la sostituzione
 		for (Integer key : mappaRicerca.keySet()) {
@@ -26,6 +40,7 @@ public class CompatibilityChecker {
 		return null;
 	}
 	
+	// Trova un alimentatore ideale per il consumo energetico della Configurazione
 	public Componente trovaAlimentatore(Map<Integer, Componente> mappaAlimentatori) {
 		//Per prima cosa calcolo il consumo della nostra configurazione
 		int consumoEnergetico = 0;
@@ -33,7 +48,7 @@ public class CompatibilityChecker {
 		for(Componente comp : this.getConf().getListaComponenti()) {
 			String cat = comp.getCategoria();
 			if(cat=="PSU") {
-				consumoEnergetico += 0; //É un PSU e non consuma...
+				consumoEnergetico += 0; //ï¿½ un PSU e non consuma...
 				alimentatore = comp; 
 			}else consumoEnergetico += comp.getConsumo_energetico();
 		}
@@ -50,7 +65,7 @@ public class CompatibilityChecker {
 		return null;
 	}
 
-	
+	// Verifica la compatibilitÃ  per il Componente che si vuole aggiungere
 	public boolean controlloComponente(Componente comp) {
 		List<Componente> tempList = this.getConf().getListaComponenti();
 		try {
@@ -85,7 +100,7 @@ public class CompatibilityChecker {
 		return false;
 	}
 	
-	
+	// Controllo sulla presenza di almeno un Componente di ogni Categoria necessaria
 	public String controllaPresenzaComponenti() {
 		HashMap<String, Integer> presenze = new HashMap<String, Integer>();
 		String[] categorie = {"CPU", "GPU", "RAM", "Case", "Motherboard", "Storage", "PSU"};
@@ -106,7 +121,7 @@ public class CompatibilityChecker {
 		return null;
 	}
 	
-	
+	// Controlla che il consumo energetico non superi la potenza erogata del PSU
 	public boolean controllaConsumoEnergetico() {
 		int consumoLibero = 0;
 		List<Componente> list = this.getConf().getListaComponenti();
@@ -234,16 +249,4 @@ public class CompatibilityChecker {
 		}
 		return true;
 	}
-	
-	// GETTER & SETTER
-	public Configurazione getConf() {
-		return conf;
-	}
-
-	public void setConf(Configurazione conf) {
-		this.conf = conf;
-	}
-	
-	
-	
 }

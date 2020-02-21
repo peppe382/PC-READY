@@ -7,6 +7,9 @@ public class CopiaComponente {
 	private int codice;
 	private static final AtomicLong counter = new AtomicLong(0);
 	
+	//------------------------------------------------------------------------------------------
+	// COSTRUTTORI
+	
 	public CopiaComponente(int codice) {
 		this.setCodice(codice);
 	}
@@ -14,6 +17,9 @@ public class CopiaComponente {
 	public CopiaComponente() {
 		this.setCodice();
 	}
+	
+	//------------------------------------------------------------------------------------------
+	// GETTERS e SETTERS
 	
 	public int getCodice() {
 		return this.codice;

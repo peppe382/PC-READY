@@ -26,7 +26,7 @@
         {
             "descrizione": "Fake PSU, 150W, dimensioni 15 x 14 x 8,6 cm",
             "potenzaErogata": 150,
-            "formFactor": "Flat",
+            "formFactor": "Slim",
             "copie": [{"codice": 987}],
             "prezzo": 999,
             "nome": "FakePSU150W",
@@ -50,16 +50,16 @@
         },
         {
             "componenti": [
-                12,
-                17,
-                7,
-                2,
-                4,
+                1,
+                24,
+                3,
                 3,
                 2,
+                6,
+                4,
                 5
             ],
-            "id": 2
+            "id": 25
         }
     ],
     "Motherboard": [
@@ -96,9 +96,7 @@
                 {"codice": 1778},
                 {"codice": 1779},
                 {"codice": 1780},
-                {"codice": 1781},
-                {"codice": 1782},
-                {"codice": 1783}
+                {"codice": 1781}
             ],
             "prezzo": 95.99,
             "nome": "AMDRyzen3V1300X",
@@ -119,15 +117,30 @@
             "consumo_energetico": 95
         }
     ],
-    "GPU": [{
-        "descrizione": "AMD Sapphyre 580, 8Gb DDR5 dedicati",
-        "copie": [{"codice": 200}],
-        "prezzo": 160.99,
-        "nome": "AMD Sapphyre 580",
-        "id": 7,
-        "slot": 2,
-        "consumo_energetico": 100
-    }],
+    "GPU": [
+        {
+            "descrizione": "AMD Sapphyre 580, 8Gb DDR5 dedicati",
+            "copie": [{"codice": 200}],
+            "prezzo": 160.99,
+            "nome": "AMD Sapphyre 580",
+            "id": 7,
+            "slot": 2,
+            "consumo_energetico": 100
+        },
+        {
+            "descrizione": "NVidia GeForce 1050Ti 4Gb dedicati, mono-slot",
+            "copie": [
+                {"codice": 1782},
+                {"codice": 1783},
+                {"codice": 1784}
+            ],
+            "prezzo": 137,
+            "nome": "NVidia GeForce 1050Ti",
+            "id": 24,
+            "slot": 1,
+            "consumo_energetico": 250
+        }
+    ],
     "RAM": [{
         "descrizione": "Corsaire Select Value RAM DDR4, 3000HZ, 8GB",
         "copie": [
