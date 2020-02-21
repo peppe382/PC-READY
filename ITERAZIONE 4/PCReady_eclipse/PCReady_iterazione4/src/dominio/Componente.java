@@ -18,9 +18,8 @@ public class Componente {
 	
 	private List<CopiaComponente> listaCopie; // Elenco di tutte le copie disponibili del componente
 	
-	
-	
-	//  Costruttori
+	//------------------------------------------------------------------------------------------
+	// COSTRUTTORI
 	
 	public Componente(String nome, double prezzo, int consumo_energetico, String descrizione, String categoria) {
 		this.setId();
@@ -54,9 +53,8 @@ public class Componente {
 		this.promozione = 0.00;
 	}
 
-
-
-	//Getters e Setters
+	//------------------------------------------------------------------------------------------
+	// GETTERS e SETTERS
 	
 	public int getId() {
 		return id;
@@ -146,9 +144,14 @@ public class Componente {
 		Componente.counter.set(id);
 	}
 	
+	//------------------------------------------------------------------------------------------
+	// FUNZIONI di PROGETTO
 	
-	//  Funzioni di progetto
-	
+	/**
+	 * Aggiungi un numero prefissato di Copie al Componente
+	 * @param numero
+	 * @return i Codici delle Copie generate
+	 */
 	public String aggiungiCopie(int numero) {
 		String str = "";
 		for (int i=0; i < numero; i++) {
@@ -159,12 +162,17 @@ public class Componente {
 		return str;
 	}
 	
-	
+	/**
+	 * Assegna una Copia appena creata ad un Componente esistente
+	 * @param c: la Copia da aggiungere
+	 */
 	public void aggiungiCopia(CopiaComponente c) {
 		this.listaCopie.add(c);
 	}
 	
-	
+	/**
+	 * Controlla l'esistenza di almeno N Copie del Componente
+	 */
 	public CopiaComponente controllaDisponibilitaCopie(int numeroDoppioni) {
 		
 		if (this.listaCopie.size() > numeroDoppioni) {
@@ -177,7 +185,9 @@ public class Componente {
 		
 	}
 	
-	
+	/**
+	 * Rimuove Copie del Componente
+	 */
 	public void rimozioneCopie(List<CopiaComponente> listaCopie) {
 		for (CopiaComponente elemento : listaCopie) {
 			if (this.listaCopie.contains(elemento)) {
@@ -185,6 +195,5 @@ public class Componente {
 			}
 		}
 	}
-	
 	
 }

@@ -4,8 +4,8 @@ public class Bundle extends Configurazione{
 
 	private double sconto;
 	
-
-	//Costruttori 
+	//------------------------------------------------------------------------------------------
+	// COSTRUTTORI
 	
 	public Bundle(String nome, double prezzo, int consumo_energetico, String descrizione) {
 		super(nome, prezzo, consumo_energetico, descrizione);
@@ -31,9 +31,9 @@ public class Bundle extends Configurazione{
 		this.sconto = 0.00;
 	}
 	
+	//------------------------------------------------------------------------------------------
+	// GETTERS e SETTERS
 	
-	
-	//  Getters e Setters
 	public double getSconto() {
 		return sconto;
 	}
@@ -42,20 +42,19 @@ public class Bundle extends Configurazione{
 		this.sconto = sconto;
 	}
 	
-	
-	
-	//  Funzioni di progetto
-	
-	public void infoBundle(String nome, String descrizione, double sconto) {
-		super.setDescrizione(descrizione);
-		super.setNome(nome);
-		this.setSconto(sconto);
-	}
-	
-//  toString
 	public String toString() {
 		String str = super.toString();
 		str += "SCONTO "+getSconto();
 		return str;
+	}
+	
+	//------------------------------------------------------------------------------------------
+	// FUNZIONI di PROGETTO
+	
+	// Setta le info aggiuntive rispetto alla Configurazione
+	public void infoBundle(String nome, String descrizione, double sconto) {
+		super.setDescrizione(descrizione);
+		super.setNome(nome);
+		this.setSconto(sconto);
 	}
 }

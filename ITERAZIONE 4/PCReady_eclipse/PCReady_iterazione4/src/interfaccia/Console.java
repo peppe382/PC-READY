@@ -21,14 +21,15 @@ public class Console {
 	private Amministratore amministratoreCorrente;
 	private Cliente clienteCorrente;
 	
-	/********** COSTRUTTORI e FUNZ. SINGLETON *********/
+	//------------------------------------------------------------------------------------------
+	// COSTRUTTORI
 	
-	/**
-	 * Costruttore principale, non-singleton, di Console
-	 */
 	public Console() {
 		this.setSistema();
 	}
+	
+	//------------------------------------------------------------------------------------------
+	// FUNZIONI di PROGETTO
 	
 	public void accesso() {
 		
@@ -72,9 +73,8 @@ public class Console {
 	}
 	
 	// -------------------------------------------------------------------
+	// FUNZIONI di UTILITY
 	
-	
-	// Funzioni di Utility
 	public void print(String message) {
 		System.out.print(message);
 	}
@@ -210,8 +210,9 @@ public class Console {
 		return returnValue;
 	}
 
+	//------------------------------------------------------------------------------------------
+	// GETTERS e SETTERS
 	
-	/********** GETTERS & SETTERS + TO-STRING **********/
 	public PCReady getSistema() {
 		return sistema;
 	}

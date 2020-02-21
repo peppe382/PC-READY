@@ -15,6 +15,9 @@ public abstract class Comando {
 	private String descrizione;
 	private boolean adminOnly;
 	
+	//------------------------------------------------------------------------------------------
+	// COSTRUTTORI
+	
 	public Comando(int codice, String descrizione, boolean adminOnly) {
 		this.setCodiceComando(codice);
 		this.setDescrizioneComando(descrizione);
@@ -27,6 +30,9 @@ public abstract class Comando {
 		this.setDescrizioneComando("");
 		this.setAdminOnly(false);
 	}
+	
+	//------------------------------------------------------------------------------------------
+	// GETTERS e SETTERS
 
 	public int getCodiceComando() {
 		return this.codice;
@@ -51,6 +57,9 @@ public abstract class Comando {
 	public void setAdminOnly(boolean adminOnly) {
 		this.adminOnly = adminOnly;
 	}
+	
+	//------------------------------------------------------------------------------------------
+	// FUNZIONI di PROGETTO
 	
     public abstract void esegui(Console console);
 	

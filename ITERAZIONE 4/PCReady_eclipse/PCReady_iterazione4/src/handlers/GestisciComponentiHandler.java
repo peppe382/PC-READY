@@ -11,13 +11,13 @@ public class GestisciComponentiHandler {
 	private Catalogo catalogo;
 	private Componente componenteCorrente;
 	
+	//------------------------------------------------------------------------------------------
+	// COSTRUTTORI e SINGLETON
 	
-	//  Costruttori 
 	public GestisciComponentiHandler() {
 		this.catalogo = Parser.createCatalogo();
 		this.componenteCorrente = null;
 	}
-	
 	
 	public static synchronized GestisciComponentiHandler getInstance() {
 		if(singleton == null) {
@@ -25,13 +25,9 @@ public class GestisciComponentiHandler {
 		}
 		return singleton;
 	}
-
-	public void salvaCatalogo() {
-		Parser.salvaCatalogo(this.catalogo);
-	}
 	
-	
-	//  Getters e Setters 
+	//------------------------------------------------------------------------------------------
+	// GETTERS e SETTERS
 	
 	public Catalogo getCatalogo() {
 		return catalogo;
@@ -49,7 +45,13 @@ public class GestisciComponentiHandler {
 		return componenteCorrente;
 	}
 	
-	//  Funzioni di Progetto
+	//------------------------------------------------------------------------------------------
+	// FUNZIONI di PROGETTO
+
+	// Salva il Catalogo su database
+	public void salvaCatalogo() {
+		Parser.salvaCatalogo(this.catalogo);
+	}
 	
 	//GPU
 	public void creaComponente(String nome, String codiceCategoria, int consumo, double prezzo, String descrizione, int slotOccupati ) {
@@ -120,9 +122,8 @@ public class GestisciComponentiHandler {
             this.componenteCorrente = motherboard;
         }
     }
-		
-
 	
+    // WRAPPER sulle funzioni del Catalogo
 	public String creaCopie (int numero) {
 		return this.componenteCorrente.aggiungiCopie(numero);
 	}

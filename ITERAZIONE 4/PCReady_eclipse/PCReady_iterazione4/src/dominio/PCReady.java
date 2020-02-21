@@ -21,10 +21,10 @@ public class PCReady {
 	private Cliente clienteCorrente;
     private Map<String, List<Ordine>> mappaOrdini;
 
+    //------------------------------------------------------------------------------------------
+    // COSTRUTTORI e SINGLETON
     
-    
-    /** COSTRUTTORI e FUNZ. SINGLETON 
-    
+    /**
      * Costruttore singleton protected. Si potra ottenere l'unica istanza singleton
      * usando la funzione "getIstance()"  **/
     
@@ -55,9 +55,8 @@ public class PCReady {
         Parser.salvaOrdini(this.mappaOrdini);
     }
 
-    
-    /********** GETTERS E SETTERS  **********/
-    
+    //------------------------------------------------------------------------------------------
+    // GETTERS e SETTERS
 	
     public ConfigurationHandler getHandlerConfigurazioni() {
         return this.handlerConfigurazioni;
@@ -67,13 +66,9 @@ public class PCReady {
         return this.handlerComponenti;
     }
 
-
-
     public void setHandlerConfigurazioni() {
         this.handlerConfigurazioni = new ConfigurationHandler(getHandlerComponenti().getCatalogo());
     }
-    
-    
     
     public void setHandlerConfigurazioni(String comando_bundle) {
         if (comando_bundle.equals("Bundle")){        //In futuro tale if controller� se un admin loggato sta chiamando il comando...
@@ -120,8 +115,21 @@ public class PCReady {
 		return cliente;
 	}
 	
-    
+	public List<Ordine> getListaOrdiniCliente(String emailCliente){
+		if (this.mappaOrdini.containsKey(emailCliente)) {
+			List<Ordine> listaOrdini = mappaOrdini.get(emailCliente);
+			return listaOrdini;
+		 }
+		else {
+			List<Ordine> listaOrdini = new ArrayList<Ordine>();
+			return listaOrdini;
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------
+    // FUNZIONI di PROGETTO
 
+	// Prova a registrare un nuovo Cliente
     public String richiediRegistrazione(String nome,String cognome,String email, String password, String confermaPassword) {
     	boolean clienteAttuale = false;
     	
@@ -145,10 +153,7 @@ public class PCReady {
     	else return "Email gia utilizzata";
     }
     
-    
-    
-    
-    
+    // Prova a effettuare il login per un Cliente pre-esistente
     public String effettuaLogin(String tipologia,String email,String password){
     	switch(tipologia){
     		case "Amministratore":
@@ -190,7 +195,7 @@ public class PCReady {
 		return "Email non registrata";
     }	
 	
-	//Funzioni di progetto
+	// Salva un nuovo Ordine nella mappa di Sistema
 	public void salvaOrdine(Ordine ordine, String emailCliente) {
 		boolean clienteInMappaOrdini = false;
 		try {
@@ -211,17 +216,7 @@ public class PCReady {
 		
 	}
 	
-	public List<Ordine> getListaOrdiniCliente(String emailCliente){
-		if (this.mappaOrdini.containsKey(emailCliente)) {
-			List<Ordine> listaOrdini = mappaOrdini.get(emailCliente);
-			return listaOrdini;
-		 }
-		else {
-			List<Ordine> listaOrdini = new ArrayList<Ordine>();
-			return listaOrdini;
-		}
-	}
-	
+	// Modifica un Ordine pre-esistente
 	public String modificaOrdine(int id, String indirizzo, String citta, int CAP, String email) {
 		
 		List<Ordine> listaOrdini = getListaOrdiniCliente(email);
@@ -243,8 +238,6 @@ public class PCReady {
 		
 		return ordineCorrente.toString();
 	}
-	
-	
 	
 }
     
